@@ -1,31 +1,27 @@
 import { Button, InputLabel, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useGlobalState } from "../utils/stateContext";
 
 const LoginForm = () => {
-    
+    const {dispatch} = useGlobalState()
+    const navigate = useNavigate()
+
     const initialFormData = {
         email: "",
         password: ""
     }
     const [formData, setFormData] = useState(initialFormData)
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        
-   
-        .then((user) => {
-        
-            if(user.error){
-                console.log("user.error", user.error)
-                setError(user.error)
-            }else{
-                setError(null)   
-                setFormData(initialFormData)
-            }
+        dispatch({
+                type: "setLoggedInUser",
+                data: formData.email
         })
-        
+        setFormData(initialFormData)
+        navigate("/activities")   
     }
 
     const handleFormData = (e) => {
@@ -37,7 +33,7 @@ const LoginForm = () => {
     return (
         <>  
             <Typography variant="h6">Welcome back!</Typography>
-            {error && <p>{error}</p>}
+            {/* {error && <p>{error}</p>} */}
             <form onSubmit={handleSubmit}>
                 <div>
                     <InputLabel>Email:</InputLabel>

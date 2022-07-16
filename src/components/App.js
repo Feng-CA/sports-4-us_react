@@ -17,15 +17,16 @@ const App = () => {
   
   }
 
-  const [store] = useReducer(reducer, initialState)
+  const [store, dispatch] = useReducer(reducer, initialState)
   const {loggedInUser} = store
   return (
     <div>
-      <StateContext.Provider value={{store}}>
+      <StateContext.Provider value={{store, dispatch}}>
       <Router>
             <Navigation /> 
             <Routes>
               <Route path="/" element={<Home replace/>} />
+              <Route path="/home" element={<Home />} />
               <Route path="activities" element={<Activities />}/>        
               <Route path="contact" element={<Contact />}/>        
               <Route path="login" element={<LoginForm />} />
