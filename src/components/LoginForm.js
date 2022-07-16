@@ -40,11 +40,11 @@ const LoginForm = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <InputLabel>Email:</InputLabel>
-                    <TextField type="email" name="email" id="email" value={formData.email} onChange={handleFormData}/>
+                    <TextField type="email" name="email" id="email" placeholder="example@email.com" value={formData.email} onChange={handleFormData}/>
                 </div>
                 <div>
                     <InputLabel htmlFor="password">Password:</InputLabel>
-                    <TextField type="password" name="password" id="password" value={formData.password} onChange={handleFormData}/>
+                    <TextField type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData}/>
                 </div>
                
                 <Button variant="contained" type="submit">Login</Button>

@@ -2,6 +2,7 @@ import React from 'react';
 import Home from './Home';
 import LoginForm from './LoginForm';
 import Navigation from './Navigation';
+import SignupForm from './SignupForm';
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
       <div >
             <Home />
             <LoginForm />
+            <SignupForm />
       </div>
     </>
   )
