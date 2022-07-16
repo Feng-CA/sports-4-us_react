@@ -3,11 +3,11 @@ import "../styles.css"
 const Home = () => {
     return(
         <div className="home"> 
-            <h2>Welcome to Sports 4 Us</h2>
+            <h2>Welcome to Sports 4 Us!</h2>
             <img src={home} alt="landing"/>
             <button>Sign up</button>
             <button>Log in</button>
-            <button>Explore activities</button>
+            <button>Explore all activities</button>
         </div>
     )
 
