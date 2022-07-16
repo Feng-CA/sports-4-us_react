@@ -1,5 +1,6 @@
-import { Button, InputLabel, TextField, Typography } from "@mui/material"
-import { useState } from "react"
+import { Button, InputLabel, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
     
@@ -35,7 +36,7 @@ const LoginForm = () => {
     }
     return (
         <>  
-            <Typography variant="h4">Welcome back!</Typography>
+            <Typography variant="h6">Welcome back!</Typography>
             {error && <p>{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
@@ -49,6 +50,10 @@ const LoginForm = () => {
                
                 <Button variant="contained" type="submit">Login</Button>
             </form>
+            <div>
+                <h6>Not a member yet?</h6>
+                <Link to="/signup">Sign up</Link>
+            </div>
         </>
     )
 

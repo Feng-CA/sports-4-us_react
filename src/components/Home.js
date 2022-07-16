@@ -4,7 +4,7 @@ import "../styles.css"
 const Home = () => {
     return(
         <div className="home"> 
-            <Typography variant="h4">Welcome to Sports 4 Us!</Typography>
+            <Typography variant="h5">Welcome to Sports 4 Us!</Typography>
             <img src={home} alt="landing"/>
             <Button variant="contained" type="submit">Sign up</Button>
             <Button variant="contained" type="submit">Log in</Button>
