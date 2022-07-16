@@ -1,20 +1,28 @@
-import React from 'react';
+import React, {useReducer} from 'react';
 import Home from './Home';
 import LoginForm from './LoginForm';
 import Navigation from './Navigation';
-import SignupForm from './SignupForm';
-
+import { reducer } from '../utils/reducer'
+import { StateContext } from '../utils/stateContext'
 
 const App = () => {
+  const initialState = {
+    
+    loggedInUser: null
+  }
+
+  const [store] = useReducer(reducer, initialState)
+  const {loggedInUser} = store
   return (
-    <>
-          <Navigation />
-      <div >
+    <div>
+      <StateContext.Provider value={{store}}>
+          <div >
+            <Navigation />
             <Home />
-            <LoginForm />
-            <SignupForm />
-      </div>
-    </>
+            {!loggedInUser && <LoginForm />}
+          </div>
+      </StateContext.Provider>
+    </div>
   )
 }
 
