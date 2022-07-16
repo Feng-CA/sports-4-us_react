@@ -1,14 +1,18 @@
 import React from 'react';
 import Home from './Home';
+import LoginForm from './LoginForm';
 import Navigation from './Navigation';
 
 
 const App = () => {
   return (
-    <div >
+    <>
           <Navigation />
-          <Home />
-    </div>
+      <div >
+            <Home />
+            <LoginForm />
+      </div>
+    </>
   )
 }
 
