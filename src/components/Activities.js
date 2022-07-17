@@ -1,6 +1,18 @@
+import CategoryCard from "./CategoryCard";
+import Grid from "@mui/material/Grid";
+
 const Activities = () => {
     return (
-      <h5>Explore all activities</h5>
+      <Grid container spacing={5}>
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+        <CategoryCard />
+      </Grid>
     )
 }
 
