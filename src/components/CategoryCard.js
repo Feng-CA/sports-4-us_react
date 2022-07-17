@@ -7,37 +7,37 @@ import { CardActionArea } from '@mui/material';
 import Grid from "@mui/material/Grid";
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
-import running from "../assets/running.jpg";
 
-export default function CategoryCard() {
-  return (  
-    <Grid item xs={3}>
-        <Card sx={{ maxWidth: 345 }}>
+
+export default function CategoryCard({category}) {
+  return (
+    <Grid item xs={8} sm={4} md={3} sx={{display: "flex", justifyContent: "center"}} marginTop={3}>
+      <Card sx={{ maxWidth: 345 }}>
         <CardActionArea>
-            <Box sx={{display: "flex", alignItems: "center"}}>
+          <CardMedia
+          component="img"
+          height="140"
+          image={category.image}
+          alt="activity category"
+          />
+          <CardContent>
+            <Box sx={{display: "flex", justifyContent: "center"}}>
                 <Typography variant="h5" component="div">
-                    Cycling
+                  {category.name}
                 </Typography>
             </Box>
-            <CardMedia
-            component="img"
-            height="140"
-            image={running}
-            alt="activity"
-            />
-            <CardContent>
             <Box sx={{display: "flex", alignItems: "center"}} marginTop={3}>
-              <Rating name="read-only" value={4.5} readOnly precision={0.5} size="small" />          
+              <Rating name="read-only" value={category.rating} readOnly precision={0.5} size="small" />          
               <Typography variant="body2" component="p" marginLeft={0.5} color="text.secondary">
-                  4.5
+              {category.rating}  
               </Typography>
               <Typography variant="body3" component="p" marginLeft={0.5} color="text.secondary">
-                  (625 reviews)
+                {category.numberOfReviews}
               </Typography>
             </Box>
-            </CardContent>
+          </CardContent>
         </CardActionArea>
-        </Card>
+      </Card>
     </Grid>
   );
 }

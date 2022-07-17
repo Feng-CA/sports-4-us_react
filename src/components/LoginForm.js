@@ -1,6 +1,6 @@
 import { Button, InputLabel, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 
 const LoginForm = () => {
@@ -44,11 +44,11 @@ const LoginForm = () => {
                     <TextField type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData}/>
                 </div>
                
-                <Button variant="contained" type="submit">Login</Button>
+                <Button variant="contained" type="submit" color="success">Login</Button>
             </form>
             <div>
-                <h6>Not a member yet?</h6>
-                <Link to="/signup">Sign up</Link>
+                <p>Not a member yet?</p>
+                <Button variant="contained" onClick={() => navigate("/signup")}>Sign up</Button>
             </div>
         </>
     )

@@ -1,18 +1,15 @@
-import CategoryCard from "./CategoryCard";
+import Container from '@mui/material/Container';
 import Grid from "@mui/material/Grid";
+import CategoryCard from "./CategoryCard";
+import categories from "../data/categoryList.json";
 
 const Activities = () => {
     return (
-      <Grid container spacing={5}>
-        <CategoryCard />
-        <CategoryCard />
-        <CategoryCard />
-        <CategoryCard />
-        <CategoryCard />
-        <CategoryCard />
-        <CategoryCard />
-        <CategoryCard />
-      </Grid>
+      <Container>
+        <Grid container spacing={{ xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
+          {categories.map((category, index) => <CategoryCard category={category} key={index} />)}
+        </Grid>
+      </Container>
     )
 }
 

@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+	"name": "Cycling",
+	"rating": 4.5,
+	"numberOfReviews": 625,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 2,
+	"name": "Golf",
+	"rating": 4.5,
+	"numberOfReviews": 525,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 3,
+	"name": "Tennis",
+	"rating": 4.5,
+	"numberOfReviews": 467,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 4,
+	"name": "Soccer",
+	"rating": 4.5,
+	"numberOfReviews": 276,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 5,
+	"name": "Cricket",
+	"rating": 4.5,
+	"numberOfReviews": 425,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 6,
+	"name": "Hiking",
+	"rating": 4.5,
+	"numberOfReviews": 525,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 7,
+	"name": "Running",
+	"rating": 4.5,
+	"numberOfReviews": 685,
+	"image": "images/running.jpg"
+	},
+  {
+    "id": 8,
+	"name": "Basketball",
+	"rating": 4.5,
+	"numberOfReviews": 575,
+	"image": "images/running.jpg"
+	}
+]
