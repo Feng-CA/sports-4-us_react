@@ -1,10 +1,7 @@
 const Activities = () => {
     return (
-        <>
-            all activities
-        </>
+      <h5>Explore all activities</h5>
     )
-
 }
 
 export default Activities

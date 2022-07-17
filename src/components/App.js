@@ -9,6 +9,7 @@ import Notfound from './NotFound';
 import { reducer } from '../utils/reducer';
 import { StateContext } from '../utils/stateContext';
 import SignupForm from './SignupForm';
+import Container from '@mui/material/Container';
 
 const App = () => {
   const initialState = {
@@ -20,22 +21,23 @@ const App = () => {
   const [store, dispatch] = useReducer(reducer, initialState)
   const {loggedInUser} = store
   return (
-    <div>
-      <StateContext.Provider value={{store, dispatch}}>
-      <Router>
-            <Navigation /> 
-            <Routes>
-              <Route path="/" element={<Home replace/>} />
-              <Route path="/home" element={<Home />} />
-              <Route path="activities" element={<Activities />}/>        
-              <Route path="contact" element={<Contact />}/>        
-              <Route path="login" element={<LoginForm />} />
-              {!loggedInUser && <Route path="signup" element={<SignupForm />} />}
-              <Route path="*" element={<Notfound />} />
-            </Routes>
-          </Router>
-        
-      </StateContext.Provider>
+    <div className="App">
+      <Container>
+        <StateContext.Provider value={{store, dispatch}}>
+        <Router>
+						<Navigation /> 
+              <Routes>
+                <Route path="/" element={<Home replace/>} />
+                <Route path="/home" element={<Home />} />
+                <Route path="activities" element={<Activities />}/>        
+                <Route path="contact" element={<Contact />}/>        
+                <Route path="login" element={<LoginForm />} />
+                {!loggedInUser && <Route path="signup" element={<SignupForm />} />}
+                <Route path="*" element={<Notfound />} />
+              </Routes>
+            </Router>
+        </StateContext.Provider>	
+      </Container>
     </div>
   )
 }
