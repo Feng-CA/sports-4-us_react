@@ -6,7 +6,7 @@ import categories from "../data/categoryList.json";
 const Activities = () => {
     return (
       <Container>
-        <a href = "/activity_form">Full Actiivity List</a>
+        <a href = "/activity_form/all">Full Actiivity List</a>
         <Grid container spacing={{ xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
           {categories.map((category, index) => <CategoryCard category={category} key={index} />)}
         </Grid>
