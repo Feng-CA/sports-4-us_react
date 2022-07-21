@@ -7,12 +7,27 @@ import { CardActionArea } from '@mui/material';
 import Grid from "@mui/material/Grid";
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
+import {useNavigate } from "react-router-dom"
+import { useGlobalState } from "../utils/stateContext"
 
 
 export default function CategoryCard({category}) {
+  const { dispatch} = useGlobalState()
+  //const {categoryItem} = store
+  const navigate = useNavigate()
+  const handleClick =() =>{
+
+    dispatch({
+      type: 'setCategoryItem',
+      data: category.id
+  })
+    
+    navigate(`/activity_form/${category.id}`)
+  }
+
   return (
     <Grid item xs={8} sm={4} md={3} sx={{display: "flex", justifyContent: "center"}} marginTop={3}>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} onClick ={()=>handleClick()}>
         <CardActionArea>
           <CardMedia
           component="img"

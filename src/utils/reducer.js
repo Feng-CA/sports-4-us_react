@@ -11,6 +11,28 @@ export const reducer = (state, action) => {
                 loggedInUser: action.data
             }
         }
+        case "setActivities": {
+            //updates the loggedInUser value
+            return {
+                ...state,
+                activities: action.data
+            }
+        }
+
+        case "setCategoryItem": {
+            //updates the loggedInUser value
+            return {
+                ...state,
+                categoryItem: action.data
+            }
+        }
+        case "setUsers": {
+            //updates the loggedInUser value
+            return {
+                ...state,
+                users: action.data
+            }
+        }
        
         default: return state
     }
