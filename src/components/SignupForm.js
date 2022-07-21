@@ -45,7 +45,7 @@ const SignupForm = () => {
             }
             
         })
-        .catch(e => {console.log(e)})
+        .catch(e => {setError(e)})
         
         
     }
@@ -61,7 +61,7 @@ const SignupForm = () => {
     return (
         <>
             <Typography variant='h4'>Register as a member</Typography>
-            {error && <p>{error}</p>}
+            {error && <p>Oops!Something Has Gone Wrong, Please confirm that the Passwords do match.</p>}
             
             <form onSubmit={handleSubmit}>
                 <div>
@@ -74,7 +74,7 @@ const SignupForm = () => {
                 </div>
                 <div>
                     <InputLabel>Your Email:</InputLabel>
-                    <TextField type="text" name="email" id="email" placeholder="e.g., John.smith@email.com" value={formData.email} onChange={handleFormData}/>
+                    <TextField type="email" name="email" id="email" placeholder="e.g., John.smith@email.com" value={formData.email} onChange={handleFormData}/>
                 </div>
                 <div>
                     <InputLabel htmlFor="password">Password:</InputLabel>
