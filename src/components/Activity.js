@@ -1,9 +1,9 @@
-import { Card,  CardContent, Typography, Box, Button } from "@mui/material"
-import { Link, useNavigate } from "react-router-dom"
+import { Card,  CardContent, Typography, Box } from "@mui/material"
+import { Link } from "react-router-dom"
 import Grid from "@mui/material/Grid";
 
 const Activity = ({activity}) => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     // const handleEnquiry = () => {
 

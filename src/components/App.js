@@ -1,7 +1,7 @@
 import React, {useReducer} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
-import Activities from './Activities';
+import Categories from './Categories';
 import Contact from './Contact';
 import LoginForm from './LoginForm';
 import Navigation from './Navigation';
@@ -9,17 +9,18 @@ import Notfound from './NotFound';
 import { reducer } from '../utils/reducer';
 import { StateContext } from '../utils/stateContext';
 import SignupForm from './SignupForm';
-import ActivitiesList from "./ActivitiesList"
+import FullActivityList from "./FullActivityList"
+import CategoriedActivityList from './CategoriedActivityList';
 import ActivityDetail from './ActivityDetail';
 
 const App = () => {
   const initialState = {
-    selectedCategory: null,
+    Category: null,
     loggedInUser: null
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {selectedCategory, loggedInUser} = store
+  const {loggedInUser} = store
   return (
     <div className="App">
         <StateContext.Provider value={{store, dispatch}}>
@@ -28,9 +29,10 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Home replace/>} />
                 <Route path="/home" element={<Home />} />
-                <Route path="activities" element={<Activities />}/> 
-                <Route path="activitieslist" element={<ActivitiesList />}/> 
-                {/* <Route path="activityId" element={<ActivityDetail />}/>        */}
+                <Route path="categories" element={<Categories />}/> 
+                <Route path="activities" element={<FullActivityList />}/> 
+                <Route path="categoriedlist/:id" element={<CategoriedActivityList />}/> 
+                <Route path="activities/:id" element={<ActivityDetail />}/>       
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}
