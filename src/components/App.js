@@ -9,14 +9,17 @@ import Notfound from './NotFound';
 import { reducer } from '../utils/reducer';
 import { StateContext } from '../utils/stateContext';
 import SignupForm from './SignupForm';
+import ActivitiesList from "./ActivitiesList"
+import ActivityDetail from './ActivityDetail';
 
 const App = () => {
   const initialState = {
+    selectedCategory: null,
     loggedInUser: null
   }
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser} = store
+  const {selectedCategory, loggedInUser} = store
   return (
     <div className="App">
         <StateContext.Provider value={{store, dispatch}}>
@@ -25,7 +28,9 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Home replace/>} />
                 <Route path="/home" element={<Home />} />
-                <Route path="activities" element={<Activities />}/>        
+                <Route path="activities" element={<Activities />}/> 
+                <Route path="activitieslist" element={<ActivitiesList />}/> 
+                {/* <Route path="activityId" element={<ActivityDetail />}/>        */}
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}
