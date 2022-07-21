@@ -1,22 +1,30 @@
 import { Button, InputLabel, TextField, Typography } from "@mui/material"
 import { useState } from "react"
+import { signUp } from "./services/authservices"
+import { useGlobalState } from "../utils/stateContext";
+import {useNavigate} from "react-router-dom";
 
 
 const SignupForm = () => {
-    
+    const {dispatch} = useGlobalState();
+    //const{loggedInUser} = store;
+    const navigate = useNavigate()
     
     const initialFormData = {
-        full_name: "",
+        first_name: "",
+        last_name: "",
         email: "",
         password: "",
         password_confirmation: ""
     }
     const [formData, setFormData] = useState(initialFormData)
     const [error, setError] = useState(null)
-
+    
     const handleSubmit = (e) =>{
         e.preventDefault()
         
+        console.log(formData)
+        signUp(formData)
           .then((user) => {
             let errorMessage = "";
             if (user.error){
@@ -27,9 +35,13 @@ const SignupForm = () => {
                 setError(errorMessage)
             }
             else {
-    
-                setFormData(initialFormData)
-               
+                
+                dispatch({
+                    type: "setLoggedInUser",
+                    data: user.first_name
+                })
+                navigate("/")
+                 
             }
             
         })
@@ -39,19 +51,26 @@ const SignupForm = () => {
     }
 
     const handleFormData = (e) => {
+        e.preventDefault()
         setFormData({
             ...formData,
             [e.target.id]: e.target.value
         })
+        console.log(formData)
     }
     return (
         <>
             <Typography variant='h4'>Register as a member</Typography>
             {error && <p>{error}</p>}
+            
             <form onSubmit={handleSubmit}>
                 <div>
-                    <InputLabel>Your Full Name:</InputLabel>
-                    <TextField type="text" name="fullname" id="fullname" placeholder="e.g., John Smith" value={formData.full_name} onChange={handleFormData}/>
+                    <InputLabel>Your First Name:</InputLabel>
+                    <TextField type="text" name="first_name" id="first_name" placeholder="e.g., John Smith" value={formData.first_name} onChange={handleFormData}/>
+                </div>
+                <div>
+                    <InputLabel>Your Last Name:</InputLabel>
+                    <TextField type="text" name="last_name" id="last_name" placeholder="e.g., John Smith" value={formData.last_name} onChange={handleFormData}/>
                 </div>
                 <div>
                     <InputLabel>Your Email:</InputLabel>
