@@ -6,7 +6,7 @@ const IndividualActivity = () => {
     const {store} = useGlobalState()
     const {activities, users} = store
     const params = useParams();
-
+    
     return ( 
             <ul>
                 <li>

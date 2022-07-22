@@ -21,7 +21,7 @@ const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name")||null,
     activities: [],
-    users: [],
+    users: []
   }
 
   useEffect(() => {  
@@ -35,7 +35,7 @@ const App = () => {
     })
     //Get all the Users from the back end
       getUsers()
-    .then(response=>{
+    .then(response=>{  
       dispatch({
         type: 'setUsers',
         data: response.data
