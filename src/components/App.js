@@ -16,7 +16,7 @@ import ActivityList from './ActivityList';
 
 const App = () => {
   const initialState = {
-    loggedInUser: null,
+    loggedInUser: sessionStorage.getItem("first_name")||null,
     activities: [],
     users: [],
     categoryItem: 0

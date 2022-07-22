@@ -26,6 +26,7 @@ const SignupForm = () => {
         console.log(formData)
         signUp(formData)
           .then((user) => {
+            sessionStorage.setItem("first_name",user.first_name)
             let errorMessage = "";
             if (user.error){
             

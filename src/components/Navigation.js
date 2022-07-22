@@ -12,7 +12,7 @@ const Navigation = () => {
 
     const logout = (e) => {
         e.preventDefault()
-  
+        sessionStorage.clear()
         dispatch({
             type: "setLoggedInUser",
             data: null 
