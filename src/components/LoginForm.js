@@ -19,6 +19,7 @@ const LoginForm = () => {
         e.preventDefault()
         signIn(formData)
         .then((user) => {
+            sessionStorage.setItem("full_name", user.full_name)
             let errorMessage = "";
             if (user.error){
                 Object.keys(user.error).forEach(key => {
@@ -29,7 +30,7 @@ const LoginForm = () => {
             else {    
                 dispatch({
                     type: "setLoggedInUser",
-                    data: user.first_name
+                    data: user.full_name
                 })
                 setFormData(initialFormData)
                 navigate("/activities")     

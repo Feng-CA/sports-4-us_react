@@ -8,33 +8,37 @@ import Navigation from './Navigation';
 import Notfound from './NotFound';
 import { reducer } from '../utils/reducer';
 import { StateContext } from '../utils/stateContext';
-import axios from 'axios';
 import SignupForm from './SignupForm';
 import FullActivityList from "./FullActivityList"
 import CategoriedActivityList from './CategoriedActivityList';
 import ActivityDetail from './ActivityDetail';
 import "../style.css";
+import { getActivities } from "../services/activitiesServices";
+import { getUsers } from "../services/usersServices";
+
 
 const App = () => {
   const initialState = {
-    loggedInUser: null,
-    activities: [],
-    users: [],
-    categoryItem: 0
-
+    loggedInUser: sessionStorage.getItem("full_name") || null,
+    activities: JSON.parse(sessionStorage.getItem("activities")) || [],
+    users: JSON.parse(sessionStorage.getItem("users")) || []
   }
 
-  useEffect(() => {  
-    axios.get('https://sports4us-api.herokuapp.com/activities')
+  useEffect(() => {
+    //Get all the activities from the back end
+    getActivities()
     .then(response => {
+      sessionStorage.setItem("activities", JSON.stringify(response.data))
+      console.log(response.data)
       dispatch({
         type: 'setActivities',
         data: response.data
     })
     })
-      
-    axios.get('https://sports4us-api.herokuapp.com/users')
+    //Get all the users from the back end
+    getUsers()
     .then(response => {
+      sessionStorage.setItem("users", JSON.stringify(response.data))
       dispatch({
         type: 'setUsers',
         data: response.data
@@ -43,9 +47,9 @@ const App = () => {
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, users, activities} = store
-  console.log(activities)
-  console.log(users)
+  const {loggedInUser} = store
+  
+  
  
   return (
     <div className="App">
@@ -56,9 +60,9 @@ const App = () => {
                 <Route path="/" element={<Home replace/>} />
                 <Route path="/home" element={<Home />} />
                 <Route path="categories" element={<Categories />}/> 
-                <Route path="activities" element={<FullActivityList />}/> 
-                <Route path="categoriedlist/:id" element={<CategoriedActivityList />}/> 
-                <Route path="activities/:id" element={<ActivityDetail />}/>       
+                <Route path="activities" element={<FullActivityList />}/> {/* form to display all activities */}
+                <Route path="categoriedlist/:id" element={<CategoriedActivityList />}/> {/* form to display activities as per category */}
+                <Route path="activities/:id" element={<ActivityDetail />}/> {/* form to display details of an individual activity */}     
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}

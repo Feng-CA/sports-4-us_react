@@ -22,6 +22,7 @@ const SignupForm = () => {
               
         signUp(formData)
             .then((user) => {
+                sessionStorage.setItem("full_name", user.full_name)
                 let errorMessage = "";
                 if (user.error){
                 
@@ -39,7 +40,7 @@ const SignupForm = () => {
                     navigate("/") 
                 }   
             })
-            .catch(e => {console.log(e)})
+            .catch(e => {setError(e)})
         
         
     }
@@ -58,11 +59,11 @@ const SignupForm = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <InputLabel>Your Full Name:</InputLabel>
-                    <TextField type="text" name="fullname" id="fullname" placeholder="e.g., John Smith" value={formData.full_name} onChange={handleFormData}/>
+                    <TextField type="text" name="full_name" id="full_name" placeholder="e.g., John Smith" value={formData.full_name} onChange={handleFormData}/>
                 </div>
                 <div>
                     <InputLabel>Your Email:</InputLabel>
-                    <TextField type="text" name="email" id="email" placeholder="e.g., John.smith@email.com" value={formData.email} onChange={handleFormData}/>
+                    <TextField type="email" name="email" id="email" placeholder="e.g., John.smith@email.com" value={formData.email} onChange={handleFormData}/>
                 </div>
                 <div>
                     <InputLabel htmlFor="password">Password:</InputLabel>

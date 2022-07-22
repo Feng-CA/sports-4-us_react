@@ -1,9 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
-// import Grid from "@mui/material/Grid";
-// import Activities from "../data/activitiesList.json"
-// import Activity from "./Activity";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
 import "../style.css";
@@ -18,14 +15,15 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
 
-
+//This form lists all the activities in a particular sporting category
+//By clicking each category you can also navigate to the individual category page.
 const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
     // const navigate = useNavigate()
     console.log((params.id)) 
-// 
+
     // const handleClick = (e) => {
     //     console.log(e.target.value)
     //     navigate(`/activities/${Number(e.target.value)}`)
@@ -41,11 +39,10 @@ const CategoriedActivityList = () => {
                     slidesPerView={1}
                     navigation={true}
                     pagination={{ clickable: true }}>
-                {/* <Grid item xs={8} sm={4} md={3} sx={{display: "flex", justifyContent: "center"}} marginTop={3}> */}
-                {/* <Grid container spacing={{ xs: 2, md: 3}} columns={{xs: 4, sm: 6, md: 4}} > */}
-
-                {activities.map((activity, index) => {
-                    // if (activity.category_id === Number(params.id))
+                
+                {/* eslint-disable-next-line */}
+                {activities.map((activity) => {
+                    if (activity.category_id === Number(params.id))
                     return (
                         <SwiperSlide className="categoried_activity">
                             <Card>

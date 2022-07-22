@@ -18,13 +18,24 @@
 }
 
 /* home page styling */
-.home {
-    color: white;
+
+/* .home {
     width: 100%;
-    height: 100vh;
-    /* background-image: url(../src/assets/home.png); */
+    height: 100%;
+} */
+
+.home_heading, .home_intro {
+    color: rgb(148, 247, 10);
+    margin: 30px;
+    
 }
 
+.main_heading {
+    
+   
+    display: flex;
+    justify-content: center;
+}
 .home img {
     width: 100%;
     height: 90vh;

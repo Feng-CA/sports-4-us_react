@@ -12,7 +12,7 @@ const Navigation = () => {
 
     const logout = (e) => {
         e.preventDefault()
-  
+        sessionStorage.removeItem("full_name")
         dispatch({
             type: "setLoggedInUser",
             data: null 
@@ -21,7 +21,7 @@ const Navigation = () => {
         navigate("/activities")
     }
     return (
-        <AppBar position="sticky" color="inherit">
+        <AppBar position="sticky" color="transparent">
             <Toolbar>
                 <Sports sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                 <Typography

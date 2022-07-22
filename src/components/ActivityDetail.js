@@ -1,7 +1,6 @@
 // import { Card,  CardContent, Typography } from "@mui/material"
 import { Container } from "@mui/system"
 import { useParams } from "react-router-dom"
-// import Activities from "../data/activitiesList.json"
 import { useGlobalState } from "../utils/stateContext"
 import categories from "../data/categoryList.json"
 
@@ -9,8 +8,7 @@ const ActivityDetail = () => {
     const {store} = useGlobalState()
     const { activities, users } = store
     const params = useParams()
-    console.log((params.id)) 
-    console.log(activities)
+
 
     return (
         <Container>
@@ -31,7 +29,7 @@ const ActivityDetail = () => {
                     Activity Date: {activities[Number(params.id-1)].date_time}
                 </li>
                 <li>
-                    Activity Organiser: {`${users[Number(activities[Number(params.id-1)].user_id)-1].first_name} ${users[Number(activities[Number(params.id-1)].user_id)-1].last_name}`}
+                    Activity Organiser: {`${users[Number(activities[Number(params.id-1)].user_id)-1].full_name}`}
                 </li>
 
             </ul>
