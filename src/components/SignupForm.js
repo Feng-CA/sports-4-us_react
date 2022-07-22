@@ -1,6 +1,6 @@
 import { Button, InputLabel, TextField, Typography } from "@mui/material"
 import { useState } from "react"
-import { signUp } from "./services/authservices"
+import { signUp } from "../services/authservices";
 import { useGlobalState } from "../utils/stateContext";
 import {useNavigate} from "react-router-dom";
 

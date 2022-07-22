@@ -2,7 +2,7 @@ import { Button, InputLabel, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
-import { signIn } from "./services/authservices"
+import { signIn } from "../services/authservices"
 
 const LoginForm = () => {
     const {dispatch} = useGlobalState()
