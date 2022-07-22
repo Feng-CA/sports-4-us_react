@@ -30,10 +30,10 @@ const App = () => {
         type: 'setActivities',
         data: response.data
     })
-    }  
-      )
-      axios.get('https://sports4us-api.herokuapp.com/users')
-    .then(response=>{
+    })
+      
+    axios.get('https://sports4us-api.herokuapp.com/users')
+    .then(response => {
       dispatch({
         type: 'setUsers',
         data: response.data
@@ -42,9 +42,9 @@ const App = () => {
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, users} = store
+  const {loggedInUser, users, activities} = store
+  console.log(activities)
   console.log(users)
-
  
   return (
     <div className="App">

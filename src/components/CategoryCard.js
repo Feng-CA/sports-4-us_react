@@ -11,16 +11,16 @@ import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 
 export default function CategoryCard({category}) {
-  const {dispatch} = useGlobalState
+  const {dispatch} = useGlobalState()
   const navigate = useNavigate()
 
-  const handleCard = (e) => {
-    e.preventDefault()
+  const handleCard = () => {
+   
     dispatch({
-            type: "setCategory",
+            type: "setCategoryItem",
             data: category.id
     })
-    navigate(`/activitiesList/${category.id}`)   
+    navigate(`/categoriedlist/${category.id}`)   
   }
 
   return (

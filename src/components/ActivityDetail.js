@@ -1,13 +1,13 @@
 import { Card,  CardContent, Typography } from "@mui/material"
 import { Container } from "@mui/system"
 import { Link, useParams } from "react-router-dom"
-import Activities from "../data/activitiesList.json"
+// import Activities from "../data/activitiesList.json"
 import { useGlobalState } from "../utils/stateContext"
 import categories from "../data/categoryList.json"
 
 const ActivityDetail = () => {
     const {store} = useGlobalState()
-    const { users } = store
+    const { activities, users } = store
     const params = useParams()
 
     // const getActivity = (id) => {
@@ -18,22 +18,22 @@ const ActivityDetail = () => {
         <Container>
              <ul>
                 <li>
-                    Activity Id: {Activities[Number(params.id-1)].id}  
+                    Activity Id: {activities[Number(params.id-1)].id}  
                 </li>
                 <li>
-                    Activity Category: {categories[Number(Activities[Number(params.id-1)].category_id)-1].name}
+                    Activity Category: {categories[Number(activities[Number(params.id-1)].category_id)-1].name}
                 </li>
                 <li>
-                    Activity Title: {Activities[Number(params.id-1)].title}
+                    Activity Title: {activities[Number(params.id-1)].title}
                 </li>
                 <li>
-                    Activity Description: {Activities[Number(params.id-1)].description}
+                    Activity Description: {activities[Number(params.id-1)].description}
                 </li>
                 <li>
-                    Activity Date: {Activities[Number(params.id-1)].date_time}
+                    Activity Date: {activities[Number(params.id-1)].date_time}
                 </li>
                 <li>
-                    Activity Organiser: {`${users[Number(Activities[Number(params.id-1)].user_id)-1].first_name} ${users[Number(Activities[Number(params.id-1)].user_id)-1].last_name}`}
+                    Activity Organiser: {`${users[Number(activities[Number(params.id-1)].user_id)-1].first_name} ${users[Number(activities[Number(params.id-1)].user_id)-1].last_name}`}
                 </li>
 
             </ul>

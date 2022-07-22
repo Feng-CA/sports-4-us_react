@@ -7,13 +7,13 @@ import { useGlobalState } from "../utils/stateContext";
 const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
-    const params = useParams
+    const params = useParams()
     const navigate = useNavigate()
     console.log(params.id) 
 
     const handleClick = (e) => {
         console.log(e.target.value)
-        navigate(`/categoriedlist/${Number(e.target.value)}`)
+        navigate(`/activities/${Number(e.target.value)}`)
     }
 
     return (
