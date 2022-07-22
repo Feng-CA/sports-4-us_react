@@ -20,14 +20,18 @@ import { getUsers } from "../services/userservices";
 const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name")||null,
-    activities: [],
-    users: []
+    //activities: [],
+    //users: []
+    activities: JSON.parse(sessionStorage.getItem("activities"))||[],
+    users: JSON.parse(sessionStorage.getItem("users"))||[]
   }
 
   useEffect(() => {  
    //Get all the activities from the back end
     getActivities()
     .then(response=>{
+      sessionStorage.setItem("activities",JSON.stringify(response.data))
+      console.log(response.data)
       dispatch({
         type: 'setActivities',
         data: response.data
@@ -36,6 +40,7 @@ const App = () => {
     //Get all the Users from the back end
       getUsers()
     .then(response=>{  
+      sessionStorage.setItem("users",JSON.stringify(response.data))
       dispatch({
         type: 'setUsers',
         data: response.data
