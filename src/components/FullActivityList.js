@@ -1,12 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 // import Card from "@mui/material/Card"
-import Activities from "../data/activitiesList.json"
+// import Activities from "../data/activitiesList.json"
 // import Activity from "./Activity";
-// import { useGlobalState } from "../utils/stateContext";
+import { useGlobalState } from "../utils/stateContext";
 
 const ActivitiesList = () => {
-    // const {store} = useGlobalState()
-    const params = useParams
+    const {store} = useGlobalState()
+    const {activities} = store
+    const params = useParams()
     const navigate = useNavigate()
     console.log(params.id) 
 
@@ -16,7 +17,7 @@ const ActivitiesList = () => {
 
     return (
         <ul>          
-            {Activities.map((activity)=>
+            {activities.map((activity)=>
             <li><button value={activity.id} onClick ={(e)=>handleClick(e)}>{activity.title}</button></li>
             )}        
        </ul>

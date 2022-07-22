@@ -4,13 +4,6 @@ export const reducer = (state, action) => {
 
     switch(action.type){
         
-        case "setSelectedCategory": {
-            //updates the category value
-            return {
-                ...state,
-                selectedCategory: action.data
-            }
-        }
         case "setLoggedInUser": {
             //updates the loggedInUser value
             return {
@@ -18,7 +11,28 @@ export const reducer = (state, action) => {
                 loggedInUser: action.data
             }
         }
-       
+        case "setActivities": {
+            //updates the activities value
+            return {
+                ...state,
+                activities: action.data
+            }
+        }
+
+        case "setCategoryItem": {
+            //updates the categoryitem value
+            return {
+                ...state,
+                categoryItem: action.data
+            }
+        }
+        case "setUsers": {
+            //updates the users value
+            return {
+                ...state,
+                users: action.data
+            }
+        }
         default: return state
     }
 

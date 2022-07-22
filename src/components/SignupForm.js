@@ -1,9 +1,12 @@
 import { Button, InputLabel, TextField, Typography } from "@mui/material"
 import { useState } from "react"
-
+import { signUp } from "../services/authServices"
+import { useGlobalState } from "../utils/stateContext";
+import {useNavigate} from "react-router-dom";
 
 const SignupForm = () => {
-    
+    const {dispatch} = useGlobalState();
+    const navigate = useNavigate()
     
     const initialFormData = {
         full_name: "",
@@ -16,24 +19,27 @@ const SignupForm = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        
-          .then((user) => {
-            let errorMessage = "";
-            if (user.error){
-            
-                Object.keys(user.error).forEach(key => {
-                    errorMessage = errorMessage.concat("", `${key} ${user.error[key]}`)
-                })
-                setError(errorMessage)
-            }
-            else {
-    
-                setFormData(initialFormData)
-               
-            }
-            
-        })
-        .catch(e => {console.log(e)})
+              
+        signUp(formData)
+            .then((user) => {
+                let errorMessage = "";
+                if (user.error){
+                
+                    Object.keys(user.error).forEach(key => {
+                        errorMessage = errorMessage.concat("", `${key} ${user.error[key]}`)
+                    })
+                    setError(errorMessage)
+                }
+                else {
+                    dispatch({
+                        type: "setLoggedInUser",
+                        data: user.full_name
+                    })
+                    setFormData(initialFormData)
+                    navigate("/") 
+                }   
+            })
+            .catch(e => {console.log(e)})
         
         
     }
@@ -47,7 +53,8 @@ const SignupForm = () => {
     return (
         <>
             <Typography variant='h4'>Register as a member</Typography>
-            {error && <p>{error}</p>}
+            {error && <p>Oops!Something Has Gone Wrong, Please confirm that the Passwords do match.</p>}
+
             <form onSubmit={handleSubmit}>
                 <div>
                     <InputLabel>Your Full Name:</InputLabel>

@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, { useEffect, useReducer} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Home';
 import Categories from './Categories';
@@ -8,6 +8,7 @@ import Navigation from './Navigation';
 import Notfound from './NotFound';
 import { reducer } from '../utils/reducer';
 import { StateContext } from '../utils/stateContext';
+import axios from 'axios';
 import SignupForm from './SignupForm';
 import FullActivityList from "./FullActivityList"
 import CategoriedActivityList from './CategoriedActivityList';
@@ -15,12 +16,36 @@ import ActivityDetail from './ActivityDetail';
 
 const App = () => {
   const initialState = {
-    Category: null,
-    loggedInUser: null
+    loggedInUser: null,
+    activities: [],
+    users: [],
+    categoryItem: 0
+
   }
 
+  useEffect(() => {  
+    axios.get('https://sports4us-api.herokuapp.com/activities')
+    .then(response => {
+      dispatch({
+        type: 'setActivities',
+        data: response.data
+    })
+    }  
+      )
+      axios.get('https://sports4us-api.herokuapp.com/users')
+    .then(response=>{
+      dispatch({
+        type: 'setUsers',
+        data: response.data
+    })
+    })   
+  },[]);
+
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser} = store
+  const {loggedInUser, users} = store
+  console.log(users)
+
+ 
   return (
     <div className="App">
         <StateContext.Provider value={{store, dispatch}}>
