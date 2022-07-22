@@ -11,8 +11,7 @@ const SignupForm = () => {
     const navigate = useNavigate()
     
     const initialFormData = {
-        first_name: "",
-        last_name: "",
+        full_name: "",
         email: "",
         password: "",
         password_confirmation: ""
@@ -26,7 +25,7 @@ const SignupForm = () => {
         console.log(formData)
         signUp(formData)
           .then((user) => {
-            sessionStorage.setItem("first_name",user.first_name)
+            sessionStorage.setItem("full_name",user.full_name)
             let errorMessage = "";
             if (user.error){
             
@@ -39,7 +38,7 @@ const SignupForm = () => {
                 
                 dispatch({
                     type: "setLoggedInUser",
-                    data: user.first_name
+                    data: user.full_name
                 })
                 navigate("/")
                  
@@ -66,13 +65,10 @@ const SignupForm = () => {
             
             <form onSubmit={handleSubmit}>
                 <div>
-                    <InputLabel>Your First Name:</InputLabel>
-                    <TextField type="text" name="first_name" id="first_name" placeholder="e.g., John Smith" value={formData.first_name} onChange={handleFormData}/>
+                    <InputLabel>Your Full Name:</InputLabel>
+                    <TextField type="text" name= "full_name" id="full_name" placeholder="e.g., John Smith" value={formData.full_name} onChange={handleFormData}/>
                 </div>
-                <div>
-                    <InputLabel>Your Last Name:</InputLabel>
-                    <TextField type="text" name="last_name" id="last_name" placeholder="e.g., John Smith" value={formData.last_name} onChange={handleFormData}/>
-                </div>
+               
                 <div>
                     <InputLabel>Your Email:</InputLabel>
                     <TextField type="email" name="email" id="email" placeholder="e.g., John.smith@email.com" value={formData.email} onChange={handleFormData}/>
