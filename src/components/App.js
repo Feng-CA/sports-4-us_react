@@ -13,6 +13,7 @@ import SignupForm from './SignupForm';
 import FullActivityList from "./FullActivityList"
 import CategoriedActivityList from './CategoriedActivityList';
 import ActivityDetail from './ActivityDetail';
+import "../style.css";
 
 const App = () => {
   const initialState = {

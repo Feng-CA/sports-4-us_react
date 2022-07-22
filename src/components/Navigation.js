@@ -21,7 +21,7 @@ const Navigation = () => {
         navigate("/activities")
     }
     return (
-        <AppBar position="sticky">
+        <AppBar position="sticky" color="inherit">
             <Toolbar>
                 <Sports sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                 <Typography

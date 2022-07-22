@@ -1,5 +1,5 @@
 import Container from '@mui/material/Container';
-import { Tab, Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Grid from "@mui/material/Grid";
 import CategoryCard from "./CategoryCard";
 import categories from "../data/categoryList.json";

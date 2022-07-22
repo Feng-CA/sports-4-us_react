@@ -1,6 +1,6 @@
-import { Card,  CardContent, Typography } from "@mui/material"
+// import { Card,  CardContent, Typography } from "@mui/material"
 import { Container } from "@mui/system"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 // import Activities from "../data/activitiesList.json"
 import { useGlobalState } from "../utils/stateContext"
 import categories from "../data/categoryList.json"
@@ -9,10 +9,8 @@ const ActivityDetail = () => {
     const {store} = useGlobalState()
     const { activities, users } = store
     const params = useParams()
-
-    // const getActivity = (id) => {
-    //     return ActivityList.find(a => a.id === parseInt(id))
-    // }
+    console.log((params.id)) 
+    console.log(activities)
 
     return (
         <Container>
