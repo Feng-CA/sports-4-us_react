@@ -48,7 +48,7 @@ const Navigation = () => {
                     <Tab label="Contact" component={Link} to="/contact"/>
                     { loggedInUser && <Tab label="Logout" onClick={logout} component={Link} to="/activities" />}
                     { !loggedInUser && <Tab label="Login" component={Link} to="/login" />}  
-                    {loggedInUser?<Tab label ={`${loggedInUser}`} />:<Tab label ="Guest" />}    
+                    {loggedInUser?<Tab label ={`${loggedInUser}`} />:<Tab label ="Guest" />}   {/*Display guest name*/}
                 </Tabs>
                 
             </Toolbar>

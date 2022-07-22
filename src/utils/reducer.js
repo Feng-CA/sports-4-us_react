@@ -1,6 +1,4 @@
 export const reducer = (state, action) => {
-    //console.log(state)
-    //console.log(action)
 
     switch(action.type){
         
@@ -16,14 +14,6 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 activities: action.data
-            }
-        }
-
-        case "setCategoryItem": {
-            //updates the loggedInUser value
-            return {
-                ...state,
-                categoryItem: action.data
             }
         }
         case "setUsers": {

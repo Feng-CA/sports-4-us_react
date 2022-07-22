@@ -9,29 +9,32 @@ import Notfound from './NotFound';
 import { reducer } from '../utils/reducer';
 import { StateContext } from '../utils/stateContext';
 import SignupForm from './SignupForm';
-import axios from 'axios'
+//import axios from 'axios'
 import ActivityForm from './ActivityForm';
 import IndividualActivity from './IndividualActivity';
 import ActivityList from './ActivityList';
+import { getActivities } from "../services/activityservices";
+import { getUsers } from "../services/userservices";
+
 
 const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name")||null,
     activities: [],
     users: [],
-    categoryItem: 0
-
   }
+
   useEffect(() => {  
-    axios.get('https://sports4us-api.herokuapp.com/activities')
+   //Get all the activities from the back end
+    getActivities()
     .then(response=>{
       dispatch({
         type: 'setActivities',
         data: response.data
     })
-    }  
-      )
-      axios.get('https://sports4us-api.herokuapp.com/users')
+    })
+    //Get all the Users from the back end
+      getUsers()
     .then(response=>{
       dispatch({
         type: 'setUsers',
@@ -41,8 +44,7 @@ const App = () => {
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, users} = store
-  console.log(users)
+  const {loggedInUser} = store
   return (
     <div className="App">
         <StateContext.Provider value={{store, dispatch}}>
@@ -52,9 +54,9 @@ const App = () => {
                 <Route path="/" element={<Home replace/>} />
                 <Route path="/home" element={<Home />} />
                 <Route path="activities" element={<Activities/>}/> 
-                <Route path="/activitylist" element={<ActivityList/>}/>
-                <Route path="activity_form/:id" element={<ActivityForm/>}/>       
-                <Route path="IndividualActivity/:id" element={<IndividualActivity/>}/>
+                <Route path="/activitylist" element={<ActivityList/>}/> {/*form to display all activities*/}
+                <Route path="activity_form/:id" element={<ActivityForm/>}/>   {/*form to display activities as per category*/}    
+                <Route path="IndividualActivity/:id" element={<IndividualActivity/>}/> {/*form to display details of an Individual Activity*/}
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}

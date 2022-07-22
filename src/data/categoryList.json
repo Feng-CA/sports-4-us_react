@@ -29,16 +29,16 @@
 	},
   {
     "id": 5,
-	"name": "Cricket",
+	"name": "Hiking",
 	"rating": 4.5,
-	"numberOfReviews": 425,
+	"numberOfReviews": 525,
 	"image": "images/running.jpg"
 	},
   {
     "id": 6,
-	"name": "Hiking",
+	"name": "Cricket",
 	"rating": 4.5,
-	"numberOfReviews": 525,
+	"numberOfReviews": 425,
 	"image": "images/running.jpg"
 	},
   {

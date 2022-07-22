@@ -1,18 +1,17 @@
 import { useGlobalState } from "../utils/stateContext"
 import { useParams } from "react-router-dom"
-//import Card from '@mui/material/Card';
 import {useNavigate } from "react-router-dom"
-
+//This form lists all the activities in a particular sporting category
+//By clicking each category you can also navigate to the individual category page.
 const ActivityForm = () => {
     const {store} = useGlobalState()
     const {activities} = store
+    console.log(store)
     const params = useParams();
     const navigate = useNavigate()
-    console.log((params.id))
-
+    //Clickhandler can navigate to the individual category page.
+    //e.target.value will provide the activity Id number to access details of the activity.
     const clickHandler =(e) =>{
-        console.log(e)
-        console.log(e.target.value)
         navigate(`/IndividualActivity/${Number(e.target.value)}`)
       }
     return ( 

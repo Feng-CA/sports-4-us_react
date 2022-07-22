@@ -6,11 +6,6 @@ const IndividualActivity = () => {
     const {store} = useGlobalState()
     const {activities, users} = store
     const params = useParams();
-    console.log(users)
-    console.log(activities)
-
-    
- 
 
     return ( 
             <ul>
@@ -30,7 +25,7 @@ const IndividualActivity = () => {
                     Activity Date: {activities[Number(params.id-1)].date_time}
                 </li>
                 <li>
-                    Activity Organiser: {`${users[Number(activities[Number(params.id-1)].user_id)-1].first_name} ${users[Number(activities[Number(params.id-1)].user_id)-1].last_name}`}
+                    Activity Organiser: {`${users[Number(activities[Number(params.id-1)].user_id)-1].full_name}`}
                 </li>
 
             </ul>

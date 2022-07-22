@@ -7,7 +7,6 @@ import {useNavigate} from "react-router-dom";
 
 const SignupForm = () => {
     const {dispatch} = useGlobalState();
-    //const{loggedInUser} = store;
     const navigate = useNavigate()
     
     const initialFormData = {
@@ -40,10 +39,8 @@ const SignupForm = () => {
                     type: "setLoggedInUser",
                     data: user.full_name
                 })
-                navigate("/")
-                 
-            }
-            
+                navigate("/")                
+            }    
         })
         .catch(e => {setError(e)})
         

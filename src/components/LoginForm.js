@@ -36,15 +36,6 @@ const LoginForm = () => {
             }  
         })
         .catch(e => {console.log(e)})
-
-        //.then((user) => {
-        //        dispatch({
-        //            type: "setLoggedInUser",
-        //           data: user.first_name
-        //    })
-       // })
-        //setFormData(initialFormData)
-      //  navigate("/activities")   
    }
 
     const handleFormData = (e) => {
@@ -56,7 +47,7 @@ const LoginForm = () => {
     return (
         <>  
             <Typography variant="h6">Welcome back!</Typography>
-            {error && <p>Wrong Email/Password</p>}
+            {error && <p>Wrong Email/Password</p>} 
             {/* {error && <p>{error}</p>} */}
             <form onSubmit={handleSubmit}>
                 <div>
