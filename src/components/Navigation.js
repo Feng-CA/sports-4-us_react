@@ -12,7 +12,7 @@ const Navigation = () => {
 
     const logout = (e) => {
         e.preventDefault()
-  
+        sessionStorage.removeItem("full_name")
         dispatch({
             type: "setLoggedInUser",
             data: null 
@@ -21,7 +21,7 @@ const Navigation = () => {
         navigate("/activities")
     }
     return (
-        <AppBar position="sticky">
+        <AppBar position="sticky" color="transparent">
             <Toolbar>
                 <Sports sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                 <Typography
@@ -43,7 +43,7 @@ const Navigation = () => {
                 </Typography>
                 <Tabs value={false}>
                     <Tab label="Home" component={Link} to="/" />
-                    <Tab label="Activities" component={Link} to="/activities"/>
+                    <Tab label="Activities" component={Link} to="/categories"/>
                     { loggedInUser && <Tab label="Members" component={Link} to="/members" />}
                     <Tab label="Contact" component={Link} to="/contact"/>
                     { loggedInUser && <Tab label="Logout" onClick={logout} component={Link} to="/activities" />}

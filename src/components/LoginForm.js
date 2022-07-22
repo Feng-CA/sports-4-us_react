@@ -2,6 +2,7 @@ import { Button, InputLabel, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
+import { signIn } from "../services/authServices";
 
 const LoginForm = () => {
     const {dispatch} = useGlobalState()
@@ -12,16 +13,30 @@ const LoginForm = () => {
         password: ""
     }
     const [formData, setFormData] = useState(initialFormData)
-    // const [error, setError] = useState(null)
+    const [error, setError] = useState(null)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        dispatch({
-                type: "setLoggedInUser",
-                data: formData.email
+        signIn(formData)
+        .then((user) => {
+            sessionStorage.setItem("full_name", user.full_name)
+            let errorMessage = "";
+            if (user.error){
+                Object.keys(user.error).forEach(key => {
+                    errorMessage = errorMessage.concat("", `${key} ${user.error[key]}`)
+                })
+                setError(errorMessage)
+            }
+            else {    
+                dispatch({
+                    type: "setLoggedInUser",
+                    data: user.full_name
+                })
+                setFormData(initialFormData)
+                navigate("/activities")     
+            }  
         })
-        setFormData(initialFormData)
-        navigate("/activities")   
+        .catch(e => {console.log(e)})
     }
 
     const handleFormData = (e) => {
@@ -33,7 +48,7 @@ const LoginForm = () => {
     return (
         <>  
             <Typography variant="h6">Welcome back!</Typography>
-            {/* {error && <p>{error}</p>} */}
+            {error && <p>Wrong Email/Password</p>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <InputLabel>Email:</InputLabel>
