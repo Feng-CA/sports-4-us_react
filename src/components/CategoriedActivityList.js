@@ -22,7 +22,7 @@ const CategoriedActivityList = () => {
     const {activities} = store
     const params = useParams()
     // console.log((params.id)) 
-    
+
 
     return (
         <Container className="categoriedActivityList_container">
@@ -59,7 +59,7 @@ const CategoriedActivityList = () => {
                                         <Typography variant="p">{activity.location}</Typography>
                                     </Box>
                                 </CardContent>
-                                    </Link>
+                                </Link>
                             </Card>
                         </SwiperSlide>
                     )

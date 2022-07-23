@@ -74,6 +74,11 @@
 }
 
 /* individual activity styling */
+.activitydetail_container {
+    margin-top: 3rem;
+    height: auto;
+}
+
 .activity_image {
     /* width: 80%;
     border-radius: 2rem;
