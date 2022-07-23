@@ -21,7 +21,7 @@ const Contact = () => {
     };
 
     return (
-        <Container sx={{width: 380}}>
+        <Container className="contact_container" sx={{width: 380}}>
             <Box sx={{textAlign: "center"}} margin={3}>
                 <Typography variant='h4'>Contact Us</Typography>
             </Box>
