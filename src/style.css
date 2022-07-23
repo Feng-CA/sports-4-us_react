@@ -73,19 +73,42 @@
     user-select: none;
 }
 
+/* individual activity styling */
+.activitydetail_container {
+    margin-top: 3rem;
+}
+
+.activitydetail_content {
+    color: rgb(2, 138, 134);
+}
+
+.activity_image {
+    /* width: 80%;
+    border-radius: 2rem;
+    user-select: none; */
+    padding: 2rem;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    border: 0.4 solid rgb(28, 10, 193);
+}
+
+
 
 /* contact page styling */
 .contactForm form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-}
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
 
-input, textarea {
-    width: 100%;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    background: transparent;
-    border: 2px solid #054ed7;
-    resize: none;
-}
+    input, textarea {
+        width: 100%;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        background: transparent;
+        border: 2px solid #054ed7;
+        resize: none;
+    }

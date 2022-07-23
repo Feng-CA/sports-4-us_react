@@ -21,13 +21,8 @@ const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
-    // const navigate = useNavigate()
-    console.log((params.id)) 
+    // console.log((params.id)) 
 
-    // const handleClick = (e) => {
-    //     console.log(e.target.value)
-    //     navigate(`/activities/${Number(e.target.value)}`)
-    // }
 
     return (
         <Container className="categoriedActivityList_container">
@@ -54,9 +49,6 @@ const CategoriedActivityList = () => {
                                     alt="group running"
                                     />
                                 <CardContent>
-                                    {/* <Box className="category_avatar">
-                                        <img src={group} alt="group running"/>
-                                    </Box> */}
                                     <Box>
                                         <Typography variant="p">{activity.date_time}</Typography>
                                     </Box>
@@ -67,7 +59,7 @@ const CategoriedActivityList = () => {
                                         <Typography variant="p">{activity.location}</Typography>
                                     </Box>
                                 </CardContent>
-                                    </Link>
+                                </Link>
                             </Card>
                         </SwiperSlide>
                     )
