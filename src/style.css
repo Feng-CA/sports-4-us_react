@@ -76,7 +76,10 @@
 /* individual activity styling */
 .activitydetail_container {
     margin-top: 3rem;
-    height: auto;
+}
+
+.activitydetail_content {
+    color: rgb(2, 138, 134);
 }
 
 .activity_image {

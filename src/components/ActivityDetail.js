@@ -2,8 +2,10 @@ import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/mate
 import { Container } from "@mui/system"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { useGlobalState } from "../utils/stateContext"
-// import categories from "../data/categoryList.json"
+import categories from "../data/categoryList.json"
 import group from "../assets/group-running.jpg";
+import { blueGrey } from "@mui/material/colors"
+import { useState } from "react"
 
 
 const ActivityDetail = () => {
@@ -11,11 +13,12 @@ const ActivityDetail = () => {
     const { activities, users } = store
     const params = useParams()
     const navigate = useNavigate()
-    console.log(activities)
+    
+    const [clicked, setClicked] = useState(true);
 
 
     return (
-        <Container className="activitydetail_container">
+        <Container className="activitydetail_container" maxWidth="lg">
 
             {activities[Number(params.id-1)] ?
                 <Card sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
@@ -28,7 +31,7 @@ const ActivityDetail = () => {
                             alt="activity"
                             />
                     </Box>
-                    <Box>
+                    <Box className="activitydetail_content">
                         <CardContent>
                             <Box marginTop={1}>
                                 <Typography variant="h5">{activities[Number(params.id-1)].date_time}</Typography>
@@ -44,6 +47,10 @@ const ActivityDetail = () => {
                                 <Typography variant="h5" marginRight={1}>Organiser: </Typography>
                                 <Typography variant="h5">{`${users[Number(activities[Number(params.id-1)].user_id)-1].full_name}`}</Typography>
                             </Box>
+                            <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
+                                <Typography variant="h5" marginRight={1}>Category: </Typography>
+                                <Typography variant="h5">{categories[Number(activities[Number(params.id-1)].category_id)-1].name}</Typography>
+                            </Box>
                             <Box sx={{display: "flex", textAlign: "justify"}} marginTop={1.5}>
                                 <Typography variant="h6">{activities[Number(params.id-1)].description}</Typography>
                             </Box>
@@ -57,17 +64,14 @@ const ActivityDetail = () => {
                                     <Typography variant="h5">{activities[Number(params.id-1)].quantity_limit}</Typography>
                                 </Box>
                             </Box>
-                            <Box sx={{display: "flex", justifyContent: "space-around"}} marginTop={3}> 
+                            <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
                                 <Box marginLeft={3}> 
-                                    <Button variant="contained" color="secondary" onClick={() => navigate("/messages")}>Enquiry</Button>
+                                    <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>
                                 </Box>
                                 <Box marginLeft={2}>
-                                    <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
+                                    <Button variant="outlined" color="success" onClick={() => navigate("/payment")}>Register</Button>
                                 </Box>
                             </Box>
-                                    {/* <Typography variant="h5" component="div">
-                                    {categories[Number(activities[Number(params.id-1)].category_id)-1].name}
-                                </Typography> */}
                         </CardContent>
                     </Box>
                 </Card>

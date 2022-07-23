@@ -34,7 +34,7 @@ const Home = () => {
                         </Box>
                     </Box>
                     <Box sx={{display: "flex"}} marginLeft={2} marginRight={2}>
-                        <Button variant="contained" color="secondary" onClick={() => navigate("/activities")}>Explorer all activities</Button>
+                        <Button variant="text" color="secondary" onClick={() => navigate("/activities")}>Explorer all activities</Button>
                     </Box>
                 </Box>
             </div>
