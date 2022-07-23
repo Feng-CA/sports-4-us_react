@@ -1,8 +1,10 @@
-// import { Card,  CardContent, Typography } from "@mui/material"
+import { Box, Card, CardMedia, CardContent, Typography } from "@mui/material"
 import { Container } from "@mui/system"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useGlobalState } from "../utils/stateContext"
 import categories from "../data/categoryList.json"
+import group from "../assets/group-running.jpg";
+
 
 const ActivityDetail = () => {
     const {store} = useGlobalState()
@@ -11,57 +13,57 @@ const ActivityDetail = () => {
 
 
     return (
-        <Container>
-             <ul>
-                <li>
-                    Activity Id: {activities[Number(params.id-1)].id}  
-                </li>
-                <li>
-                    Activity Category: {categories[Number(activities[Number(params.id-1)].category_id)-1].name}
-                </li>
-                <li>
-                    Activity Title: {activities[Number(params.id-1)].title}
-                </li>
-                <li>
-                    Activity Description: {activities[Number(params.id-1)].description}
-                </li>
-                <li>
-                    Activity Date: {activities[Number(params.id-1)].date_time}
-                </li>
-                <li>
-                    Activity Organiser: {`${users[Number(activities[Number(params.id-1)].user_id)-1].full_name}`}
-                </li>
+        <Container className="activitydetail_container">
 
-            </ul>
-
-            {/* {Activity ?
-                <Card>
-                    <Typography variant="h5">{Activity.title}</Typography>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image={activity.image}
-                        alt="activity"
-                        />
-                    <CardContent>
-                    <Box sx={{display: "flex", justifyContent: "center"}}>
-                        <Typography variant="h5">{Activity.date}</Typography>
-                        <Typography variant="p">{Activity.location}</Typography>
-                        <Typography variant="h5">{Activity.organiser}</Typography>
+            {activities[Number(params.id-1)] ?
+                <Card sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}}>
+                    <Box>
+                        <CardMedia
+                            className="activity_image"
+                            component="img"
+                            height="380"
+                            image={group}
+                            alt="activity"
+                            />
                     </Box>
-                        <Typography variant="p">{Activity.description}</Typography>
-                        <Typography variant="p"></Typography>
-                        <Typography variant="h5" component="div">
-                            {category.name}
-                        </Typography>
-                    </CardContent>
+                    <Box>
+                        <CardContent>
+                            <Box>
+                                <Typography variant="h5">{activities[Number(params.id-1)].date_time}</Typography>
+                            </Box>
+                            <Box>
+                                <Typography variant="h4">{activities[Number(params.id-1)].title}</Typography>
+                            </Box>
+                            <Box>
+                                <Typography variant="h5">{activities[Number(params.id-1)].location}</Typography>
+                            </Box>
+                            <Box sx={{display: "flex", justifyContent: "center"}}>
+                                <Typography variant="h5">Organiser: </Typography>
+                                <Typography variant="h5">{`${users[Number(activities[Number(params.id-1)].user_id)-1].full_name}`}</Typography>
+                            </Box>
+                            <Box>
+                                <Typography variant="p">{activities[Number(params.id-1)].description}</Typography>
+                            </Box>
+                            <Box sx={{display: "flex", justifyContent: "center"}}>
+                                <Typography variant="h5">Cost: </Typography>
+                                <Typography variant="h5">{activities[Number(params.id-1)].cost}</Typography>
+                            </Box>
+                                <Typography variant="h5" component="div">
+                                    {categories[Number(activities[Number(params.id-1)].category_id)-1].name}
+                                </Typography>
+                        </CardContent>
+                    </Box>
                 </Card>
                 :
                 <>
-                    <Typography variant="p">Activity not found</Typography>
-                    <Link to="/activities">Go back to the activities page</Link>
+                    <Box marginTop={3}>
+                        <Typography variant="h5">Activity not found</Typography>
+                    </Box>
+                    <Box marginTop={3}>
+                        <Link to="/activities">Go back to the activities page</Link>
+                    </Box>
                 </>
-            } */}
+            }
         </Container>
     )
 }

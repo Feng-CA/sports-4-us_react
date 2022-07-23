@@ -73,6 +73,22 @@
     user-select: none;
 }
 
+/* individual activity styling */
+.activity_image {
+    /* width: 80%;
+    border-radius: 2rem;
+    user-select: none; */
+    padding: 2rem;
+    width: 100%;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    border: 0.4 solid rgb(28, 10, 193);
+}
+
+
+
 /* contact page styling */
 .contactForm form {
         display: flex;
