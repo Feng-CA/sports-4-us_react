@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
@@ -11,19 +11,21 @@ import Select from '@mui/material/Select';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { createActivity } from "../services/activitiesServices";
+// import { createActivity } from "../services/activitiesServices";
 
 
 const ActivityForm = () => {
     const {store, dispatch} = useGlobalState()
-    const { activities } = store
+    // const { activities } = store
     const navigate = useNavigate()
+
+    const [value, setValue] = useState(new Date());
 
     const initialFormData = {
         title: "",
         category: "",
         location: "",
-        date_time: "",
+        date_time: null,
         image: null,
         cost: 0,
         quantity: 0,
@@ -32,44 +34,38 @@ const ActivityForm = () => {
     const [formData, setFormData] = useState(initialFormData)
     const [error, setError] = useState(null)
 
-    // const [location, setLocation] = useState('');
-    // const [category, setCategory] = useState('');
-    const [value, setValue] = useState(new Date());
-
-    // const handleLocationChange = (event) => {
-    //     console.log(event.target.value)
-    //   setLocation(event.target.value);
-    // };
-    // console.log(location)
-
-    // const handleCategoryChange = (event) => {
-    //   setCategory(event.target.value);
-    // };
-
+    // console.log(formData)
+    // console.log(value)
+    
+    useEffect(() => {
+        setFormData(() => ({
+            date_time: value
+        }))
+    }, [value])
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log(formData)
-        createActivity(formData)
-        .then((activities) => {
+        // createActivity(formData)
+        // .then((activities) => {
 
-            let errorMessage = "";
-            if (activities.error){
-                Object.keys(activities.error).forEach(key => {
-                    errorMessage = errorMessage.concat("", `${key} ${activities.error[key]}`)
-                })
-                setError(errorMessage)
-            }
-            else {    
-                dispatch({
-                    type: "setActivities",
-                    data: activities
-                })
-                setFormData(initialFormData)
-                navigate("/activities")     
-            }  
-        })
-        .catch(e => {console.log(e)})
+        //     let errorMessage = "";
+        //     if (activities.error){
+        //         Object.keys(activities.error).forEach(key => {
+        //             errorMessage = errorMessage.concat("", `${key} ${activities.error[key]}`)
+        //         })
+        //         setError(errorMessage)
+        //     }
+        //     else {    
+        //         dispatch({
+        //             type: "setActivities",
+        //             data: activities
+        //         })
+        //         setFormData(initialFormData)
+        //         navigate("/activities")     
+        //     }  
+        // })
+        // .catch(error=> {console.log(error)})
     }
 
     const handleFormData = (e) => {
@@ -140,9 +136,11 @@ const ActivityForm = () => {
                         <DateTimePicker
                             renderInput={(props) => <TextField {...props}  sx={{width: 320}}/>}
                             label="DateTimePicker"
-                            value={formData.value}
+                            name="date_time"
+                            value={formData.date_time}
                             onChange={(newValue) => {
-                            setValue(newValue);
+                            setValue(newValue)
+                          
                             }}
                         />
                     </LocalizationProvider>
@@ -150,11 +148,11 @@ const ActivityForm = () => {
                 <Box sx={{display: "flex"}} marginTop={2}> 
                     <Box>
                         <InputLabel>Quantity</InputLabel>
-                        <TextField sx={{width: 152}} type="number" name="quantity" id="quantity" value={formData.quantity} onChange={handleFormData}/>
+                        <TextField sx={{width: 152}} type="number" name="quantity" id="quantity" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.quantity} onChange={handleFormData}/>
                     </Box>
                     <Box marginLeft={2}>
                         <InputLabel>Cost</InputLabel>
-                        <TextField sx={{width: 152}}type="number" name="cost" id="cost" value={formData.cost} onChange={handleFormData}/>
+                        <TextField sx={{width: 152}}type="number" name="cost" id="cost" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.cost} onChange={handleFormData}/>
                     </Box>
                 </Box>
                 <Box marginTop={2}>
