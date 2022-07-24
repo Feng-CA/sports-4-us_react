@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useGlobalState } from "../utils/stateContext";
+// import { useNavigate } from "react-router-dom";
+// import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Input, TextField, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,12 +15,11 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 
 const ActivityForm = () => {
-    const {store, dispatch} = useGlobalState()
+    // const {store, dispatch} = useGlobalState()
     // const { activities } = store
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-    const [value, setValue] = useState(new Date());
-
+    
     const initialFormData = {
         title: "",
         category: "",
@@ -32,16 +31,25 @@ const ActivityForm = () => {
         description: ""
     }
     const [formData, setFormData] = useState(initialFormData)
-    const [error, setError] = useState(null)
+    // const [error, setError] = useState(null)
+    const [value, setValue] = useState(new Date());
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    // console.log(formData)
+    console.log(formData)
     // console.log(value)
     
     useEffect(() => {
         setFormData(() => ({
-            date_time: value
+            date_time: value,
+            image: selectedImage
         }))
-    }, [value])
+    }, [value, selectedImage])
+
+    // useEffect(() => {
+    //     setFormData(() => ({
+    //         image: selectedImage
+    //     }))
+    // }, [selectedImage])
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -91,6 +99,7 @@ const ActivityForm = () => {
                         <FormControl required fullWidth>
                             <InputLabel>Location</InputLabel>
                             <Select
+                                defaultValue={"Melbourne"}
                                 name="location"
                                 id="location"
                                 value={formData.location}
@@ -153,6 +162,10 @@ const ActivityForm = () => {
                         <InputLabel>Cost</InputLabel>
                         <TextField sx={{width: 152}}type="number" name="cost" id="cost" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.cost} onChange={handleFormData}/>
                     </Box>
+                </Box>
+                <Box marginTop={2}>
+                    <InputLabel>Upload image</InputLabel>
+                    <Input sx={{width: 320}} type="file" name="image" id="image" value={selectedImage} onChange={(e)=> setSelectedImage(e.target.files[0])}/>
                 </Box>
                 <Box marginTop={2}>
                     <InputLabel>Description</InputLabel>
