@@ -1,9 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material"
-// import Card from "@mui/material/Card"
-// import Activities from "../data/activitiesList.json"
-// import Activity from "./Activity";
 import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
 import "../style.css";
@@ -21,13 +18,7 @@ import "swiper/css/navigation";
 const ActivitiesList = () => {
     const {store} = useGlobalState()
     const {activities} = store
-    const params = useParams()
-    // const navigate = useNavigate()
-    console.log(params.id) 
 
-    // const handleClick = (e) => {
-    //     navigate(`/activities/${Number(e.target.value)}`)
-    // }
 
     return (
         <Container className="fullActivityList_container">
@@ -39,13 +30,11 @@ const ActivitiesList = () => {
                     slidesPerView={1}
                     navigation={true}
                     pagination={{ clickable: true }}>
-                {/* <Grid item xs={8} sm={4} md={3} sx={{display: "flex", justifyContent: "center"}} marginTop={3}> */}
-                {/* <Grid container spacing={{ xs: 2, md: 3}} columns={{xs: 4, sm: 6, md: 4}} > */}
 
                 {activities.map((activity, index) => {
-                    // if (activity.category_id === Number(params.id))
+                 
                     return (
-                        <SwiperSlide className="categoried_activity">
+                        <SwiperSlide className="categoried_activity" key={index}>
                             <Card>
                                 <Link to={`/activities/${activity.id}`}>
                                 <CardMedia

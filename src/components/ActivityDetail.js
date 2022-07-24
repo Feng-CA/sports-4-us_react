@@ -4,8 +4,6 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import { useGlobalState } from "../utils/stateContext"
 import categories from "../data/categoryList.json"
 import group from "../assets/group-running.jpg";
-import { blueGrey } from "@mui/material/colors"
-import { useState } from "react"
 
 
 const ActivityDetail = () => {
@@ -13,8 +11,6 @@ const ActivityDetail = () => {
     const { activities, users } = store
     const params = useParams()
     const navigate = useNavigate()
-    
-    const [clicked, setClicked] = useState(true);
 
 
     return (

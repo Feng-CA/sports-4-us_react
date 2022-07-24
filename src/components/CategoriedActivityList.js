@@ -21,7 +21,6 @@ const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
-    // console.log((params.id)) 
 
 
     return (
@@ -36,10 +35,10 @@ const CategoriedActivityList = () => {
                     pagination={{ clickable: true }}>
                 
                 {/* eslint-disable-next-line */}
-                {activities.map((activity) => {
+                {activities.map((activity, index) => {
                     if (activity.category_id === Number(params.id))
                     return (
-                        <SwiperSlide className="categoried_activity">
+                        <SwiperSlide className="categoried_activity" key={index}>
                             <Card>
                                 <Link to={`/activities/${activity.id}`}>
                                 <CardMedia
@@ -67,26 +66,6 @@ const CategoriedActivityList = () => {
             </Swiper>
         
         </Container>
-            
-        
-        
-
-    
-    //     <ul>          
-    //         {activities.map((activity) => (activity.category_id === Number(params.id))&&
-    //         <li><button value={activity.id} onClick ={(e)=>handleClick(e)}>{activity.title}</button></li>
-    //         )}        
-    //    </ul>
-    
-    // <Grid>
-    
-    //     {activities.map((activity) => (activity.category_id === Number(params.id))&&
-    //     <Card value={activity.id} onClick = {(e) => handleClick(e)}>
-    //         <Activity key={activity.id} activity={activity} />
-    //     </Card>
-    //     )}
-    
-    // </Grid>
     )
 }
 

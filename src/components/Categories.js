@@ -8,16 +8,15 @@ import { Link } from "react-router-dom";
 const Categories = () => {
    
     return (
-      <Container>
-        {/* <Tab label="Full Activity List" component={Link} to="/activities" /> */}
-        <Box sx={{display: "flex", justifyContent: "center"}} component={Link} to="/activities">
+        <Container>
+        	<Box sx={{display: "flex", justifyContent: "center"}} marginTop={3} component={Link} to="/activities">
                 <Typography variant="h5" component="div">
                   Full Activities List
                 </Typography>
-        </Box>
-        <Grid container spacing={{ xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}} >
-          {categories.map((category, index) => <CategoryCard category={category} key={index} />)}
-        </Grid>
+       		</Box>
+			<Grid container spacing={{ xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}} >
+			{categories.map((category, index) => <CategoryCard category={category} key={index} />)}
+			</Grid>
       </Container>
     )
 }
