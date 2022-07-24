@@ -83,12 +83,12 @@ const ActivityForm = () => {
                 <Box className="activityForm_title">
                     <InputLabel>Title</InputLabel>
                     <Box className="activityForm_textfield">
-                        <TextField sx={{width: 320}} type="text" name="title" id="title" value={formData.title} onChange={handleFormData}/>
+                        <TextField required sx={{width: 320}} type="text" name="title" id="title" value={formData.title} onChange={handleFormData}/>
                     </Box>
                 </Box>
                 <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={3}> 
                     <Box sx={{ width: 150 }}>
-                        <FormControl fullWidth>
+                        <FormControl required fullWidth>
                             <InputLabel>Location</InputLabel>
                             <Select
                                 name="location"
@@ -109,7 +109,7 @@ const ActivityForm = () => {
                         </FormControl>
                     </Box>
                     <Box sx={{ width: 150 }} marginLeft={3}>
-                        <FormControl fullWidth>
+                        <FormControl required fullWidth>
                             <InputLabel>Category</InputLabel>
                             <Select
 
@@ -140,7 +140,6 @@ const ActivityForm = () => {
                             value={formData.date_time}
                             onChange={(newValue) => {
                             setValue(newValue)
-                          
                             }}
                         />
                     </LocalizationProvider>
@@ -157,7 +156,7 @@ const ActivityForm = () => {
                 </Box>
                 <Box marginTop={2}>
                     <InputLabel>Description</InputLabel>
-                    <TextField sx={{width: 320}} type="textarea" name="description" id="description" value={formData.description} onChange={handleFormData}/>
+                    <TextField required sx={{width: 320}} type="textarea" name="description" id="description" value={formData.description} onChange={handleFormData}/>
                 </Box>
                <Box sx={{display: "flex", justifyContent: "center"}} marginTop={2}>
                     <Button variant="contained" type="submit" color="success" >Submit</Button>
