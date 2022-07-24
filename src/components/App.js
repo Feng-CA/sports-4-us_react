@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer} from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
 import Categories from './Categories';
 import Contact from './Contact';
@@ -12,6 +12,7 @@ import SignupForm from './SignupForm';
 import FullActivityList from "./FullActivityList"
 import CategoriedActivityList from './CategoriedActivityList';
 import ActivityDetail from './ActivityDetail';
+import ActivityForm from './ActivityForm';
 import "../style.css";
 import { getActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
@@ -59,10 +60,18 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Home replace/>} />
                 <Route path="/home" element={<Home />} />
-                <Route path="categories" element={<Categories />}/> 
-                <Route path="activities" element={<FullActivityList />}/> {/* form to display all activities */}
+                <Route path="categories" element={<Categories />}/>
                 <Route path="categoriedlist/:id" element={<CategoriedActivityList />}/> {/* form to display activities as per category */}
-                <Route path="activities/:id" element={<ActivityDetail />}/> {/* form to display details of an individual activity */}     
+                <Route path="activities">
+                  <Route index element={<FullActivityList />}/> {/* form to display all activities */}
+                  <Route path=":id" element={<ActivityDetail />}/> {/* form to display details of an individual activity */}     
+                  <Route path="new" element={
+                    loggedInUser ?
+                    <ActivityForm />
+                    :
+                    <Navigate to="/" />
+                    }/> {/* form to create details of an individual activity */}     
+                </Route>
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}

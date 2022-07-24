@@ -5,3 +5,7 @@ export async function getActivities(){
     return response
 }
 
+export async function createActivity(data){
+    const response = await sports4usAPI.post('/activities', data)
+    return response
+}
