@@ -165,7 +165,8 @@ const ActivityForm = () => {
                 </Box>
                 <Box marginTop={2}>
                     <InputLabel>Upload image</InputLabel>
-                    <Input sx={{width: 320}} type="file" name="image" id="image" value={selectedImage} onChange={(e)=> setSelectedImage(e.target.files[0])}/>
+                    {/*<Input sx={{width: 320}} type="file" name="image" id="image" value={selectedImage} onChange={(e)=> setSelectedImage(e.target.files[0])}/>*/}
+                    <Input sx={{width: 320}} type="file" name="image" id="image" onChange={(e)=> setSelectedImage(e.target.files[0])}/>
                 </Box>
                 <Box marginTop={2}>
                     <InputLabel>Description</InputLabel>

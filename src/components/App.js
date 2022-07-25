@@ -64,13 +64,14 @@ const App = () => {
                 <Route path="categoriedlist/:id" element={<CategoriedActivityList />}/> {/* form to display activities as per category */}
                 <Route path="activities">
                   <Route index element={<FullActivityList />}/> {/* form to display all activities */}
-                  <Route path=":id" element={<ActivityDetail />}/> {/* form to display details of an individual activity */}     
+                  {/*<Route path=":id" element={<ActivityDetail />}/> */}{/* form to display details of an individual activity */}     
                   <Route path="new" element={
                     loggedInUser ?
-                    <ActivityForm />
+                  <ActivityForm/>
                     :
                     <Navigate to="/" />
                     }/> {/* form to create details of an individual activity */}     
+                <Route path=":id" element={<ActivityDetail />}/>
                 </Route>
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
