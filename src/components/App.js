@@ -16,6 +16,9 @@ import ActivityForm from './ActivityForm';
 import "../style.css";
 import { getActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
+import MessageForm from './MessageForm';
+import Messages from './Messages';
+import MessageDetail from './MessageDetail';
 
 
 const App = () => {
@@ -71,7 +74,19 @@ const App = () => {
                     :
                     <Navigate to="/" />
                     }/> {/* form to create details of an individual activity */}     
-                <Route path=":id" element={<ActivityDetail />}/>
+                 <Route path=":id" element={<ActivityDetail />}/>
+                </Route>
+                <Route path="messages">
+                  <Route index element={<Messages />}/>
+                  <Route path="new" element={
+                    loggedInUser?
+                      <MessageForm  />
+                    :
+                      <Navigate to="/login" />
+                    } />
+                  <Route path=":messageId" element={<MessageDetail />} />
+                  <Route path="mymessages" element={<Messages />} />
+                  <Route path="user/:username" element={<Messages />} />
                 </Route>
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />

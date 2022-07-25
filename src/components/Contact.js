@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { Container } from '@mui/system';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import '../style.css'
 
 const Contact = () => {
@@ -28,9 +28,9 @@ const Contact = () => {
 
             <Box className="contactForm">
                 <form ref={form} onSubmit={sendEmail}>
-                    <input type="text" name="name" placeholder="Your Full Name" required />
-                    <input type="email" name="email" placeholder="Your Email" required />
-                    <textarea name="message" rows="7" placeholder="Your Message" required></textarea>
+                    <TextField type="text" name="name" placeholder="Your Full Name" required />
+                    <TextField type="email" name="email" placeholder="Your Email" required />
+                    <TextField name="message" rows="7" placeholder="Your Message" required/>
                     <Button type="submit" variant="outlined" color="success">Send Message</Button>
                 </form>
             </Box>
