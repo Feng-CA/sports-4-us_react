@@ -48,20 +48,20 @@ const LoginForm = () => {
     return (
         <Container className="login_container">
             <Box className="login_form">
-                <Typography variant="h4">Welcome back!</Typography>
+                <Typography variant="h5">Welcome back!</Typography>
                 {error && <Typography>No match that Email and/or Password</Typography>}
-                <form onSubmit={handleSubmit} sx={{width: "100%"}}>
+                <form onSubmit={handleSubmit}>
                     <Box marginTop={2}>
                         <Box marginBottom={2}>
                             <InputLabel>Email:</InputLabel>
                         </Box>
-                        <TextField type="email" name="email" id="email" placeholder="example@email.com" value={formData.email} onChange={handleFormData}/>
+                        <TextField style={{width: 280}} type="email" name="email" id="email" placeholder="example@email.com" value={formData.email} onChange={handleFormData} required/>
                     </Box>
                     <Box marginTop={2}>
                         <Box marginBottom={2}>
                             <InputLabel htmlFor="password">Password:</InputLabel>
                         </Box>
-                        <TextField type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData}/>
+                        <TextField style={{width: 280}} type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData} required/>
                     </Box>
                     <Box marginTop={3}>
                         <Button variant="outlined" type="submit" color="success">Login</Button>

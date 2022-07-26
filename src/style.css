@@ -123,16 +123,34 @@
 
 /* login form styling */
 .login_container {
+   
+   
+    text-align: center;
+}
+
+.login_form {
+    width: 380;
+    background: #ffffff;
+    padding: 40px 20px;
+    margin: 0 auto;
+}
+
+.login_input {
+    width: 40%;
+}
+
+/* signup form styling */
+.signup_container {
     width: 40%;
     margin: 0 auto;
     text-align: center;
 }
 
-.login_form {
+.singup_form {
     background: #ffffff;
     padding: 40px 20px;
 }
 
-.login_input {
+.signup_input {
     width: 80%;
 }
