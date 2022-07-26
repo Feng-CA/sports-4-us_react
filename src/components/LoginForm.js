@@ -1,4 +1,4 @@
-import { Button, InputLabel, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, InputLabel, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
@@ -46,26 +46,37 @@ const LoginForm = () => {
         })
     }
     return (
-        <>  
-            <Typography variant="h6">Welcome back!</Typography>
-            {error && <p>Wrong Email/Password</p>}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <InputLabel>Email:</InputLabel>
-                    <TextField type="email" name="email" id="email" placeholder="example@email.com" value={formData.email} onChange={handleFormData}/>
-                </div>
-                <div>
-                    <InputLabel htmlFor="password">Password:</InputLabel>
-                    <TextField type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData}/>
-                </div>
-               
-                <Button variant="contained" type="submit" color="success">Login</Button>
-            </form>
-            <div>
-                <p>Not a member yet?</p>
-                <Button variant="contained" onClick={() => navigate("/signup")}>Sign up</Button>
-            </div>
-        </>
+        <Container className="login_container">
+            <Box className="login_form">
+                <Typography variant="h4">Welcome back!</Typography>
+                {error && <Typography>No match that Email and/or Password</Typography>}
+                <form onSubmit={handleSubmit} sx={{width: "100%"}}>
+                    <Box marginTop={2}>
+                        <Box marginBottom={2}>
+                            <InputLabel>Email:</InputLabel>
+                        </Box>
+                        <TextField type="email" name="email" id="email" placeholder="example@email.com" value={formData.email} onChange={handleFormData}/>
+                    </Box>
+                    <Box marginTop={2}>
+                        <Box marginBottom={2}>
+                            <InputLabel htmlFor="password">Password:</InputLabel>
+                        </Box>
+                        <TextField type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData}/>
+                    </Box>
+                    <Box marginTop={3}>
+                        <Button variant="outlined" type="submit" color="success">Login</Button>
+                    </Box>
+                </form>
+                <Box>
+                    <Box marginTop={2}>
+                        <Typography variant="h6">Not a member yet?</Typography>
+                    </Box>
+                    <Box marginTop={2}>
+                        <Button variant="outlined" onClick={() => navigate("/signup")}>Sign up</Button>
+                    </Box>
+                </Box>
+            </Box>
+        </Container>
     )
 
 }

@@ -119,3 +119,20 @@
     border: 2px solid #054ed7;
     resize: none;
 }
+
+
+/* login form styling */
+.login_container {
+    width: 40%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.login_form {
+    background: #ffffff;
+    padding: 40px 20px;
+}
+
+.login_input {
+    width: 80%;
+}
