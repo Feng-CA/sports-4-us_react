@@ -51,9 +51,9 @@ const App = () => {
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser} = store
+  const {loggedInUser, users} = store
   
-  
+  console.log(users)
  
   return (
     <div className="App">

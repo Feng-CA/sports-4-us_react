@@ -1,9 +1,10 @@
-import { useGlobalState } from '../utils/stateContext'
+// import { useGlobalState } from '../utils/stateContext'
+import messageList from "../data/msssageList.json"
 import Message from './Message'
 
 const Messages = () => {
-    const {store}= useGlobalState()
-    const {messageList} = store
+    // const {store}= useGlobalState()
+    // const {messageList} = store
     
     
     return (
