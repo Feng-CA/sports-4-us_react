@@ -16,16 +16,20 @@ import ActivityForm from './ActivityForm';
 import "../style.css";
 import { getActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
+import { getProfiles } from "../services/profilesServices";
+import ProfileDetail from './ProfileDetail';
 import MessageForm from './MessageForm';
 import Messages from './Messages';
 import MessageDetail from './MessageDetail';
+
 
 
 const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name") || null,
     activities: sessionStorage.getItem("activities") || [],
-    users: sessionStorage.getItem("users") || []
+    users: sessionStorage.getItem("users") || [],
+    profiles: sessionStorage.getItem("profiles") || []
   }
 
   useEffect(() => {
@@ -39,6 +43,7 @@ const App = () => {
         data: response.data
     })
     })
+    
     //Get all the users from the back end
     getUsers()
     .then(response => {
@@ -46,14 +51,24 @@ const App = () => {
       dispatch({
         type: 'setUsers',
         data: response.data
+      })
+    })
+    
+    //Get all the profiles from the back end
+    getProfiles()
+    .then(response => {
+      sessionStorage.setItem("profiles", JSON.stringify(response.data))
+      dispatch({
+        type: 'setProfiles',
+        data: response.data
     })
     })   
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, users} = store
+  const {loggedInUser} = store
   
-  console.log(users)
+
  
   return (
     <div className="App">
@@ -76,18 +91,27 @@ const App = () => {
                     }/> {/* form to create details of an individual activity */}     
                  <Route path=":id" element={<ActivityDetail />}/>
                 </Route>
-                <Route path="messages">
-                  <Route index element={<Messages />}/>
-                  <Route path="new" element={
-                    loggedInUser?
-                      <MessageForm  />
-                    :
-                      <Navigate to="/login" />
-                    } />
-                  <Route path=":messageId" element={<MessageDetail />} />
-                  <Route path="mymessages" element={<Messages />} />
-                  <Route path="user/:username" element={<Messages />} />
-                </Route>
+            
+                  {loggedInUser && <Route path="messages">
+                    <Route index element={<Messages />}/>
+                      <Route path="new" element={
+                        loggedInUser?
+                        <MessageForm  />
+                        :
+                        <Navigate to="/login" />
+                      } />
+                      <Route path=":messageId" element={<MessageDetail />} />
+                      <Route path="mymessages" element={<Messages />} />
+                  </Route>
+                  }
+                  
+                  {loggedInUser && <Route index path="member/profile" element={<ProfileDetail />} />
+                      // <Route path="member">
+                      //   {/* <Route index element={<Dashboard />} /> */}
+                      //   <Route index path="profile" element={<ProfileDetail />} />
+                      // </Route>
+                  }
+              
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}

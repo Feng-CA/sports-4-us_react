@@ -61,7 +61,6 @@
     border-radius: 50%;
     margin: 0 auto 1rem;
     border: 0.4 solid rgb(28, 10, 193);
-
 }
 
 .categoried_activity {
@@ -151,4 +150,12 @@
 
 .signup_input {
     width: 80%;
+}
+
+/* profile detail page styling */
+.profile_image {
+    padding: 2rem;
+    aspect-ratio: 1/1;
+    overflow: hidden;
+    border-radius: 50%;
 }

@@ -23,6 +23,13 @@ export const reducer = (state, action) => {
                 users: action.data
             }
         }
+        case "setProfiles": {
+            //updates the users value
+            return {
+                ...state,
+                profile: action.data
+            }
+        }
         default: return state
     }
 
