@@ -24,8 +24,8 @@ import MessageDetail from './MessageDetail';
 const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name") || null,
-    activities: JSON.parse(sessionStorage.getItem("activities")) || [],
-    users: JSON.parse(sessionStorage.getItem("users")) || []
+    activities: sessionStorage.getItem("activities") || [],
+    users: sessionStorage.getItem("users") || []
   }
 
   useEffect(() => {

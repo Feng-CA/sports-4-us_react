@@ -13,6 +13,7 @@ const Navigation = () => {
     const logout = (e) => {
         e.preventDefault()
         sessionStorage.removeItem("full_name")
+        sessionStorage.clear()
         dispatch({
             type: "setLoggedInUser",
             data: null 
