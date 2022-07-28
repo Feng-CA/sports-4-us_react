@@ -27,7 +27,7 @@ export const reducer = (state, action) => {
             //updates the users value
             return {
                 ...state,
-                profile: action.data
+                profiles: action.data
             }
         }
         default: return state

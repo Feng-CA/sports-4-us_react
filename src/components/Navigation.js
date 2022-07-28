@@ -46,7 +46,7 @@ const Navigation = () => {
                 <Tabs value={false}>
                     <Tab label="Home" component={Link} to="/" />
                     <Tab label="Activities" component={Link} to="/categories"/>
-                    { loggedInUser && <Tab label="Member" component={Link} to="/member/dashboard" />}
+                    { loggedInUser && <Tab label="Member" component={Link} to="/member/profile" />}
                     <Tab label="Contact" component={Link} to="/contact"/>
                     { loggedInUser && <Tab label="Logout" onClick={logout} component={Link} to="/activities" />}
                     { !loggedInUser && <Tab label="Login" component={Link} to="/login" />}      

@@ -11,9 +11,18 @@ const ProfileDetail = () => {
     const { loggedInUser, profiles } = store
     const navigate = useNavigate()
 
+    let newProfiles;
+   
+        if(typeof(profiles) === "string") {
+            newProfiles = JSON.parse(profiles)
+        }else{
+        newProfiles = profiles
+        }
+
+    const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    // const profile = profiles.find(profile => profile.fullname === loggedInUser)
     
-    const profile = (JSON.parse(profiles).find(profile => profile.fullname === loggedInUser))
-      
+   
 
     return (
         <Container className="profiledetail_container" maxWidth="lg">
@@ -60,7 +69,7 @@ const ProfileDetail = () => {
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-end"}} marginTop={2}> 
                                 <Box marginLeft={3}> 
-                                    <Button variant="contained" style={{color: "primary"}} onClick={() => navigate("/member")}>Update</Button>
+                                    <Button variant="contained" style={{color: "primary"}} onClick={() => navigate("/member/profile/update")}>Update</Button>
                                 </Box>
                             </Box>
                         </CardContent>

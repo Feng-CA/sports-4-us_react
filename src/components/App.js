@@ -37,7 +37,6 @@ const App = () => {
     getActivities()
     .then(response => {
       sessionStorage.setItem("activities", JSON.stringify(response.data))
-      console.log(response.data)
       dispatch({
         type: 'setActivities',
         data: response.data
@@ -56,20 +55,20 @@ const App = () => {
     
     //Get all the profiles from the back end
     getProfiles()
-    .then(response => {
-      sessionStorage.setItem("profiles", JSON.stringify(response.data))
+    .then( data => {
+      console.log("then:", data)
+      sessionStorage.setItem("profiles", JSON.stringify(data))
       dispatch({
         type: 'setProfiles',
-        data: response.data
+        data: data
     })
     })   
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
   const {loggedInUser} = store
-  
-  
- 
+
+
   return (
     <div className="App">
         <StateContext.Provider value={{store, dispatch}}>
