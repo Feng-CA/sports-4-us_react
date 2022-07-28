@@ -63,7 +63,7 @@ const ProfileForm = () => {
     const [contactNo, setContactNo] = useState()
     const [emergencyContactNo, setEmergencyContactNo] = useState()
     const [emergencyContact, setEmergencyContact] = useState()
-    const [email, setEmail] = useState()
+    const [email, setEmail] = useState(currentUser.email)
 
     const handleChange = (event) => {
         setInterest({
