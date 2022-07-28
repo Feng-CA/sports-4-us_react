@@ -31,10 +31,21 @@ const ProfileForm = () => {
         running: false,
         basketball: false
     })
-    console.log(users)
+   
+    let newUsers;
+   
+        if(typeof(users)==="string"){
+            newUsers = JSON.parse(users)
+        }else{
+        newUsers=users
+        }
+        
     const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
-    const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
-    // const currentUser = users.find(user => user.full_name === loggedInUser)
+    //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
+    //const currentUser = (JSON.parse(newUsers).find(user => user.full_name === loggedInUser))
+    const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
+    console.log(currentUser)
+    //const currentUser = users.find(user => user.full_name === loggedInUser)
     const [location, setLocation] = useState()
 
     const initialFormData = {
