@@ -19,6 +19,7 @@ import { getUsers } from "../services/usersServices";
 import MessageForm from './MessageForm';
 import Messages from './Messages';
 import MessageDetail from './MessageDetail';
+import Dashboard from './Dashboard';
 
 
 const App = () => {
@@ -88,6 +89,7 @@ const App = () => {
                   <Route path="mymessages" element={<Messages />} />
                   <Route path="user/:username" element={<Messages />} />
                 </Route>
+                <Route path="member" element={<Dashboard />} />
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
                 {!loggedInUser && <Route path="signup" element={<SignupForm />} />}
