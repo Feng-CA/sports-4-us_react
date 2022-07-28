@@ -1,5 +1,5 @@
 .sidebar {
-    width: 280px;
+    width: 200px;
     flex: 1;
     height: calc(100vh - 50px);
     background-color: rgb(251, 251, 255);
@@ -17,8 +17,8 @@
   }
   
   .sidebarTitle {
-    font-size: 13px;
-    color: rgb(187, 186, 186);
+    font-size: 15px;
+    color: rgb(238, 180, 35);
   }
   
   .sidebarList {
@@ -41,5 +41,5 @@
   
   .sidebarIcon{
       margin-right: 15px;
-      font-size: 30px !important;
+      font-size: 28px !important;
   }

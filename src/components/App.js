@@ -105,7 +105,8 @@ const App = () => {
                   }
                   
                   {loggedInUser && <Route path="member">
-                    <Route index path="profile" element={<ProfileDetail />} />
+                    <Route index path="dashboard" element={<Dashboard />} />
+                    <Route path="profile" element={<ProfileDetail />} />
                     <Route path="profile/update" element={<ProfileForm />} />
                       {/* <Route path="update" element={
                           loggedInUser?
@@ -117,7 +118,6 @@ const App = () => {
                     </Route>
                   }
             
-                <Route path="member" element={<Dashboard />} />
 
                 <Route path="contact" element={<Contact />}/>        
                 <Route path="login" element={<LoginForm />} />
