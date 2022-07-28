@@ -34,9 +34,6 @@ const ActivityForm = () => {
     // const [error, setError] = useState(null)
     const [value, setValue] = useState(new Date());
     const [selectedImage, setSelectedImage] = useState(null);
-
-    console.log(formData)
-    // console.log(value)
     
     useEffect(() => {
         setFormData(() => ({
@@ -44,12 +41,6 @@ const ActivityForm = () => {
             image: selectedImage
         }))
     }, [value, selectedImage])
-
-    // useEffect(() => {
-    //     setFormData(() => ({
-    //         image: selectedImage
-    //     }))
-    // }, [selectedImage])
 
     const handleSubmit = (e) =>{
         e.preventDefault()

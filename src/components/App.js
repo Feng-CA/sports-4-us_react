@@ -18,10 +18,10 @@ import { getActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
 import { getProfiles } from "../services/profilesServices";
 import ProfileDetail from './ProfileDetail';
+import ProfileForm from './ProfileForm';
 import MessageForm from './MessageForm';
 import Messages from './Messages';
 import MessageDetail from './MessageDetail';
-
 
 
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
       dispatch({
         type: 'setActivities',
         data: response.data
-    })
+      })
     })
     
     //Get all the users from the back end
@@ -68,7 +68,7 @@ const App = () => {
   const [store, dispatch] = useReducer(reducer, initialState)
   const {loggedInUser} = store
   
-
+  
  
   return (
     <div className="App">
@@ -105,11 +105,17 @@ const App = () => {
                   </Route>
                   }
                   
-                  {loggedInUser && <Route index path="member/profile" element={<ProfileDetail />} />
-                      // <Route path="member">
-                      //   {/* <Route index element={<Dashboard />} /> */}
-                      //   <Route index path="profile" element={<ProfileDetail />} />
-                      // </Route>
+                  {loggedInUser && <Route path="member">
+                    <Route index path="profile" element={<ProfileDetail />} />
+                    <Route path="profile/update" element={<ProfileForm />} />
+                      {/* <Route path="update" element={
+                          loggedInUser?
+                          <ProfileForm  />
+                          :
+                          <Navigate to="/login" />
+                        } />
+                     */}
+                    </Route>
                   }
               
                 <Route path="contact" element={<Contact />}/>        

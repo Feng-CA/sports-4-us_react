@@ -1,110 +1,159 @@
-import { useEffect, useState } from "react";
+import {useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-// import { useGlobalState } from "../utils/stateContext";
+import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
-import { Button, Input, TextField, Typography } from "@mui/material";
-import Box from '@mui/material/Box';
+import { Box, Button, TextField, Typography } from "@mui/material";
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
+import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-// import { createActivity } from "../services/activitiesServices";
+import Checkbox from '@mui/material/Checkbox';
+import PhoneInput from 'react-phone-input-2';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import 'react-phone-input-2/lib/style.css'
 
 
-const ActivityForm = () => {
-    // const {store, dispatch} = useGlobalState()
-    // const { activities } = store
+const ProfileForm = () => {
+    const {store} = useGlobalState()
+    const { loggedInUser, users } = store
     // const navigate = useNavigate()
+    const [interest, setInterest] = useState({
+        cycling: false,
+        golf: false,
+        tennis: false,
+        soccer: false,
+        hiking: false,
+        cricket: false,
+        running: false,
+        basketball: false
+    })
+    console.log(users)
+    const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
+    const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
+    // const currentUser = users.find(user => user.full_name === loggedInUser)
+    const [location, setLocation] = useState()
 
-    
     const initialFormData = {
-        title: "",
-        category: "",
-        location: "",
-        date_time: null,
-        image: null,
-        cost: 0,
-        quantity: 0,
-        description: ""
+        fullname: loggedInUser,
+        email: currentUser.email,
+        location: location,
+        contact_no: "",
+        emergency_contact: "",
+        emergency_contact_no: "",
+        account_type: "member",
+        interests: []
     }
-    const [formData, setFormData] = useState(initialFormData)
-    // const [error, setError] = useState(null)
-    const [value, setValue] = useState(new Date());
-    const [selectedImage, setSelectedImage] = useState(null);
 
-    console.log(formData)
-    // console.log(value)
+    const [formData, setFormData] = useState(initialFormData)
+    const [contactNo, setContactNo] = useState()
+    const [emergencyContactNo, setEmergencyContactNo] = useState()
+    const [emergencyContact, setEmergencyContact] = useState()
+    const [email, setEmail] = useState()
+
+    const handleChange = (event) => {
+        setInterest({
+          ...interest,
+          [event.target.name]: event.target.checked,
+        });
+      };
+
+    // const [error, setError] = useState(null)
+    
     
     useEffect(() => {
         setFormData(() => ({
-            date_time: value,
-            image: selectedImage
+            fullname: loggedInUser,
+            email: email,
+            interests: interest,
+            contact_no: contactNo,
+            emergency_contact_no: emergencyContactNo,
+            emergency_contact: emergencyContact,
+            location: location
         }))
-    }, [value, selectedImage])
-
-    // useEffect(() => {
-    //     setFormData(() => ({
-    //         image: selectedImage
-    //     }))
-    // }, [selectedImage])
+        
+    }, [interest, contactNo, emergencyContactNo, emergencyContact, location, email, loggedInUser])
+    
+    console.log("before:", formData)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(formData)
-        // createActivity(formData)
-        // .then((activities) => {
+        console.log("after:", formData)
+        // updateProfile(formData)
+        // .then((profile) => {
 
         //     let errorMessage = "";
-        //     if (activities.error){
-        //         Object.keys(activities.error).forEach(key => {
-        //             errorMessage = errorMessage.concat("", `${key} ${activities.error[key]}`)
+        //     if (profile.error){
+        //         Object.keys(profile.error).forEach(key => {
+        //             errorMessage = errorMessage.concat("", `${key} ${profile.error[key]}`)
         //         })
         //         setError(errorMessage)
         //     }
         //     else {    
         //         dispatch({
-        //             type: "setActivities",
-        //             data: activities
+        //             type: "setProfile",
+        //             data: profile
         //         })
         //         setFormData(initialFormData)
-        //         navigate("/activities")     
+        //         navigate("/member/profile")     
         //     }  
         // })
         // .catch(error=> {console.log(error)})
     }
 
-    const handleFormData = (e) => {
-        setFormData((formData) => ({
-            ...formData,
-            [e.target.name]: e.target.value
-        }))
-    }
+    
     return (
-        <Container className="activityForm_container" sx={{width: 380}}>
+        <Container className="profileForm_container" sx={{width: 380}}>
              <Box sx={{textAlign: "center"}} margin={3}>
-                <Typography variant="h6">Create / Update Activity</Typography>
+                <Typography variant="h6">Update Profile</Typography>
             </Box>  
             <form onSubmit={handleSubmit}>
-                <Box className="activityForm_title">
-                    <InputLabel>Title</InputLabel>
-                    <Box className="activityForm_textfield">
-                        <TextField required sx={{width: 320}} type="text" name="title" id="title" value={formData.title} onChange={handleFormData}/>
+                <Box>
+                    <InputLabel>Your Full Name</InputLabel>
+                    <Box marginTop={1}>
+                        <TextField required sx={{width: 320}} type="text" name="fullname" id="fullname" value={formData.fullname} disabled/>
+                    </Box>
+                </Box>
+                <Box marginTop={1}>
+                    <InputLabel>Your Email</InputLabel>
+                    <Box marginTop={1}>
+                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={formData.email} onChange={(e)=>setEmail(e.target.value)}/>
+                    </Box>
+                </Box>
+                <Box sx={{display: "flex"}} marginTop={2}> 
+                    <Box >
+                        <InputLabel>Contact Number</InputLabel>
+                        {/* <PhoneInput name="contact_no" id="contact_no"  value={formData.contact_no} onChange={e=>console.log(e.target.value)}/> */}
+                        <PhoneInput required country={'au'} value={contactNo} onChange={setContactNo}/>
+                    </Box>
+                </Box>
+
+                <Box marginTop={2}>
+                    <InputLabel>Emergency Contact</InputLabel>
+                    <Box marginTop={1}>
+                        <TextField required sx={{width: 320}} type="text" name="emergency_contact" id="emergency_contact" value={emergencyContact} onChange={(e)=>setEmergencyContact(e.target.value)}/>
+                    </Box>
+                </Box>
+                <Box sx={{display: "flex"}} marginTop={2}> 
+                    <Box>
+                        <InputLabel>Emergency Contact Number</InputLabel>
+                        <PhoneInput required country={'au'} value={emergencyContactNo} onChange={setEmergencyContactNo}/>
                     </Box>
                 </Box>
                 <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={3}> 
-                    <Box sx={{ width: 150 }}>
+                    <Box sx={{width:320 }}>
                         <FormControl required fullWidth>
                             <InputLabel>Location</InputLabel>
                             <Select
-                                defaultValue={"Melbourne"}
+                                defaultValue="Melbourne"
                                 name="location"
                                 id="location"
                                 value={formData.location}
                                 label="Location"
-                                onChange={handleFormData}
+                                onChange={(e)=>setLocation(e.target.value)}
                             >
                                 <MenuItem value={"Sydney"}>Sydney</MenuItem>
                                 <MenuItem value={"Melbourne"}>Melbourne</MenuItem>
@@ -117,62 +166,78 @@ const ActivityForm = () => {
                             </Select>
                         </FormControl>
                     </Box>
-                    <Box sx={{ width: 150 }} marginLeft={3}>
-                        <FormControl required fullWidth>
-                            <InputLabel>Category</InputLabel>
-                            <Select
-
-                                name="category"
-                                id="category"
-                                value={formData.category}
-                                label="Category"
-                                onChange={handleFormData}
+                </Box>
+                <Box sx={{width:320 }} marginTop={2}>
+                    <FormControl>
+                        <FormLabel id="demo-row-radio-buttons-group-label">Account Type</FormLabel>
+                        <RadioGroup
+                            row
+                            defaultValue="member"
+                            name="account_type"
                             >
-                                <MenuItem value={"Cycling"}>Cycling</MenuItem>
-                                <MenuItem value={"Golf"}>Golf</MenuItem>
-                                <MenuItem value={"Tennis"}>Tennis</MenuItem>
-                                <MenuItem value={"Soccer"}>Soccer</MenuItem>
-                                <MenuItem value={"Hiking"}>Hiking</MenuItem>
-                                <MenuItem value={"Cricket"}>Cricket</MenuItem>
-                                <MenuItem value={"Running"}>Running</MenuItem>
-                                <MenuItem value={"Basketball"}>Basketball</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Box>
+                            <FormControlLabel value="member" control={<Radio />} label="Member"/>
+                            <FormControlLabel value="organiser" control={<Radio />} label="Organiser" disabled/>
+                        </RadioGroup>
+                    </FormControl>
                 </Box>
-                <Box marginTop={3} sx={{width: 380}}>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <DateTimePicker
-                            renderInput={(props) => <TextField {...props}  sx={{width: 320}}/>}
-                            label="DateTimePicker"
-                            name="date_time"
-                            value={formData.date_time}
-                            onChange={(newValue) => {
-                            setValue(newValue)
-                            }}
-                        />
-                    </LocalizationProvider>
-                </Box>
-                <Box sx={{display: "flex"}} marginTop={2}> 
-                    <Box>
-                        <InputLabel>Quantity</InputLabel>
-                        <TextField sx={{width: 152}} type="number" name="quantity" id="quantity" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.quantity} onChange={handleFormData}/>
-                    </Box>
-                    <Box marginLeft={2}>
-                        <InputLabel>Cost</InputLabel>
-                        <TextField sx={{width: 152}}type="number" name="cost" id="cost" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.cost} onChange={handleFormData}/>
-                    </Box>
-                </Box>
-                <Box marginTop={2}>
-                    <InputLabel>Upload image</InputLabel>
-                    {/*<Input sx={{width: 320}} type="file" name="image" id="image" value={selectedImage} onChange={(e)=> setSelectedImage(e.target.files[0])}/>*/}
-                    <Input sx={{width: 320}} type="file" name="image" id="image" onChange={(e)=> setSelectedImage(e.target.files[0])}/>
-                </Box>
-                <Box marginTop={2}>
-                    <InputLabel>Description</InputLabel>
-                    <TextField required sx={{width: 320}} type="textarea" name="description" id="description" value={formData.description} onChange={handleFormData}/>
-                </Box>
-               <Box sx={{display: "flex", justifyContent: "center"}} marginTop={2}>
+                <Box sx={{ display: 'flex'}} marginTop={2}>
+                    <FormControl sx={{ m: 0}} component="fieldset" variant="standard">
+                        <FormLabel component="legend">Your interests</FormLabel>
+                        <FormGroup>
+                        <Box sx={{display: "flex", flexDirection: "row", flexWrap: "wrap"}} marginTop={2}> 
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={cycling} onChange={handleChange} name="cycling" value={cycling}/>
+                                }
+                                label="Cycling"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={golf} onChange={handleChange} name="golf" value={golf}/>
+                                }
+                                label="Golf"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={tennis} onChange={handleChange} name="tennis" value={tennis}/>
+                                }
+                                label="Tennis"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={soccer} onChange={handleChange} name="soccer" value={soccer}/>
+                                }
+                                label="Soccer"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={hiking} onChange={handleChange} name="hiking" value={hiking}/>
+                                }
+                                label="Hiking"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={cricket} onChange={handleChange} name="cricket" value={cricket}/>
+                                }
+                                label="Cricket"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={running} onChange={handleChange} name="running" value={running}/>
+                                }
+                                label="Running"
+                            />
+                            <FormControlLabel
+                                control={
+                                <Checkbox checked={basketball} onChange={handleChange} name="basketball" value={basketball}/>
+                                }
+                                label="Basketball"
+                            />
+                        </Box>
+                        </FormGroup>
+                    </FormControl>
+                </Box>                                           
+               <Box sx={{display: "flex", justifyContent: "flex-end"}} marginTop={2}>
                     <Button variant="contained" type="submit" color="success" >Submit</Button>
                </Box>
             </form>
@@ -181,4 +246,4 @@ const ActivityForm = () => {
 
 }
 
-export default ActivityForm 
+export default ProfileForm 
