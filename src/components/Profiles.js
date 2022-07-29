@@ -1,3 +1,4 @@
+import Sidebar from "./SideBar";
 import { Box, Typography } from "@mui/material"
 import { useGlobalState } from "../utils/stateContext"
 import Profile from "./Profile";
@@ -18,17 +19,21 @@ const Profiles = () => {
     
     return (
         <Box className="profiles_container">
-          {newProfiles.length ?
-            <Box className="profiles_wrap_container">
-              {newProfiles.map(profile => 
-                <Profile key={profile.id} profile={profile}/>
-              )} 
-            </Box> 
-            :
-            <Typography variant="h5" marginLeft={5}>List of profiles is empty</Typography>
-          
-          } 
-            
+            <Box>
+                <Sidebar />
+            </Box>
+            <Box className="profiles_wrap_container"> 
+                {newProfiles.length ?
+                    <Box>
+                    {newProfiles.map(profile => 
+                        <Profile key={profile.id} profile={profile}/>
+                    )} 
+                    </Box> 
+                    :
+                    <Typography variant="h5" marginLeft={5}>List of profiles is empty</Typography>
+                }
+            </Box>
+    
         </Box>
     )
 

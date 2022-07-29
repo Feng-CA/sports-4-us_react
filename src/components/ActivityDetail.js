@@ -65,7 +65,7 @@ const ActivityDetail = () => {
                                     <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>
                                 </Box>
                                 <Box marginLeft={2}>
-                                    <Button variant="outlined" color="success" onClick={() => navigate("/payment")}>Register</Button>
+                                    <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
                                 </Box>
                             </Box>
                         </CardContent>

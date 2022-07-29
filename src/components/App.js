@@ -69,10 +69,8 @@ const App = () => {
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, profiles, activities} = store
-  console.log("after: ", profiles)
-  console.log("after: ", activities)
-  
+  const {loggedInUser} = store
+ 
   return (
     <Box className="App">
         <StateContext.Provider value={{store, dispatch}}>

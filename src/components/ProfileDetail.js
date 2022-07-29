@@ -26,11 +26,11 @@ const ProfileDetail = () => {
 
     return (
         <Box className="profiledetail_container">
-            <Box sx={{display: "flex", flexDirection: "raw"}} marginTop={2}> 
+            <Box sx={{display: "flex", flexDirection: "raw"}}> 
                 <Sidebar />
                 <Box> 
                 { profile ?
-                    <Card sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
+                    <Card className="profiledetail_wrap" sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
                         <Box>
                             <CardMedia
                                 className="profile_image"

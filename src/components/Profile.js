@@ -9,13 +9,12 @@ const Profile = ({profile}) => {
     
 
     return (
-        <Box className="profile_container">
+       
             <Card className="profile_card_container">
-                <Box>
+                <Box className="profile_avatar_container">
                     <CardMedia
                             className="profile_avatar"
-                            component="avatar"
-                            height="150"
+                            component="avatar"                           
                             image={running}
                             alt="avatar"
                             />
@@ -23,19 +22,15 @@ const Profile = ({profile}) => {
                 <CardContent className="profile-info-container">
                     <Box className="profile-info"> 
                         <Typography variant="h5">{profile.fullname}</Typography>
-                    
                         <Typography variant="p">{profile.location}</Typography>
-
-                        <Typography variant="p" marginLeft={1}>{profile.account_id}</Typography>
-                    </Box>  
-                            
-                    
-                    <Box className="profile_action">
-                        <Button size="small" variant="contained" color="success" onClick={() => navigate("/messages")}>Chat with Me</Button>
+                        <Typography variant="p" marginLeft={2}>{profile.account_id}</Typography>
+                    </Box>
+                    <Box className="profile_action" marginTop={1}>
+                        <Button size="small" variant="outlined" onClick={() => navigate("/messages")}>Chat with Me</Button>
                     </Box> 
                 </CardContent>  
             </Card>
-        </Box>
+
     )
 
 }
