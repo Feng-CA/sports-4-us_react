@@ -1,6 +1,7 @@
 // import { useGlobalState } from '../utils/stateContext'
 import messageList from "../data/msssageList.json"
 import Message from './Message'
+import MessageForm from "./MessageForm";
 
 const Messages = () => {
     // const {store}= useGlobalState()
@@ -9,6 +10,7 @@ const Messages = () => {
     
     return (
         <>
+          <MessageForm />
           {messageList.length ?
             <>
               {messageList.map(message => 

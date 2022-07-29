@@ -30,7 +30,7 @@ const Home = () => {
                 </Box>
                 <Box sx={{display: "flex"}} style={{position: "absolute", bottom: 40}}>
                     
-                {!loggedInUser&&
+                {!loggedInUser &&
                     <Box sx={{display: "flex"}}> 
                         <Box marginLeft={3}> 
                             <Button variant="contained" onClick={() => navigate("/signup")}>Sign up</Button>
@@ -38,7 +38,8 @@ const Home = () => {
                         <Box marginLeft={2}>
                             <Button variant="outlined" color="success" onClick={() => navigate("/login")}>Log in</Button>
                         </Box>
-                    </Box>}
+                    </Box>
+                }
                     <Box sx={{display: "flex"}} marginLeft={2} marginRight={2}>
                         <Button size="medium" variant="contained" color="secondary" onClick={() => navigate("/activities")}>Explorer all activities</Button>
                     </Box>

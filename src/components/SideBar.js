@@ -86,12 +86,14 @@ const Sidebar = () => {
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="General" />
-                    </ListItemButton>
+                    <Link to="/messages/channels/general" className="link">
+                      <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                          <StarBorder />
+                        </ListItemIcon>
+                        <ListItemText primary="General" />
+                      </ListItemButton>
+                    </Link>
                   </List>
                   <List component="div" disablePadding>
                     <ListItemButton sx={{ pl: 4 }}>

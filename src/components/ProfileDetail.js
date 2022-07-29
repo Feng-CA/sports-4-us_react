@@ -20,9 +20,7 @@ const ProfileDetail = () => {
         }
 
     const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
-    // const profile = profiles.find(profile => profile.fullname === loggedInUser)
     
-   
 
     return (
         <Box className="profiledetail_container">
@@ -71,8 +69,18 @@ const ProfileDetail = () => {
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "flex-end"}} marginTop={2}> 
                                     <Box marginLeft={3}> 
-                                        <Button variant="contained" style={{color: "primary"}} onClick={() => navigate("/member/profile/update")}>Update</Button>
+                                        <Button variant="contained" color="primary" onClick={() => navigate("/member/profile/update")}>Update</Button>
                                     </Box>
+                                { profile.isAdmin ?
+
+                                    <Box marginLeft={3}> 
+                                        <Button variant="contained" color="error" onClick={() => navigate("/member/profile/delete")}>Delete</Button>
+                                    </Box>
+                                    :
+                                    <>
+    
+                                    </>
+                                }
                                 </Box>
                             </CardContent>
                         </Box>
