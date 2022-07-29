@@ -17,12 +17,14 @@ import "../style.css";
 import { getActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
 import { getProfiles } from "../services/profilesServices";
+import Profiles from "./Profiles";
 import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
 import MessageForm from './MessageForm';
 import Messages from './Messages';
 import MessageDetail from './MessageDetail';
 import Dashboard from './Dashboard';
+import { Box } from '@mui/material';
 
 
 const App = () => {
@@ -56,22 +58,23 @@ const App = () => {
     
     //Get all the profiles from the back end
     getProfiles()
-    .then( data => {
-      console.log("then:", data)
-      sessionStorage.setItem("profiles", JSON.stringify(data))
+    .then( response => {
+      console.log("then:", response.data)
+      sessionStorage.setItem("profiles", JSON.stringify(response.data))
       dispatch({
         type: 'setProfiles',
-        data: data
+        data: response.data
     })
     })   
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser} = store
-
-
+  const {loggedInUser, profiles, activities} = store
+  console.log("after: ", profiles)
+  console.log("after: ", activities)
+  
   return (
-    <div className="App">
+    <Box className="App">
         <StateContext.Provider value={{store, dispatch}}>
         <Router>
 						<Navigation />
@@ -105,7 +108,9 @@ const App = () => {
                   }
                   
                   {loggedInUser && <Route path="member">
-                    <Route index path="dashboard" element={<Dashboard />} />
+                    <Route index element={<Dashboard/>} />
+                    <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="profiles" element={<Profiles />} />
                     <Route path="profile" element={<ProfileDetail />} />
                     <Route path="profile/update" element={<ProfileForm />} />
                       {/* <Route path="update" element={
@@ -126,7 +131,7 @@ const App = () => {
               </Routes>
             </Router>
         </StateContext.Provider>	
-    </div>
+    </Box>
   )
 }
 

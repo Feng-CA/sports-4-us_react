@@ -1,6 +1,6 @@
 import sports4usAPI from "../config/api"
 
-export async function getMessage(){
+export async function getMessages(){
     const response = await sports4usAPI.get('/messages')
     return response.data
 }

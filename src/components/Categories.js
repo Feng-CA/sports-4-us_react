@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Categories = () => {
    
     return (
-        <Container>
+        <Container className='categories_container'>
         	<Box sx={{display: "flex", justifyContent: "center"}} marginTop={3} component={Link} to="/activities">
                 <Typography variant="h5" component="div">
                   Full Activities List

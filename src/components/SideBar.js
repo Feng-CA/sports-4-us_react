@@ -27,7 +27,7 @@ const Sidebar = () => {
           <Box className="sidebarMenu">
             <Typography variant="h6" className="sidebarTitle">Dashboard</Typography>
             <List className="sidebarList">
-              <Link to="/member" className="dashboard_link">
+              <Link to="/member/dashboard" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem active">
                     <LineStyleIcon className="sidebarIcon" />  
@@ -40,7 +40,7 @@ const Sidebar = () => {
                   <ListItemIcon className="sidebarListItem">
                     <PermIdentifyIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText primary="Profile"/>
+                  <ListItemText primary="My Profile"/>
                 </ListItemButton>
               </Link>
               <Link to="/activities" className="dashboard_link">
@@ -48,7 +48,7 @@ const Sidebar = () => {
                   <ListItemIcon className="sidebarListItem">
                     <TimelineIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText primary="Activities"/>
+                  <ListItemText primary="My Activities"/>
                 </ListItemButton>
               </Link>
             </List>
@@ -61,7 +61,7 @@ const Sidebar = () => {
                   <ListItemIcon className="sidebarListItem">
                     <PeopleOutlineIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText primary="Profiles"/>
+                  <ListItemText primary="Member Profiles"/>
                 </ListItemButton>
               </Link>
             </List>
@@ -159,7 +159,7 @@ const Sidebar = () => {
                   </List>
                 </Collapse>
               
-                <Link to="/messages/direct" className="link">
+                <Link to="/messages/new" className="link">
                   <ListItemButton>
                       <ListItemIcon className="sidebarListItem">
                         <ChatBubbleOutlineIcon className="sidebarIcon" /> 

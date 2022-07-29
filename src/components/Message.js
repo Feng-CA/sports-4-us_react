@@ -13,7 +13,7 @@ const Message = ({message}) => {
                     <Link to={`/messages/${message.id}`} style={{textDecoration: 'none'}}>
                         <Typography variant='h5'>{message.text}</Typography>
                     </Link>
-                </CardContent>    
+                </CardContent>
             </Card>
         </Container>
     )

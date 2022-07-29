@@ -18,6 +18,7 @@ import "swiper/css/navigation";
 const ActivitiesList = () => {
     const {store} = useGlobalState()
     const {activities} = store
+    console.log(activities)
 
 
     return (
