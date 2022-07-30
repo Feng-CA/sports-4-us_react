@@ -34,3 +34,4 @@ return response.data
 export async function deleteProfile(id){
     const response = await sports4usAPI.delete(`/profiles/${id}`)
 return response.data
+}
