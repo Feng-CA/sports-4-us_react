@@ -26,11 +26,8 @@ const ProfileDetail = () => {
     }
 
     const profile = getProfile(params.profileId)
-
-    console.log("profile: ", profile)
     
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
-    console.log(adminProfile)
 
     let loggedInAdmin;
     if (adminProfile.fullname === loggedInUser) {
@@ -89,9 +86,15 @@ const ProfileDetail = () => {
                                     <Typography variant="h5">{profile.account_id}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "flex-end"}} marginTop={2}> 
+                                { loggedInAdmin ?
                                     <Box marginLeft={3}> 
-                                        <Button variant="contained" color="primary" onClick={() => navigate("/member/profile/update")}>Update</Button>
+                                        <Button variant="contained" color="primary" onClick={() => navigate(`/member/profiles/${profile.id}/adminupdate`)}>Edit</Button>
                                     </Box>
+                                    :
+                                    <Box marginLeft={3}> 
+                                        <Button variant="contained" color="success" onClick={() => navigate(`/member/profiles/${profile.id}/update`)}>Update</Button>
+                                    </Box>
+                                }
                                 { loggedInAdmin &&
                                     <Box marginLeft={3}> 
                                         <Button variant="contained" color="error" onClick={handleClick}>Delete</Button>

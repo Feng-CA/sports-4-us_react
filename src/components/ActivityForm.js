@@ -44,7 +44,7 @@ const ActivityForm = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(formData)
+      
         // createActivity(formData)
         // .then((activities) => {
 
@@ -73,6 +73,8 @@ const ActivityForm = () => {
             [e.target.name]: e.target.value
         }))
     }
+
+    
     return (
         <Container className="activityForm_container" sx={{width: 380}}>
              <Box sx={{textAlign: "center"}} margin={3}>

@@ -1,5 +1,5 @@
 import {useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
 import { Box, Button, TextField, Typography } from "@mui/material";
@@ -14,12 +14,31 @@ import Checkbox from '@mui/material/Checkbox';
 import PhoneInput from 'react-phone-input-2';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import 'react-phone-input-2/lib/style.css';
+import 'react-phone-input-2/lib/style.css'
 
 
-const ProfileForm = () => {
+const AdminUpdateProfileForm = () => {
     const {store} = useGlobalState()
-    const { loggedInUser, users } = store
+    const { loggedInUser, users, profiles } = store
+    const params = useParams()
+
+    let newProfiles;
+    
+    if(typeof(profiles) === "string") {
+        newProfiles = JSON.parse(profiles)
+    } else {
+        newProfiles = profiles
+    }
+
+    const getProfile = (id) => {
+        return newProfiles.find(p => p.id === parseInt(id))
+    }
+
+    const profile = getProfile(params.profileId)
+
+   
+
+    // console.log("admin:", params)
     // const navigate = useNavigate()
     const [interest, setInterest] = useState({
         cycling: false,
@@ -34,11 +53,11 @@ const ProfileForm = () => {
    
     let newUsers;
    
-    if(typeof(users) === "string") {
-        newUsers = JSON.parse(users);
-    } else {
-        newUsers = users;
-    }
+        if(typeof(users)==="string"){
+            newUsers = JSON.parse(users)
+        }else{
+        newUsers=users
+        }
         
     const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
     //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
@@ -49,21 +68,21 @@ const ProfileForm = () => {
     const [location, setLocation] = useState()
 
     const initialFormData = {
-        fullname: loggedInUser,
-        email: currentUser.email,
-        location: "",
-        contact_no: "",
-        emergency_contact: "",
-        emergency_contact_no: "",
+        fullname: profile.full_name,
+        email: profile.email,
+        location: profile.location,
+        contact_no: profile.contact_no,
+        emergency_contact: profile.emergency_contact,
+        emergency_contact_no: profile.emergency_contact_no,
         account_type: "member",
-        interests: []
+        interests: profile.interests
     }
 
     const [formData, setFormData] = useState(initialFormData)
     const [contactNo, setContactNo] = useState()
     const [emergencyContactNo, setEmergencyContactNo] = useState()
     const [emergencyContact, setEmergencyContact] = useState()
-
+    const [email, setEmail] = useState(currentUser.email)
 
     const handleChange = (event) => {
         setInterest({
@@ -77,6 +96,8 @@ const ProfileForm = () => {
     
     useEffect(() => {
         setFormData(() => ({
+            fullname: profile.full_name,
+            email: profile.email,
             interests: interest,
             contact_no: contactNo,
             emergency_contact_no: emergencyContactNo,
@@ -84,12 +105,13 @@ const ProfileForm = () => {
             location: location
         }))
         
-    }, [interest, contactNo, emergencyContactNo, emergencyContact, location])
+    }, [interest, contactNo, emergencyContactNo, emergencyContact, location, email, profile])
     
- 
+    console.log("before:", formData)
+
     const handleSubmit = (e) =>{
         e.preventDefault()
-     
+        console.log("after:", formData)
         // updateProfile(formData)
         // .then((profile) => {
 
@@ -128,7 +150,7 @@ const ProfileForm = () => {
                 <Box marginTop={1}>
                     <InputLabel>Your Email</InputLabel>
                     <Box marginTop={1}>
-                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={formData.email} disabled/>
+                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={formData.email} onChange={(e)=>setEmail(e.target.value)}/>
                     </Box>
                 </Box>
                 <Box sx={{display: "flex"}} marginTop={2}> 
@@ -156,6 +178,7 @@ const ProfileForm = () => {
                         <FormControl required fullWidth>
                             <InputLabel>Location</InputLabel>
                             <Select
+                                defaultValue="Melbourne"
                                 name="location"
                                 id="location"
                                 value={formData.location}
@@ -253,4 +276,4 @@ const ProfileForm = () => {
 
 }
 
-export default ProfileForm 
+export default AdminUpdateProfileForm 

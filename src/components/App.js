@@ -20,6 +20,7 @@ import { getProfiles } from "../services/profilesServices";
 import Profiles from "./Profiles";
 import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
+import AdminUpdateProfileForm from './AdminUpdateProfileForm'
 import MessageForm from './MessageForm';
 import Messages from './Messages';
 import MessageDetail from './MessageDetail';
@@ -32,8 +33,7 @@ const App = () => {
     loggedInUser: sessionStorage.getItem("full_name") || null,
     activities: sessionStorage.getItem("activities") || [],
     users: sessionStorage.getItem("users") || [],
-    profiles: sessionStorage.getItem("profiles") || [],
-    loggedInAdmin: null
+    profiles: sessionStorage.getItem("profiles") || []
   }
   
 
@@ -107,7 +107,7 @@ const App = () => {
                   {/*<Route path=":id" element={<ActivityDetail />}/> */}{/* form to display details of an individual activity */}     
                   <Route path="new" element={
                     loggedInAdmin ?
-                  <ActivityForm loggedInAdmin={loggedInAdmin}/>
+                    <ActivityForm />
                     :
                     <Navigate to="/" />
                     }/> {/* form to create details of an individual activity */}     
@@ -131,15 +131,14 @@ const App = () => {
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="profiles" element={<Profiles />} />
                     <Route path="profiles/:profileId" element={<ProfileDetail />} />
-                    <Route path="profile/update" element={<ProfileForm />} />
-                      {/* <Route path="update" element={
-                          loggedInUser?
-                          <ProfileForm  />
-                          :
-                          <Navigate to="/login" />
-                        } />
-                     */}
-                    </Route>
+                    <Route path="profiles/:profileId/update" element={<ProfileForm />} />
+                    {/* {loggedInAdmin ?
+                    <Route path="profiles/:profileId/adminupdate" element={<AdminUpdateProfileForm />} />
+                    :
+                    <Route path="profiles/:profileId/update" element={<ProfileForm />} />
+                    } */}
+                  <Route path="profiles/:profileId/update" element={<ProfileForm />} />
+                  </Route>
                   }
             
 

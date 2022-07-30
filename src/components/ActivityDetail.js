@@ -21,7 +21,7 @@ const ActivityDetail = () => {
         newProfiles = profiles
     }
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
-    console.log(adminProfile)
+   
 
     let loggedInAdmin;
     if (adminProfile.fullname === loggedInUser) {

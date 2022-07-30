@@ -146,11 +146,11 @@
 /* profile detail page styling */
 .profiledetail_container {
     display: flex;
-    width: 100%;
+    width: 90%;
 }
 .profiledetail_wrap {
     margin: 0 auto;
-    width: 100%;
+    width: 80%;
 }
 
 .profile_image {
