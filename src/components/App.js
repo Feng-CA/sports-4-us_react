@@ -32,8 +32,10 @@ const App = () => {
     loggedInUser: sessionStorage.getItem("full_name") || null,
     activities: sessionStorage.getItem("activities") || [],
     users: sessionStorage.getItem("users") || [],
-    profiles: sessionStorage.getItem("profiles") || []
+    profiles: sessionStorage.getItem("profiles") || [],
+    loggedInAdmin: null
   }
+  
 
   useEffect(() => {
     //Get all the activities from the back end
@@ -59,7 +61,6 @@ const App = () => {
     //Get all the profiles from the back end
     getProfiles()
     .then( response => {
-      console.log("then:", response.data)
       sessionStorage.setItem("profiles", JSON.stringify(response.data))
       dispatch({
         type: 'setProfiles',
@@ -69,7 +70,27 @@ const App = () => {
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser} = store
+  const {loggedInUser, profiles } = store
+
+  // get admin profile
+  let newProfiles;
+   
+        if(typeof(profiles) === "string") {
+            newProfiles = JSON.parse(profiles)
+        } else {
+            newProfiles = profiles
+        }
+  const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+
+  
+  // get loggedInAdmin value
+  let loggedInAdmin;
+  if (adminProfile.fullname === loggedInUser) {
+      loggedInAdmin = adminProfile.fullname
+  } else {
+      loggedInAdmin = null
+  }
+
  
   return (
     <Box className="App">
@@ -85,8 +106,8 @@ const App = () => {
                   <Route index element={<FullActivityList />}/> {/* form to display all activities */}
                   {/*<Route path=":id" element={<ActivityDetail />}/> */}{/* form to display details of an individual activity */}     
                   <Route path="new" element={
-                    loggedInUser ?
-                  <ActivityForm/>
+                    loggedInAdmin ?
+                  <ActivityForm loggedInAdmin={loggedInAdmin}/>
                     :
                     <Navigate to="/" />
                     }/> {/* form to create details of an individual activity */}     
@@ -109,7 +130,7 @@ const App = () => {
                     <Route index element={<Dashboard/>} />
                     <Route path="dashboard" element={<Dashboard />} />
                     <Route path="profiles" element={<Profiles />} />
-                    <Route path="profile" element={<ProfileDetail />} />
+                    <Route path="profiles/:profileId" element={<ProfileDetail />} />
                     <Route path="profile/update" element={<ProfileForm />} />
                       {/* <Route path="update" element={
                           loggedInUser?

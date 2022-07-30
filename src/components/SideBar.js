@@ -8,6 +8,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
+import { useGlobalState } from "../utils/stateContext";
 import '../css/sidebar.css'
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { ExpandLess, StarBorder } from "@mui/icons-material";
@@ -15,7 +16,31 @@ import { ExpandMore } from "@mui/icons-material";
 
 
 const Sidebar = () => {
+    const {store} = useGlobalState()
+    const { loggedInUser, profiles } = store
     const [open, setOpen] = useState()
+
+    // get loggedInUser profile
+    let newProfiles;
+   
+        if(typeof(profiles) === "string") {
+            newProfiles = JSON.parse(profiles)
+        } else {
+            newProfiles = profiles
+        }
+    
+    const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+   
+    // sets loggedInAdmin value
+    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+  
+    let loggedInAdmin;
+    if (adminProfile.fullname === loggedInUser) {
+        loggedInAdmin = adminProfile.fullname
+    } else {
+        loggedInAdmin = null
+    }
+
 
     const handleClick = () => {
       setOpen(!open);
@@ -35,7 +60,7 @@ const Sidebar = () => {
                   <ListItemText primary="Panel"/>
                 </ListItemButton>
               </Link>
-              <Link to="/member/profile" className="dashboard_link">
+              <Link to={`/member/profiles/${profile.id}`} className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
                     <PermIdentifyIcon className="sidebarIcon" />
@@ -43,6 +68,16 @@ const Sidebar = () => {
                   <ListItemText primary="My Profile"/>
                 </ListItemButton>
               </Link>
+              { loggedInAdmin ?
+              <Link to="/activities/new" className="dashboard_link">
+                <ListItemButton>
+                  <ListItemIcon className="sidebarListItem">
+                    <TimelineIcon className="sidebarIcon" />
+                  </ListItemIcon>
+                  <ListItemText primary="Create Activities"/>
+                </ListItemButton>
+              </Link>
+              :
               <Link to="/activities" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
@@ -51,6 +86,7 @@ const Sidebar = () => {
                   <ListItemText primary="My Activities"/>
                 </ListItemButton>
               </Link>
+              }
             </List>
           </Box>
           <Box className="sidebarMenu">

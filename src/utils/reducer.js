@@ -9,6 +9,13 @@ export const reducer = (state, action) => {
                 loggedInUser: action.data
             }
         }
+        case "setLoggedAdmin": {
+            //updates the loggedInAdmin value
+            return {
+                ...state,
+                loggedInUser: action.data
+            }
+        }
         case "setActivities": {
             //updates the activities value
             return {

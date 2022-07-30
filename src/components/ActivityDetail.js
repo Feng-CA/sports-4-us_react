@@ -1,16 +1,42 @@
-import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/material"
-import { Container } from "@mui/system"
-import { Link, useParams, useNavigate } from "react-router-dom"
-import { useGlobalState } from "../utils/stateContext"
-import categories from "../data/categoryList.json"
+import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { Container } from "@mui/system";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useGlobalState } from "../utils/stateContext";
+import categories from "../data/categoryList.json";
 import group from "../assets/group-running.jpg";
 
 
 const ActivityDetail = () => {
     const {store} = useGlobalState()
-    const { activities, users } = store
+    const { activities, users, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
+
+    
+    let newProfiles;
+    
+    if(typeof(profiles) === "string") {
+        newProfiles = JSON.parse(profiles)
+    } else {
+        newProfiles = profiles
+    }
+    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+    console.log(adminProfile)
+
+    let loggedInAdmin;
+    if (adminProfile.fullname === loggedInUser) {
+        loggedInAdmin = adminProfile.fullname
+    } else {
+        loggedInAdmin = null
+    }
+   
+
+    const handleUpdate = () => {
+        
+    }
+    const handleDelete = () => {
+
+    }
 
 
     return (
@@ -61,12 +87,25 @@ const ActivityDetail = () => {
                                 </Box>
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
-                                <Box marginLeft={3}> 
-                                    <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>
-                                </Box>
-                                <Box marginLeft={2}>
-                                    <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
-                                </Box>
+                                {loggedInAdmin ?
+                                <>
+                                    <Box marginLeft={3}> 
+                                        <Button variant="outlined" style={{color: "primary"}} onClick={handleUpdate}>Update</Button>
+                                    </Box>
+                                    <Box marginLeft={2}>
+                                        <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>
+                                    </Box>
+                                </>
+                                :
+                                <>
+                                    <Box marginLeft={3}> 
+                                        <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>
+                                    </Box>
+                                    <Box marginLeft={2}>
+                                        <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
+                                    </Box>
+                                </>
+                                }
                             </Box>
                         </CardContent>
                     </Box>

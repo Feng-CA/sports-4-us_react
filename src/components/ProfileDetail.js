@@ -1,6 +1,6 @@
-import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/material"
-import { Link, useNavigate } from "react-router-dom"
-import { useGlobalState } from "../utils/stateContext"
+import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
 import Sidebar from "./SideBar";
 
@@ -11,16 +11,37 @@ const ProfileDetail = () => {
     const { loggedInUser, profiles } = store
     const navigate = useNavigate()
 
-    let newProfiles;
-   
-        if(typeof(profiles) === "string") {
-            newProfiles = JSON.parse(profiles)
-        }else{
-        newProfiles = profiles
-        }
+    const params = useParams()
 
-    const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    let newProfiles;
     
+    if(typeof(profiles) === "string") {
+        newProfiles = JSON.parse(profiles)
+    } else {
+        newProfiles = profiles
+    }
+
+    const getProfile = (id) => {
+        return newProfiles.find(p => p.id === parseInt(id))
+    }
+
+    const profile = getProfile(params.profileId)
+
+    console.log("profile: ", profile)
+    
+    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+    console.log(adminProfile)
+
+    let loggedInAdmin;
+    if (adminProfile.fullname === loggedInUser) {
+        loggedInAdmin = adminProfile.fullname
+    } else {
+        loggedInAdmin = null
+    }
+   
+    const handleClick = () => {
+
+    }
 
     return (
         <Box className="profiledetail_container">
@@ -71,15 +92,10 @@ const ProfileDetail = () => {
                                     <Box marginLeft={3}> 
                                         <Button variant="contained" color="primary" onClick={() => navigate("/member/profile/update")}>Update</Button>
                                     </Box>
-                                { profile.isAdmin ?
-
+                                { loggedInAdmin &&
                                     <Box marginLeft={3}> 
-                                        <Button variant="contained" color="error" onClick={() => navigate("/member/profile/delete")}>Delete</Button>
+                                        <Button variant="contained" color="error" onClick={handleClick}>Delete</Button>
                                     </Box>
-                                    :
-                                    <>
-    
-                                    </>
                                 }
                                 </Box>
                             </CardContent>

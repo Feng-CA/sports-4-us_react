@@ -18,7 +18,15 @@ import "swiper/css/navigation";
 const ActivitiesList = () => {
     const {store} = useGlobalState()
     const {activities} = store
-    console.log(activities)
+   
+    let newActivities;
+    
+    if(typeof(activities) === "string") {
+        newActivities = JSON.parse(activities)
+    } else {
+        newActivities = activities
+    }
+
 
 
     return (
@@ -32,7 +40,7 @@ const ActivitiesList = () => {
                     navigation={true}
                     pagination={{ clickable: true }}>
 
-                {activities.map((activity, index) => {
+                {newActivities.map((activity, index) => {
                  
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
