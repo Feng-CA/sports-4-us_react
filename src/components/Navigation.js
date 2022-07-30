@@ -19,6 +19,10 @@ const Navigation = () => {
             type: "setLoggedInUser",
             data: null 
         })
+        dispatch({
+            type: "setToken",
+            data: null 
+        })
       
         navigate("/activities")
     }

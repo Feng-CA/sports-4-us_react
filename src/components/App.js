@@ -33,7 +33,8 @@ const App = () => {
     loggedInUser: sessionStorage.getItem("full_name") || null,
     activities: sessionStorage.getItem("activities") || [],
     users: sessionStorage.getItem("users") || [],
-    profiles: sessionStorage.getItem("profiles") || []
+    profiles: sessionStorage.getItem("profiles") || [],
+    token: sessionStorage.getItem("token")||null
   }
   
 
@@ -85,11 +86,14 @@ const App = () => {
   
   // get loggedInAdmin value
   let loggedInAdmin;
+ //Introduced check for adminProfile in case it is an empty array
+ if(adminProfile){
   if (adminProfile.fullname === loggedInUser) {
-      loggedInAdmin = adminProfile.fullname
-  } else {
-      loggedInAdmin = null
-  }
+    loggedInAdmin = adminProfile.fullname
+} 
+}else {
+    loggedInAdmin = null
+}
 
  
   return (

@@ -22,6 +22,13 @@ const CategoriedActivityList = () => {
     const {activities} = store
     const params = useParams()
 
+    let newActivities;
+    
+    if(typeof(activities) === "string") {
+        newActivities = JSON.parse(activities)
+    } else {
+        newActivities = activities
+    }
 
     return (
         <Container className="categoriedActivityList_container">
@@ -35,7 +42,7 @@ const CategoriedActivityList = () => {
                     pagination={{ clickable: true }}>
                 
                 {/* eslint-disable-next-line */}
-                {activities.map((activity, index) => {
+                {newActivities.map((activity, index) => {
                     if (activity.category_id === Number(params.id))
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>

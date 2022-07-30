@@ -37,6 +37,13 @@ export const reducer = (state, action) => {
                 profiles: action.data
             }
         }
+        case "setToken": {
+            //updates the token value
+            return {
+                ...state,
+                token: action.data
+            }
+        }
         default: return state
     }
 

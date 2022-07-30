@@ -23,6 +23,7 @@ const SignupForm = () => {
         signUp(formData)
             .then((user) => {
                 sessionStorage.setItem("full_name", user.full_name)
+                sessionStorage.setItem("token", user.jwt)
                 let errorMessage = "";
                 if (user.error){
                 
@@ -35,6 +36,10 @@ const SignupForm = () => {
                     dispatch({
                         type: "setLoggedInUser",
                         data: user.full_name
+                    })
+                    dispatch({
+                        type: "setToken",
+                        data: user.jwt
                     })
                     setFormData(initialFormData)
                     navigate("/") 

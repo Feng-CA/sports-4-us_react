@@ -20,6 +20,7 @@ const LoginForm = () => {
         signIn(formData)
         .then((user) => {
             sessionStorage.setItem("full_name", user.full_name)
+            sessionStorage.setItem("token", user.jwt)
             let errorMessage = "";
             if (user.error){
                 Object.keys(user.error).forEach(key => {
@@ -31,6 +32,10 @@ const LoginForm = () => {
                 dispatch({
                     type: "setLoggedInUser",
                     data: user.full_name
+                })
+                dispatch({
+                    type: "setToken",
+                    data: user.jwt
                 })
                 setFormData(initialFormData)
                 navigate("/activities")     
