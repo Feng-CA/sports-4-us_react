@@ -26,16 +26,29 @@ const ActivityDetail = () => {
     } else {
         newProfiles = profiles
     }
-    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
-   
 
+    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+    
     let loggedInAdmin;
     if (adminProfile.fullname === loggedInUser) {
         loggedInAdmin = adminProfile.fullname
     } else {
         loggedInAdmin = null
     }
-   
+    
+    
+  
+    const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
+    // const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser)
+    // let loggedInOrganiser;
+    // if (organiserProfile.fullname === loggedInUser) {
+    //     loggedInOrganiser = organiserProfile.fullname
+    // } else {
+    //     loggedInOrganiser = null
+    // }
+    
+    console.log(organiserProfiles)
+    // console.log(loggedInOrganiser)
 
     const handleUpdate = () => {
         
@@ -73,11 +86,11 @@ const ActivityDetail = () => {
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                 <Typography variant="h5" marginRight={1}>Organiser: </Typography>
-                                <Typography variant="h5">{`${users[Number(newActivities[Number(params.id-1)].user_id)-1].full_name}`}</Typography>
+                                <Typography variant="h5">{newActivities[Number(params.id-1)].organiser}</Typography>
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                 <Typography variant="h5" marginRight={1}>Category: </Typography>
-                                <Typography variant="h5">{categories[Number(newActivities[Number(params.id-1)].category_id)-1].name}</Typography>
+                                <Typography variant="h5">{newActivities[Number(params.id-1)].category}</Typography>
                             </Box>
                             <Box sx={{display: "flex", textAlign: "justify"}} marginTop={1.5}>
                                 <Typography variant="h6">{newActivities[Number(params.id-1)].description}</Typography>
@@ -85,34 +98,34 @@ const ActivityDetail = () => {
                             <Box sx={{display: "flex", justifyContent: "space-around"}} marginTop={1}>
                                 <Box sx={{display: "flex", justifyContent: "space-around"}}>
                                     <Typography variant="h5">Cost: </Typography>
-                                    <Typography variant="h5">{newActivities[Number(params.id-1)].cost}</Typography>
+                                    <Typography marginLeft={2} variant="h5">{newActivities[Number(params.id-1)].cost}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "space-around"}}>
                                     <Typography variant="h5">Quantity: </Typography>
-                                    <Typography variant="h5">{newActivities[Number(params.id-1)].quantity_limit}</Typography>
+                                    <Typography marginLeft={2} variant="h5">{newActivities[Number(params.id-1)].quantity_limit}</Typography>
                                 </Box>
                             </Box>
-                            <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
-                                {loggedInAdmin ?
-                                <>
-                                    <Box marginLeft={3}> 
-                                        <Button variant="outlined" style={{color: "primary"}} onClick={handleUpdate}>Update</Button>
-                                    </Box>
-                                    <Box marginLeft={2}>
-                                        <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>
-                                    </Box>
-                                </>
-                                :
-                                <>
+                            {loggedInAdmin &&
+                                <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
+                                        <Box marginLeft={3}> 
+                                            <Button variant="outlined" style={{color: "primary"}} onClick={handleUpdate}>Update</Button>
+                                        </Box>
+                                        <Box marginLeft={2}>
+                                            <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>
+                                        </Box>
+                                </Box>
+                            }
+                  
+                            {!organiserProfiles &&
+                                <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>
                                     </Box>
                                     <Box marginLeft={2}>
                                         <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
                                     </Box>
-                                </>
-                                }
-                            </Box>
+                                </Box>
+                            }
                         </CardContent>
                     </Box>
                 </Card>

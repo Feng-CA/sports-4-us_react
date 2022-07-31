@@ -14,7 +14,7 @@ import CategoriedActivityList from './CategoriedActivityList';
 import ActivityDetail from './ActivityDetail';
 import ActivityForm from './ActivityForm';
 import "../style.css";
-import { getActivities } from "../services/activitiesServices";
+import { getActivities, getMemberActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
 import { getProfiles } from "../services/profilesServices";
 import Profiles from "./Profiles";
@@ -33,9 +33,10 @@ const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name") || null,
     activities: sessionStorage.getItem("activities") || [],
+    memberActivities: sessionStorage.getItem("memberActivities") || [],
     users: sessionStorage.getItem("users") || [],
     profiles: sessionStorage.getItem("profiles") || [],
-    token: sessionStorage.getItem("token")||null
+    token: sessionStorage.getItem("token") || null
   }
   
 
@@ -46,6 +47,16 @@ const App = () => {
       sessionStorage.setItem("activities", JSON.stringify(response.data))
       dispatch({
         type: 'setActivities',
+        data: response.data
+      })
+    })
+
+    //Get all the member activities from the back end
+    getMemberActivities()
+    .then(response => {
+      sessionStorage.setItem("memberActivities", JSON.stringify(response.data))
+      dispatch({
+        type: 'setMemberActivities',
         data: response.data
       })
     })

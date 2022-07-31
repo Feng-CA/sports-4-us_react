@@ -4,6 +4,18 @@ export async function getActivities(){
     const response = await sports4usAPI.get('/activities')
     return response     
 }
+// view full list of member paticipating activities = Login required
+export async function getMemberActivities(){
+    const response = await sports4usAPI.get('/activities/member')
+    return response     
+}
+
+// add paid activity to member paticipating activities list = Login required
+export async function updateMemberActivity(id,data){
+    const response = await sports4usAPI.put(`/activities/member/${id}`, data)
+    return response.data
+}
+
 // create an Activity => Admin Login required
 export async function createActivity(data){
     const response = await sports4usAPI.post('/activities', data)

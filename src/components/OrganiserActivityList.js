@@ -3,7 +3,7 @@ import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material"
 import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
-
+import "../style.css";
 // import Swiper core and required modules
 import { Pagination, Navigation } from 'swiper';
 
@@ -23,18 +23,18 @@ const OrganiserActivitiesList = () => {
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
-        newActivities = activities
+        newActivities = activities;
     }
 
-    console.log(loggedInUser)
-    console.log(newActivities)
-
-    const organiserActivities = newActivities.find(activity => activity.user_id === loggedInUser)
+   
+    // get all organiser activities
+    const organiserActivities = newActivities.filter(activity => activity.organiser === loggedInUser)
+    // console.log(organiserActivities)
 
     return (
-        <Container className="fullActivityList_container">
+        <Container className="organiserActivityList_container">
 
-            <Swiper className="fullActivityList_swiper"
+            <Swiper className="organiserActivityList_swiper"
                     // install Swiper modules
                     modules={[Pagination, Navigation]}
                     spaceBetween={50}
