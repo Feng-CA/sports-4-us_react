@@ -26,6 +26,7 @@ import Messages from './Messages';
 import MessageDetail from './MessageDetail';
 import Dashboard from './Dashboard';
 import { Box } from '@mui/material';
+import OrganiserActivitiesList from './OrganiserActivityList';
 
 
 const App = () => {
@@ -116,6 +117,7 @@ const App = () => {
                     <Navigate to="/" />
                     }/> {/* form to create details of an individual activity */}     
                  <Route path=":id" element={<ActivityDetail />}/>
+                 <Route path="organiser" element={<OrganiserActivitiesList />}/>
                 </Route>
                   {loggedInUser && <Route path="messages">
                     <Route index element={<Messages />}/>

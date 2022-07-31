@@ -78,7 +78,7 @@ const Sidebar = () => {
                 </ListItemButton>
               </Link>
               :
-              <Link to="/activities" className="dashboard_link">
+              <Link to="/activities/organiser" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
                     <TimelineIcon className="sidebarIcon" />

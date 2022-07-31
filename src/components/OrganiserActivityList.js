@@ -14,9 +14,9 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
 
-const ActivitiesList = () => {
+const OrganiserActivitiesList = () => {
     const {store} = useGlobalState()
-    const {activities} = store
+    const {activities, loggedInUser } = store
    
     let newActivities;
     
@@ -26,7 +26,10 @@ const ActivitiesList = () => {
         newActivities = activities
     }
 
+    console.log(loggedInUser)
+    console.log(newActivities)
 
+    const organiserActivities = newActivities.find(activity => activity.user_id === loggedInUser)
 
     return (
         <Container className="fullActivityList_container">
@@ -39,7 +42,7 @@ const ActivitiesList = () => {
                     navigation={true}
                     pagination={{ clickable: true }}>
 
-                {newActivities.map((activity, index) => {
+                {organiserActivities.map((activity, index) => {
                  
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
@@ -74,4 +77,4 @@ const ActivitiesList = () => {
     )
 }
 
-export default ActivitiesList
+export default OrganiserActivitiesList
