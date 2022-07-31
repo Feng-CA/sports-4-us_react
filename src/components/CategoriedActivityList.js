@@ -4,6 +4,8 @@ import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
 import "../style.css";
+import categoryList from "../data/categoryList.json";
+
 
 // import Swiper core and required modules
 import { Pagination, Navigation } from 'swiper';
@@ -21,6 +23,8 @@ const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
+
+    console.log(params.id)
 
     let newActivities;
     
@@ -43,7 +47,7 @@ const CategoriedActivityList = () => {
                 
                 {/* eslint-disable-next-line */}
                 {newActivities.map((activity, index) => {
-                    if (activity.category_id === Number(params.id))
+                    if (activity.category === categoryList[Number(params.id)-1].name)
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
                             <Card>
