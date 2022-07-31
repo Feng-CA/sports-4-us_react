@@ -18,8 +18,8 @@ import { ExpandMore } from "@mui/icons-material";
 const Sidebar = () => {
     const {store} = useGlobalState()
     const { loggedInUser, profiles } = store
-    const [open, setOpen] = useState()
-
+    const [open, setOpen] = useState(false)
+    console.log(profiles)
     // get loggedInUser profile
     let newProfiles;
    
@@ -105,13 +105,21 @@ const Sidebar = () => {
           <Box className="sidebarMenu">
             <Typography variant="h6" className="sidebarTitle">Message Board</Typography>
             <List className="sidebarList">
-                <Link to="/messages/myinbox" className="link">
+                <Link to="/messages" className="link">
                   <ListItemButton>
                     <ListItemIcon className="sidebarListItem">
                       <DynamicFeedIcon className="sidebarIcon" />
                     </ListItemIcon>
                     <ListItemText primary="Inbox"/>
                   </ListItemButton>
+                </Link>
+                <Link to="/messages/new" className="link">
+                  <ListItemButton>
+                      <ListItemIcon className="sidebarListItem">
+                        <ChatBubbleOutlineIcon className="sidebarIcon" /> 
+                      </ListItemIcon>
+                      <ListItemText primary="Direct Message"/>
+                    </ListItemButton>
                 </Link>
                 <ListItemButton onClick={handleClick}>
                     <ListItemIcon className="sidebarListItem">
@@ -197,14 +205,7 @@ const Sidebar = () => {
                   </List>
                 </Collapse>
               
-                <Link to="/messages/new" className="link">
-                  <ListItemButton>
-                      <ListItemIcon className="sidebarListItem">
-                        <ChatBubbleOutlineIcon className="sidebarIcon" /> 
-                      </ListItemIcon>
-                      <ListItemText primary="Direct Message"/>
-                    </ListItemButton>
-                </Link>
+                
             </List>
           </Box>
         </Box>

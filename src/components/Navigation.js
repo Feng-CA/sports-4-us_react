@@ -13,14 +13,19 @@ const Navigation = () => {
     const logout = (e) => {
         e.preventDefault()
         sessionStorage.removeItem("full_name")
-        sessionStorage.removeItem("profiles")
-        sessionStorage.clear()
+        sessionStorage.removeItem("token")
+
+        //sessionStorage.clear()
         dispatch({
             type: "setLoggedInUser",
             data: null 
         })
         dispatch({
             type: "setToken",
+            data: null 
+        })
+        dispatch({
+            type: "setReceiverId",
             data: null 
         })
       

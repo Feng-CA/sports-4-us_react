@@ -3,19 +3,23 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createMessage } from "../services/messagesServices";
 import { useGlobalState } from "../utils/stateContext";
+import SendersList from "./SendersList";
 
 const MessageForm = () => {
     const {store, dispatch} = useGlobalState()
-    const {loggedInUser} = store
+    const {loggedInUser, receiverId} = store
+
     const navigate = useNavigate()
     const initialFormData = {
-        text: ""
+        message: "",
+        receiver_user_id: ""
     }
     const [formData, setFormData] = useState(initialFormData)
-
+    
     const handleFormData = (e) => {
+        //console.log(e)
         setFormData({
-            ...formData,
+            receiver_user_id: receiverId,
             [e.target.id]: e.target.value
         })
     }
@@ -25,6 +29,9 @@ const MessageForm = () => {
         if (formData.text === ""){
             console.log("empty message")
         }else {
+            //formData.sender_user_id = senderId
+            console.log(e)
+            console.log(formData)
             addMessage(formData)
             cleanMessage()
         }
@@ -32,7 +39,7 @@ const MessageForm = () => {
     }
     
     const addMessage = (data) => {
-    
+        
         createMessage(data)
         .then(message => {
             dispatch({
@@ -40,7 +47,7 @@ const MessageForm = () => {
                 data: message
                 })
             navigate("/messages")
-        })
+    })
     
     }
 
@@ -52,8 +59,9 @@ const MessageForm = () => {
             <form onSubmit={handleSubmit}>
                 <Box sx={{display: "flex", flexDirection: "column"}}  marginTop={2}>
                     <InputLabel>{`Hi ${loggedInUser},`}</InputLabel>
+                    <SendersList/>
                     <Box marginTop={2}>
-                        <TextField required sx={{width: 320}} type="textarea" name="text" id="text" placeholder={"what would you like to say?"} value={formData.text} onChange={handleFormData}/>
+                        <TextField required sx={{width: 320}} type="textarea" name="message" id="message" placeholder={"what would you like to say?"} value={formData.message} onChange={handleFormData}/>
                     </Box>
                 </Box>
                 <Box style={{display: "flex", justifyContent: "flex-start"}}>

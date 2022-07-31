@@ -1,17 +1,23 @@
-import { Link, useParams } from "react-router-dom"
-// import { useGlobalState } from "../utils/stateContext"
+import { Link, useParams } from "react-router-dom" 
+import { useGlobalState } from "../utils/stateContext"
 import { Container, Box, Card, CardContent, Typography } from "@mui/material"
-import messageList from "../data/msssageList.json"
+//import messageList from "../data/msssageList.json"
 
 
 const MessageDetail = () => {
-    // const {store} = useGlobalState()
-    // const {messageList} = store
+     const {store} = useGlobalState()
+     const {messageList} = store
     const params = useParams()
-    console.log(params)
+    
+    let newMessageList
+     if(typeof(messageList) === "string") {
+      newMessageList = JSON.parse(messageList)
+      } else {
+        newMessageList = messageList
+      }
 
     const getMessage = (id) => {
-        return messageList.find(m => m.id === parseInt(id))
+        return newMessageList.find(m => m.message_id === parseInt(id))
     }
 
     const message = getMessage(params.messageId)//{text: "test message", user: "Test user"}
@@ -22,9 +28,9 @@ const MessageDetail = () => {
                     { message ?
                         <Card>
                             <CardContent>
-                                <Typography variant='p'>{message.username}</Typography>
-                                <Typography variant='p' margin={2}>{message.posted}</Typography>
-                                <Typography variant='h5'>{message.text}</Typography>
+                                <Typography variant='p'>{message.sender}</Typography>
+                                <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
+                                <Typography variant='h5'>{message.message}</Typography>
                             </CardContent>    
                         </Card>
                         :

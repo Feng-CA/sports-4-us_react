@@ -26,6 +26,7 @@ import Messages from './Messages';
 import MessageDetail from './MessageDetail';
 import Dashboard from './Dashboard';
 import { Box } from '@mui/material';
+import { getMessages } from '../services/messagesServices';
 
 
 const App = () => {
@@ -34,7 +35,10 @@ const App = () => {
     activities: sessionStorage.getItem("activities") || [],
     users: sessionStorage.getItem("users") || [],
     profiles: sessionStorage.getItem("profiles") || [],
-    token: sessionStorage.getItem("token")||null
+    token: sessionStorage.getItem("token")||null,
+    messageList: sessionStorage.getItem("messagesList")||[],
+    //messageList: [],
+    receiverId: ""
   }
   
 
@@ -63,16 +67,28 @@ const App = () => {
     getProfiles()
     .then( response => {
       sessionStorage.setItem("profiles", JSON.stringify(response.data))
+      
       dispatch({
         type: 'setProfiles',
         data: response.data
     })
-    })   
+    }) 
+    getMessages()
+    
+    .then(response =>{
+      sessionStorage.setItem("messagesList", JSON.stringify(response))
+      dispatch({
+        type: 'setMessagelist',
+        data: response
+    }) 
+    })    
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, profiles } = store
-
+  const {loggedInUser, profiles, messageList} = store
+  console.log(messageList)
+  console.log(sessionStorage.getItem("profiles"))
+  
   // get admin profile
   let newProfiles;
    

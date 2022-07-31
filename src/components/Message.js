@@ -6,12 +6,12 @@ const Message = ({message}) => {
         <Container className="message_container">
             <Card style={{width: 380, margin: "0 auto"}}>
                 <CardContent>
-                    <Link to={`/messages/user/${message.username}`}>
-                        <Typography variant='p'>{message.username}</Typography>
+                    <Link to={`/messages/user/${message.sender}`}>
+                        <Typography variant='p'>{message.sender}</Typography>
                     </Link>
-                    <Typography variant='p' margin={2}>{message.posted}</Typography>
-                    <Link to={`/messages/${message.id}`} style={{textDecoration: 'none'}}>
-                        <Typography variant='h5'>{message.text}</Typography>
+                    <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
+                    <Link to={`/messages/${message.message_id}`} style={{textDecoration: 'none'}}>
+                        <Typography variant='h5'>{message.message}</Typography>
                     </Link>
                 </CardContent>
             </Card>

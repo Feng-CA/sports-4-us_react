@@ -44,6 +44,21 @@ export const reducer = (state, action) => {
                 token: action.data
             }
         }
+        case "setMessagelist": {
+            //updates the messages array
+            return {
+                ...state,
+                messageList: action.data
+            }
+        }
+        case "setReceiverId": {
+            //updates the messages array
+            return {
+                ...state,
+                receiverId: action.data
+            }
+        }
+
         default: return state
     }
 
