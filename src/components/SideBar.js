@@ -89,7 +89,7 @@ const Sidebar = () => {
                   <ListItemText primary="Create Activities"/>
                 </ListItemButton>
               </Link>}
-              { (profile.account_id === "Organiser") ?
+              { (profile.account_id === "Organiser") &&
               <Link to="/activities/organiser" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
@@ -97,8 +97,8 @@ const Sidebar = () => {
                   </ListItemIcon>
                   <ListItemText primary="Organised Activities"/>
                 </ListItemButton>
-              </Link>
-              :
+              </Link>}
+              { (profile.account_id !== "Organiser" && profile.account_id !== "Admin") &&
               <Link to="/activities/member" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
