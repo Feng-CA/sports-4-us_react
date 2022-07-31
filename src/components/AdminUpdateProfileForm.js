@@ -37,8 +37,8 @@ const AdminUpdateProfileForm = () => {
     const profile = getProfile(params.profileId)
 
    
-    console.log(profile)
-    console.log("admin:", params)
+
+    // console.log("admin:", params)
     // const navigate = useNavigate()
     const [interest, setInterest] = useState({
         cycling: false,
@@ -62,7 +62,7 @@ const AdminUpdateProfileForm = () => {
     const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
     //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
     //const currentUser = (JSON.parse(newUsers).find(user => user.full_name === loggedInUser))
-    // const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
+    const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
     // console.log(currentUser)
     //const currentUser = users.find(user => user.full_name === loggedInUser)
     const [location, setLocation] = useState()
@@ -74,15 +74,15 @@ const AdminUpdateProfileForm = () => {
         contact_no: profile.contact_no,
         emergency_contact: profile.emergency_contact,
         emergency_contact_no: profile.emergency_contact_no,
-        account_type: profile.account_id,
-        interests: []
+        account_type: "member",
+        interests: profile.interests
     }
 
     const [formData, setFormData] = useState(initialFormData)
     const [contactNo, setContactNo] = useState()
     const [emergencyContactNo, setEmergencyContactNo] = useState()
     const [emergencyContact, setEmergencyContact] = useState()
-    // const [email, setEmail] = useState(currentUser.email)
+    const [email, setEmail] = useState(currentUser.email)
 
     const handleChange = (event) => {
         setInterest({
@@ -96,15 +96,16 @@ const AdminUpdateProfileForm = () => {
     
     useEffect(() => {
         setFormData(() => ({
-           
-       
+            fullname: profile.full_name,
+            email: profile.email,
+            interests: interest,
             contact_no: contactNo,
             emergency_contact_no: emergencyContactNo,
             emergency_contact: emergencyContact,
             location: location
         }))
         
-    }, [contactNo, emergencyContactNo, emergencyContact, location])
+    }, [interest, contactNo, emergencyContactNo, emergencyContact, location, email, profile])
     
     console.log("before:", formData)
 
@@ -149,7 +150,7 @@ const AdminUpdateProfileForm = () => {
                 <Box marginTop={1}>
                     <InputLabel>Your Email</InputLabel>
                     <Box marginTop={1}>
-                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={formData.email} disabled/>
+                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={formData.email} onChange={(e)=>setEmail(e.target.value)}/>
                     </Box>
                 </Box>
                 <Box sx={{display: "flex"}} marginTop={2}> 

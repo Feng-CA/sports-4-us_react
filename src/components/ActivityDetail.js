@@ -7,7 +7,7 @@ import group from "../assets/group-running.jpg";
 
 const ActivityDetail = () => {
     const {store} = useGlobalState()
-    const { activities, users, loggedInUser, profiles } = store
+    const { activities, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
 
