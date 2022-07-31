@@ -149,11 +149,11 @@ const App = () => {
                     <Route path="profiles" element={<Profiles />} />
                     <Route path="profiles/:profileId" element={<ProfileDetail />} />
                     <Route path="profiles/:profileId/update" element={<ProfileForm />} />
-                    {/* {loggedInAdmin ?
+                    {loggedInAdmin ?
                     <Route path="profiles/:profileId/adminupdate" element={<AdminUpdateProfileForm />} />
                     :
                     <Route path="profiles/:profileId/update" element={<ProfileForm />} />
-                    } */}
+                    }
                   <Route path="profiles/:profileId/update" element={<ProfileForm />} />
                   </Route>
                   }
