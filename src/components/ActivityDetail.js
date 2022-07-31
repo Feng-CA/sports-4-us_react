@@ -2,7 +2,6 @@ import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/mate
 import { Container } from "@mui/system";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
-import categories from "../data/categoryList.json";
 import group from "../assets/group-running.jpg";
 
 
@@ -27,6 +26,7 @@ const ActivityDetail = () => {
         newProfiles = profiles
     }
 
+    // check whether loggedInUser is admin
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
     
     let loggedInAdmin;
@@ -36,19 +36,10 @@ const ActivityDetail = () => {
         loggedInAdmin = null
     }
     
-    
-  
+    // get all organiser data
     const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
-    // const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser)
-    // let loggedInOrganiser;
-    // if (organiserProfile.fullname === loggedInUser) {
-    //     loggedInOrganiser = organiserProfile.fullname
-    // } else {
-    //     loggedInOrganiser = null
-    // }
-    
-    console.log(organiserProfiles)
-    // console.log(loggedInOrganiser)
+    const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser )
+  
 
     const handleUpdate = () => {
         
@@ -116,7 +107,7 @@ const ActivityDetail = () => {
                                 </Box>
                             }
                   
-                            {!organiserProfiles &&
+                            {(!organiserProfile && !loggedInAdmin) &&
                                 <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>

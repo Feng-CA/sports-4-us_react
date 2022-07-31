@@ -46,27 +46,27 @@ const OrganiserActivitiesList = () => {
                  
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
-                            <Card>
-                                <Link to={`/activities/${activity.id}`}>
-                                <CardMedia
-                                    className="category_avatar"
-                                    component="img"
-                                    image={running}
-                                    alt="group running"
-                                    />
-                                <CardContent>
-                                    <Box>
-                                        <Typography variant="p">{activity.date_time}</Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography variant="h5">{activity.title}</Typography>
-                                    </Box>
-                                    <Box>
-                                        <Typography variant="p">{activity.location}</Typography>
-                                    </Box>
-                                </CardContent>
-                                    </Link>
-                            </Card>
+                            <Link to={`/activities/${activity.id}`}>
+                                <Card>
+                                    <CardMedia
+                                        className="category_avatar"
+                                        component="img"
+                                        image={running}
+                                        alt="group running"
+                                        />
+                                    <CardContent>
+                                        <Box>
+                                            <Typography variant="p">{activity.date_time}</Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography variant="h5">{activity.title}</Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography variant="p">{activity.location}</Typography>
+                                        </Box>
+                                    </CardContent>
+                                </Card>
+                            </Link>
                         </SwiperSlide>
                     )
                 })}

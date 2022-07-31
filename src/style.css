@@ -37,11 +37,11 @@
 
 /* activities list styling  */
 
-.categoriedActivityList_container, .fullActivityList_container {
+.categoriedActivityList_container, .fullActivityList_container, .organiserActivityList_container {
     margin-top: 3rem;
 }
 
-.categoriedActivityList_swiper, .fullActivityList_swiper {
+.categoriedActivityList_swiper, .fullActivityList_swiper, .organiserActivityList_swiper {
     width: 60%;
     background-color: aqua;
 }
