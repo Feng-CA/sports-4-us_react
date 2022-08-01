@@ -21,7 +21,7 @@ const Messages = () => {
         type: 'setMessagelist',
         data: response
     }) 
-    })
+    })// eslint-disable-next-line
   },[]);
 
      if(typeof(messageList) === "string") {

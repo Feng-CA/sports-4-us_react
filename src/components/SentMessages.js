@@ -19,7 +19,7 @@ const SentMessages = () => {
        type: 'setSentMessagelist',
        data: response
    }) 
-   })
+   })// eslint-disable-next-line
  },[]);
 
     if(typeof(sentMessageList) === "string") {

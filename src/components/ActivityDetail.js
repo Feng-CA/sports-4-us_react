@@ -2,7 +2,6 @@ import { Box, Card, CardMedia, CardContent, Typography, Button } from "@mui/mate
 import { Container } from "@mui/system";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
-import categories from "../data/categoryList.json";
 import group from "../assets/group-running.jpg";
 
 

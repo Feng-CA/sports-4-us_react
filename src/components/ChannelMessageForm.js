@@ -1,7 +1,7 @@
 import { Button, Container, Box, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createSentMessage } from "../services/sentMessagesServices";
+//import { useNavigate } from "react-router-dom";
+//import { createSentMessage } from "../services/sentMessagesServices";
 import { useGlobalState } from "../utils/stateContext";
 import ChannelsList from "./ChannelsList";
 import { createChannelMessage } from "../services/channelMessagingServices";
@@ -12,7 +12,7 @@ const ChannelMessageForm = () => {
     const {store, dispatch} = useGlobalState()
     const {loggedInUser, messagingChannelId, channelMessageList} = store
 
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
     const initialFormData = {
         message: "",
         category_id: ""

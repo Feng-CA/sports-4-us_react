@@ -4,7 +4,7 @@ import ChannelMessage from './ChannelMessage';
 import ChannelMessageForm from './ChannelMessageForm';
 import { useEffect } from 'react';
 import { getChannelMessages } from '../services/channelMessagingServices';
-import { ContactlessOutlined } from '@mui/icons-material';
+//import { ContactlessOutlined } from '@mui/icons-material';
 
 
 const ChannelMessages = () => {
@@ -23,9 +23,9 @@ const ChannelMessages = () => {
         type: 'setchannelMessageList',
         data: response
     }) 
-    })
+    })// eslint-disable-next-line
   },[]);
-
+  
      if(typeof(channelMessageList) === "string") {
       newMessageList = JSON.parse(channelMessageList)
       } else {
