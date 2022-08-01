@@ -7,7 +7,6 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
 import { Link } from "react-router-dom";
-import { Container } from "@mui/system";
 import { useGlobalState } from "../utils/stateContext";
 import '../css/sidebar.css'
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
@@ -59,7 +58,7 @@ const Sidebar = () => {
     }
 
     return (
-      <Container className="sidebar" >
+      <Box className="sidebar" >
         <Box className="sidebarWrapper">
           <Box className="sidebarMenu">
             <Typography variant="h6" className="sidebarTitle">Dashboard</Typography>
@@ -104,7 +103,7 @@ const Sidebar = () => {
                   <ListItemIcon className="sidebarListItem">
                     <TimelineIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText primary="Paticipating Activities"/>
+                  <ListItemText sx={{display: "flex", flexDirection: "column", flexWrap: "wrap"}}  primary="Paticipating Activities"/>
                 </ListItemButton>
               </Link>
               }
@@ -229,7 +228,7 @@ const Sidebar = () => {
             </List>
           </Box>
         </Box>
-      </Container>
+      </Box>
     );
   }
   

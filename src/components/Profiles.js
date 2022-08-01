@@ -19,7 +19,7 @@ const Profiles = () => {
     
     return (
         <Box className="profiles_container">
-            <Box>
+            <Box className="profiles_sidebar">
                 <Sidebar />
             </Box>
             <Box className="profiles_wrap_container"> 

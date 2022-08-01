@@ -1,7 +1,6 @@
 import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
 import Messages from './Messages';
-import "../style.css";
 
 const Dashboard = () => {
 
