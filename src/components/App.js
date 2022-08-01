@@ -21,7 +21,7 @@ import { getChannelMessages } from '../services/channelMessagingServices';
 import Profiles from "./Profiles";
 import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
-//import AdminUpdateProfileForm from './AdminUpdateProfileForm'
+import AdminUpdateProfileForm from './AdminUpdateProfileForm'
 import MessageForm from './MessageForm';
 import Messages from './Messages';
 import MessageDetail from './MessageDetail';
