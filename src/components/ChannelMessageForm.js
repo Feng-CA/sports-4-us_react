@@ -5,9 +5,7 @@ import { createSentMessage } from "../services/sentMessagesServices";
 import { useGlobalState } from "../utils/stateContext";
 import ChannelsList from "./ChannelsList";
 import { createChannelMessage } from "../services/channelMessagingServices";
-import { getChannelMessages } from "../services/channelMessagingServices";
-import { useEffect } from "react";
-import { reducer } from '../utils/reducer';
+
 
 
 const ChannelMessageForm = () => {
@@ -22,7 +20,6 @@ const ChannelMessageForm = () => {
     const [formData, setFormData] = useState(initialFormData)
     
     const handleFormData = (e) => {
-        //console.log(e)
         setFormData({
             category_id: messagingChannelId!==1?(messagingChannelId-1):9,
             [e.target.id]: e.target.value
@@ -40,7 +37,7 @@ const ChannelMessageForm = () => {
             addMessage(formData)
             cleanMessage()
         }
-        navigate("../")
+        //navigate("../")
         //adds the message to the list  
     }
     

@@ -6,7 +6,7 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import DynamicFeedIcon from "@mui/icons-material/DynamicFeed";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { Container } from "@mui/system";
 import { useGlobalState } from "../utils/stateContext";
 import '../css/sidebar.css'
@@ -17,9 +17,12 @@ import SendIcon from '@mui/icons-material/Send';
 
 
 const Sidebar = () => {
-    const {store} = useGlobalState()
+    const {store,dispatch} = useGlobalState()
     const { loggedInUser, profiles } = store
     const [open, setOpen] = useState(false)
+    const channels = ["General", "Cycling", "Golf", "Tennis", "Soccer", "Hiking", "Cricket", "Running", "Basketball"]
+
+    //const navigate = useNavigate
     console.log(profiles)
     // get loggedInUser profile
     let newProfiles;
@@ -45,6 +48,15 @@ const Sidebar = () => {
 
     const handleClick = () => {
       setOpen(!open);
+    }
+
+    const handleChanelClick = (e)=>{
+        console.log(channels.indexOf(e.target.outerText))
+        sessionStorage.setItem("messagingChannelId",(channels.indexOf(e.target.outerText)+1) )
+        dispatch({
+          type: 'setMessagingChannelId',
+          data: (channels.indexOf(e.target.outerText)+1)
+        })
     }
 
     return (
@@ -113,9 +125,10 @@ const Sidebar = () => {
                     {open? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
+
                   <List component="div" disablePadding>
                     <Link to="/messages/channelmessages" className="link">
-                      <ListItemButton sx={{ pl: 4 }}>
+                      <ListItemButton sx={{ pl: 4 }} value = "8" onClick={(e)=>handleChanelClick(e)}>
                         <ListItemIcon>
                           <StarBorder />
                         </ListItemIcon>
@@ -123,70 +136,94 @@ const Sidebar = () => {
                       </ListItemButton>
                     </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                    <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Cycling" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                  <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Golf" />
                     </ListItemButton>
+                    </Link>
                   </List>
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemIcon>
+                  <Link to="/messages/channelmessages" className="link">
+                  <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
+                  <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Tennis" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                    <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Soccer" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                    <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Hiking" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                    <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Cricket" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                    <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Running" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                   <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <Link to="/messages/channelmessages" className="link">
+                    <ListItemButton sx={{ pl: 4 }} onClick={(e)=>handleChanelClick(e)}>
                       <ListItemIcon>
                         <StarBorder />
                       </ListItemIcon>
                       <ListItemText primary="Basketball" />
                     </ListItemButton>
+                    </Link>
                   </List>
+
                 </Collapse>
                 <List className="sidebarList">
                 <Link to="/messages" className="link">

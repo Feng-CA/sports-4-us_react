@@ -11,6 +11,7 @@ const ActivityDetail = () => {
     const { activities, users, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
+    console.log(typeof(activities))
 
     
     let newProfiles;
@@ -43,7 +44,8 @@ const ActivityDetail = () => {
     const handleDelete = () => {
 
     }
-
+    console.log(users[Number(newActivities[Number(params.id-1)].user_id)-1])
+    console.log(newActivities[Number(params.id-1)].organiser)
 
     return (
         <Container className="activitydetail_container" maxWidth="lg">
@@ -73,11 +75,11 @@ const ActivityDetail = () => {
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                 <Typography variant="h5" marginRight={1}>Organiser: </Typography>
-                                <Typography variant="h5">{`${users[Number(newActivities[Number(params.id-1)].user_id)-1].full_name}`}</Typography>
+                                <Typography variant="h5">{`${newActivities[Number(params.id-1)].organiser}`}</Typography>
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                 <Typography variant="h5" marginRight={1}>Category: </Typography>
-                                <Typography variant="h5">{categories[Number(newActivities[Number(params.id-1)].category_id)-1].name}</Typography>
+                                <Typography variant="h5">{(newActivities[Number(params.id-1)]).category}</Typography>
                             </Box>
                             <Box sx={{display: "flex", textAlign: "justify"}} marginTop={1.5}>
                                 <Typography variant="h6">{newActivities[Number(params.id-1)].description}</Typography>

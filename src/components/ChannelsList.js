@@ -17,6 +17,7 @@ const ChannelsList = () => {
       }
 
       const senderClick = (e) => {
+        sessionStorage.setItem("messagingChannelId",(channels.indexOf(e.target.outerText)+1) )
           dispatch({
             type: "setMessagingChannelId",
             data: (channels.indexOf(e.target.outerText)+1)

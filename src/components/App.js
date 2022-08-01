@@ -46,7 +46,7 @@ const App = () => {
     channelMessageList: sessionStorage.getItem("channelMessageList")||[],
     //messageList: [],
     receiverId: "",
-    messagingChannelId: 1
+    messagingChannelId: sessionStorage.getItem("messagingChannelId")||1
   }
   
 

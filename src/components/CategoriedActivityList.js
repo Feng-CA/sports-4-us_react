@@ -21,15 +21,16 @@ const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
-
+    const categories = [ "Cycling", "Golf", "Tennis", "Soccer", "Hiking", "Cricket", "Running", "Basketball"]
     let newActivities;
+    console.log(activities)
     
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
         newActivities = activities
     }
-
+ 
     return (
         <Container className="categoriedActivityList_container">
 
@@ -43,7 +44,7 @@ const CategoriedActivityList = () => {
                 
                 {/* eslint-disable-next-line */}
                 {newActivities.map((activity, index) => {
-                    if (activity.category_id === Number(params.id))
+                    if (activity.category === categories[Number(params.id)-1])
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
                             <Card>

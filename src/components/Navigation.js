@@ -14,6 +14,7 @@ const Navigation = () => {
         e.preventDefault()
         sessionStorage.removeItem("full_name")
         sessionStorage.removeItem("token")
+        sessionStorage.removeItem("messagingChannelId")
 
         //sessionStorage.clear()
         dispatch({
