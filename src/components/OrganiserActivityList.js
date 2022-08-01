@@ -1,12 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container } from "@mui/system";
-import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material"
 import { useGlobalState } from "../utils/stateContext";
-import group from "../assets/group-running.jpg";
+import running from "../assets/running.jpg";
 import "../style.css";
-import categoryList from "../data/categoryList.json";
-
-
 // import Swiper core and required modules
 import { Pagination, Navigation } from 'swiper';
 
@@ -17,46 +14,44 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
 
-//This form lists all the activities in a particular sporting category
-//By clicking each category you can also navigate to the individual category page.
-const CategoriedActivityList = () => {
+const OrganiserActivitiesList = () => {
     const {store} = useGlobalState()
-    const {activities} = store
-    const params = useParams()
-
-    console.log(params.id)
-
+    const {activities, loggedInUser } = store
+   
     let newActivities;
-    console.log(activities)
     
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
-        newActivities = activities
+        newActivities = activities;
     }
- 
-    return (
-        <Container className="categoriedActivityList_container">
 
-            <Swiper className="categoriedActivityList_swiper"
+   
+    // get all organiser activities
+    const organiserActivities = newActivities.filter(activity => activity.organiser === loggedInUser)
+    // console.log(organiserActivities)
+
+    return (
+        <Container className="organiserActivityList_container">
+
+            <Swiper className="organiserActivityList_swiper"
                     // install Swiper modules
                     modules={[Pagination, Navigation]}
                     spaceBetween={50}
                     slidesPerView={1}
                     navigation={true}
                     pagination={{ clickable: true }}>
-                
-                {/* eslint-disable-next-line */}
-                {newActivities.map((activity, index) => {
-                    if (activity.category === categoryList[Number(params.id)-1].name)
+
+                {organiserActivities.map((activity, index) => {
+                 
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
-                            <Card>
-                                <Link to={`/activities/${activity.id}`}>
+                            <Link to={`/activities/${activity.id}`}>
+                                <Card>
                                     <CardMedia
                                         className="category_avatar"
                                         component="img"
-                                        image={group}
+                                        image={running}
                                         alt="group running"
                                         />
                                     <CardContent>
@@ -70,15 +65,16 @@ const CategoriedActivityList = () => {
                                             <Typography variant="p">{activity.location}</Typography>
                                         </Box>
                                     </CardContent>
-                                </Link>
-                            </Card>
+                                </Card>
+                            </Link>
                         </SwiperSlide>
                     )
                 })}
             </Swiper>
         
         </Container>
+        
     )
 }
 
-export default CategoriedActivityList
+export default OrganiserActivitiesList

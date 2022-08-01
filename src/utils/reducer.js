@@ -23,6 +23,13 @@ export const reducer = (state, action) => {
                 activities: action.data
             }
         }
+        case "setMemberActivities": {
+            //updates the member activities value
+            return {
+                ...state,
+                activities: action.data
+            }
+        }
         case "setUsers": {
             //updates the users value
             return {

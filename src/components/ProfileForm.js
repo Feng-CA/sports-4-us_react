@@ -21,16 +21,16 @@ const ProfileForm = () => {
     const {store} = useGlobalState()
     const { loggedInUser, users } = store
     // const navigate = useNavigate()
-    const [interest, setInterest] = useState({
-        cycling: false,
-        golf: false,
-        tennis: false,
-        soccer: false,
-        hiking: false,
-        cricket: false,
-        running: false,
-        basketball: false
-    })
+    // const [interest, setInterest] = useState({
+    //     cycling: false,
+    //     golf: false,
+    //     tennis: false,
+    //     soccer: false,
+    //     hiking: false,
+    //     cricket: false,
+    //     running: false,
+    //     basketball: false
+    // })
    
     let newUsers;
    
@@ -40,7 +40,7 @@ const ProfileForm = () => {
         newUsers = users;
     }
         
-    const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
+    // const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
     //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
     //const currentUser = (JSON.parse(newUsers).find(user => user.full_name === loggedInUser))
     const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
@@ -56,40 +56,60 @@ const ProfileForm = () => {
         emergency_contact: "",
         emergency_contact_no: "",
         account_type: "member",
-        interests: []
+        cycling: false,
+        golf: false,
+        tennis: false,
+        soccer: false,
+        hiking: false,
+        cricket: false,
+        running: false,
+        basketball: false
     }
 
     const [formData, setFormData] = useState(initialFormData)
     const [contactNo, setContactNo] = useState()
     const [emergencyContactNo, setEmergencyContactNo] = useState()
     const [emergencyContact, setEmergencyContact] = useState()
+    const [cycling, setCycling] = useState()
+    const [golf, setGolf] = useState()
+    const [tennis, setTennis] = useState()
+    const [soccer, setSoccer] = useState()
+    const [hiking, setHiking] = useState()
+    const [cricket, setCricket] = useState()
+    const [running, setRunning] = useState()
+    const [basketball, setBasketball] = useState()
 
 
-    const handleChange = (event) => {
-        setInterest({
-          ...interest,
-          [event.target.name]: event.target.checked,
-        });
-      };
+
 
     // const [error, setError] = useState(null)
     
     
     useEffect(() => {
         setFormData(() => ({
-            interests: interest,
             contact_no: contactNo,
             emergency_contact_no: emergencyContactNo,
             emergency_contact: emergencyContact,
-            location: location
+            location: location,
+            cycling: cycling,
+            golf: golf,
+            tennis: tennis,
+            soccer: soccer,
+            hiking: hiking,
+            cricket: cricket,
+            running: running,
+            basketball: basketball,
         }))
         
-    }, [interest, contactNo, emergencyContactNo, emergencyContact, location])
+        console.log("after-useEffct:", formData)
+    }, [contactNo, emergencyContact, emergencyContactNo, location, cycling, golf, tennis, soccer, hiking, cricket, running, basketball])
     
- 
+    
+    console.log("before:", formData)
+
     const handleSubmit = (e) =>{
         e.preventDefault()
-     
+        console.log("after:", formData)
         // updateProfile(formData)
         // .then((profile) => {
 
@@ -194,49 +214,49 @@ const ProfileForm = () => {
                         <Box sx={{display: "flex", flexDirection: "row", flexWrap: "wrap"}} marginTop={2}> 
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={cycling} onChange={handleChange} name="cycling" value={cycling}/>
+                                <Checkbox checked={cycling} onChange={(e)=>setCycling(e.target.checked)} name="cycling" value={cycling}/>
                                 }
                                 label="Cycling"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={golf} onChange={handleChange} name="golf" value={golf}/>
+                                <Checkbox checked={golf} onChange={(e)=>setGolf(e.target.checked)} name="golf" value={golf}/>
                                 }
                                 label="Golf"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={tennis} onChange={handleChange} name="tennis" value={tennis}/>
+                                <Checkbox checked={tennis} onChange={(e)=>setTennis(e.target.checked)} name="tennis" value={tennis}/>
                                 }
                                 label="Tennis"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={soccer} onChange={handleChange} name="soccer" value={soccer}/>
+                                <Checkbox checked={soccer} onChange={(e)=>setSoccer(e.target.checked)} name="soccer" value={soccer}/>
                                 }
                                 label="Soccer"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={hiking} onChange={handleChange} name="hiking" value={hiking}/>
+                                <Checkbox checked={hiking} onChange={(e)=>setHiking(e.target.checked)} name="hiking" value={hiking}/>
                                 }
                                 label="Hiking"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={cricket} onChange={handleChange} name="cricket" value={cricket}/>
+                                <Checkbox checked={cricket} onChange={(e)=>setCricket(e.target.checked)} name="cricket" value={cricket}/>
                                 }
                                 label="Cricket"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={running} onChange={handleChange} name="running" value={running}/>
+                                <Checkbox checked={running} onChange={(e)=>setRunning(e.target.checked)} name="running" value={running}/>
                                 }
                                 label="Running"
                             />
                             <FormControlLabel
                                 control={
-                                <Checkbox checked={basketball} onChange={handleChange} name="basketball" value={basketball}/>
+                                <Checkbox checked={basketball} onChange={(e)=>setBasketball(e.target.checked)} name="basketball" value={basketball}/>
                                 }
                                 label="Basketball"
                             />

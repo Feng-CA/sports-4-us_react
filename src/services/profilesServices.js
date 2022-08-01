@@ -3,7 +3,6 @@ import sports4usAPI from "../config/api";
 //view all the profiles - have to be logged in 
 export async function getProfiles(){
     const response = await sports4usAPI.get('/profiles')
-    console.log(response)
     return response
 }
 //view your specific profile - have to be logged in 

@@ -7,7 +7,7 @@ import group from "../assets/group-running.jpg";
 
 const ActivityDetail = () => {
     const {store} = useGlobalState()
-    const { activities, users, loggedInUser, profiles } = store
+    const { activities, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
     console.log(typeof(activities))
@@ -26,16 +26,21 @@ const ActivityDetail = () => {
     } else {
         newProfiles = profiles
     }
-    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
-   
 
+    // check whether loggedInUser is admin
+    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+    
     let loggedInAdmin;
     if (adminProfile.fullname === loggedInUser) {
         loggedInAdmin = adminProfile.fullname
     } else {
         loggedInAdmin = null
     }
-   
+    
+    // get all organiser data
+    const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
+    const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser )
+  
 
     const handleUpdate = () => {
         
@@ -74,11 +79,11 @@ const ActivityDetail = () => {
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                 <Typography variant="h5" marginRight={1}>Organiser: </Typography>
-                                <Typography variant="h5">{`${newActivities[Number(params.id-1)].organiser}`}</Typography>
+                                <Typography variant="h5">{newActivities[Number(params.id-1)].organiser}</Typography>
                             </Box>
                             <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                 <Typography variant="h5" marginRight={1}>Category: </Typography>
-                                <Typography variant="h5">{(newActivities[Number(params.id-1)]).category}</Typography>
+                                <Typography variant="h5">{newActivities[Number(params.id-1)].category}</Typography>
                             </Box>
                             <Box sx={{display: "flex", textAlign: "justify"}} marginTop={1.5}>
                                 <Typography variant="h6">{newActivities[Number(params.id-1)].description}</Typography>
@@ -86,34 +91,34 @@ const ActivityDetail = () => {
                             <Box sx={{display: "flex", justifyContent: "space-around"}} marginTop={1}>
                                 <Box sx={{display: "flex", justifyContent: "space-around"}}>
                                     <Typography variant="h5">Cost: </Typography>
-                                    <Typography variant="h5">{newActivities[Number(params.id-1)].cost}</Typography>
+                                    <Typography marginLeft={2} variant="h5">{newActivities[Number(params.id-1)].cost}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "space-around"}}>
                                     <Typography variant="h5">Quantity: </Typography>
-                                    <Typography variant="h5">{newActivities[Number(params.id-1)].quantity_limit}</Typography>
+                                    <Typography marginLeft={2} variant="h5">{newActivities[Number(params.id-1)].quantity_limit}</Typography>
                                 </Box>
                             </Box>
-                            <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
-                                {loggedInAdmin ?
-                                <>
-                                    <Box marginLeft={3}> 
-                                        <Button variant="outlined" style={{color: "primary"}} onClick={handleUpdate}>Update</Button>
-                                    </Box>
-                                    <Box marginLeft={2}>
-                                        <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>
-                                    </Box>
-                                </>
-                                :
-                                <>
+                            {loggedInAdmin &&
+                                <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
+                                        <Box marginLeft={3}> 
+                                            <Button variant="outlined" style={{color: "primary"}} onClick={handleUpdate}>Update</Button>
+                                        </Box>
+                                        <Box marginLeft={2}>
+                                            <Button variant="contained" color="error" onClick={handleDelete}>Delete</Button>
+                                        </Box>
+                                </Box>
+                            }
+                  
+                            {(!organiserProfile && !loggedInAdmin) &&
+                                <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages")}>Enquiry</Button>
                                     </Box>
                                     <Box marginLeft={2}>
                                         <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
                                     </Box>
-                                </>
-                                }
-                            </Box>
+                                </Box>
+                            }
                         </CardContent>
                     </Box>
                 </Card>

@@ -14,23 +14,22 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
 
-const ActivitiesList = () => {
+const MemberActivitiesList = () => {
     const {store} = useGlobalState()
-    const {activities} = store
+    const {memberActivities} = store
    
     let newActivities;
     
-    if(typeof(activities) === "string") {
-        newActivities = JSON.parse(activities)
+    if(typeof(memberActivities) === "string") {
+        newActivities = JSON.parse(memberActivities)
     } else {
-        newActivities = activities;
+        newActivities = memberActivities;
     }
 
-
     return (
-        <Container className="fullActivityList_container">
+        <Container className="memberActivityList_container">
 
-            <Swiper className="fullActivityList_swiper"
+            <Swiper className="memberActivityList_swiper"
                     // install Swiper modules
                     modules={[Pagination, Navigation]}
                     spaceBetween={50}
@@ -73,4 +72,4 @@ const ActivitiesList = () => {
     )
 }
 
-export default ActivitiesList
+export default MemberActivitiesList

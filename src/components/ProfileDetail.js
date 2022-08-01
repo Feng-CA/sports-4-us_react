@@ -26,7 +26,14 @@ const ProfileDetail = () => {
     }
 
     const profile = getProfile(params.profileId)
-    
+
+    // const golf = () => {
+    //     if (profile.golf === true) return golf
+    // }
+    // const Soccer = () => {
+    //     if (profile.soccer === true) return Soccer
+    // }
+
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
 
     let loggedInAdmin;
@@ -61,25 +68,36 @@ const ProfileDetail = () => {
                                 <Typography variant="h4" marginTop={2}>My Profile</Typography>
                             </Box>
                             <CardContent>
-                                <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
                                     <Typography variant="h5" marginRight={1}>Full Name: </Typography>
                                     <Typography variant="h5">{profile.fullname}</Typography>
                                 </Box>
-                                <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
                                     <Typography variant="h5" marginRight={1}>Location: </Typography>
                                     <Typography variant="h5">{profile.location}</Typography>
                                 </Box>
-                                <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
                                     <Typography variant="h5" marginRight={1}>Contact: </Typography>
                                     <Typography variant="h5">{profile.contact_no}</Typography>
                                 </Box>
-                                <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
                                     <Typography variant="h5" marginRight={1}>Emergency Contact: </Typography>
                                     <Typography variant="h5">{profile.emergency_contact}</Typography>
                                 </Box>
-                                <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
                                     <Typography variant="h5" marginRight={1}>Emergency Contact Number: </Typography>
                                     <Typography variant="h5">{profile.emergency_contact_no}</Typography>
+                                </Box>
+                                <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
+                                    <Typography variant="h5" marginRight={1}>Interests:</Typography>
+                                    {(profile.cycling === true) && <Typography marginRight={1} variant="h6">Cycling</Typography>}
+                                    {(profile.golf === true) && <Typography marginRight={1} variant="h6">Golf</Typography>}
+                                    {(profile.tennis === true) && <Typography marginRight={1} variant="h6">Tennis</Typography>}
+                                    {(profile.soccer === true) && <Typography marginRight={1} variant="h6">Soccer</Typography>}
+                                    {(profile.hiking === true) && <Typography marginRight={1} variant="h6">Hiking</Typography>}
+                                    {(profile.cricket === true) && <Typography marginRight={1} variant="h6">Cricket</Typography>}
+                                    {(profile.running === true) && <Typography marginRight={1} variant="h6">Running</Typography>}
+                                    {(profile.basketball === true) && <Typography marginRight={1} variant="h6">Basketball</Typography>}
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
                                     <Typography variant="h5" marginRight={1}>Account Type: </Typography>

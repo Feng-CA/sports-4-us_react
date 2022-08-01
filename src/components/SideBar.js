@@ -34,18 +34,30 @@ const Sidebar = () => {
         }
     
     const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
-   
+    // const organiser = newProfiles.find(profile => profile.account_id === "Organiser")
+    
+    
     // sets loggedInAdmin value
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
-  
+    
     let loggedInAdmin;
     if (adminProfile.fullname === loggedInUser) {
-        loggedInAdmin = adminProfile.fullname
+      loggedInAdmin = adminProfile.fullname
     } else {
-        loggedInAdmin = null
+      loggedInAdmin = null
     }
-
-
+    
+    // const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
+    // const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser)
+    // let loggedInOrganiser="";
+    // if (organiserProfile.fullname === loggedInUser) {
+    //   loggedInOrganiser = organiserProfile.fullname
+    // } else {
+    //   loggedInOrganiser = null
+    // }
+    
+    // console.log(organiserProfiles)
+    
     const handleClick = () => {
       setOpen(!open);
     }
@@ -81,7 +93,7 @@ const Sidebar = () => {
                   <ListItemText primary="My Profile"/>
                 </ListItemButton>
               </Link>
-              { loggedInAdmin ?
+              { loggedInAdmin &&
               <Link to="/activities/new" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
@@ -89,14 +101,23 @@ const Sidebar = () => {
                   </ListItemIcon>
                   <ListItemText primary="Create Activities"/>
                 </ListItemButton>
-              </Link>
-              :
-              <Link to="/activities" className="dashboard_link">
+              </Link>}
+              { (profile.account_id === "Organiser") &&
+              <Link to="/activities/organiser" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
                     <TimelineIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText primary="My Activities"/>
+                  <ListItemText primary="Organised Activities"/>
+                </ListItemButton>
+              </Link>}
+              { (profile.account_id !== "Admin") &&
+              <Link to="/activities/member" className="dashboard_link">
+                <ListItemButton>
+                  <ListItemIcon className="sidebarListItem">
+                    <TimelineIcon className="sidebarIcon" />
+                  </ListItemIcon>
+                  <ListItemText primary="Paticipating Activities"/>
                 </ListItemButton>
               </Link>
               }

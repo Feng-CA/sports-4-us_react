@@ -14,7 +14,7 @@ import CategoriedActivityList from './CategoriedActivityList';
 import ActivityDetail from './ActivityDetail';
 import ActivityForm from './ActivityForm';
 import "../style.css";
-import { getActivities } from "../services/activitiesServices";
+import { getActivities, getMemberActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
 import { getProfiles } from "../services/profilesServices";
 import { getChannelMessages } from '../services/channelMessagingServices';
@@ -32,12 +32,14 @@ import SentMessages from './SentMessages';
 import { getSentMessages } from '../services/sentMessagesServices';
 import SentMessageDetail from './SentMessageDetail';
 import ChannelMessages from './ChannelMessages';
+import OrganiserActivitiesList from './OrganiserActivityList';
 
 
 const App = () => {
   const initialState = {
     loggedInUser: sessionStorage.getItem("full_name") || null,
     activities: sessionStorage.getItem("activities") || [],
+    memberActivities: sessionStorage.getItem("memberActivities") || [],
     users: sessionStorage.getItem("users") || [],
     profiles: sessionStorage.getItem("profiles") || [],
     token: sessionStorage.getItem("token")||null,
@@ -57,6 +59,16 @@ const App = () => {
       sessionStorage.setItem("activities", JSON.stringify(response.data))
       dispatch({
         type: 'setActivities',
+        data: response.data
+      })
+    })
+
+    //Get all the member activities from the back end
+    getMemberActivities()
+    .then(response => {
+      sessionStorage.setItem("memberActivities", JSON.stringify(response.data))
+      dispatch({
+        type: 'setMemberActivities',
         data: response.data
       })
     })
@@ -156,6 +168,7 @@ const App = () => {
                     <Navigate to="/" />
                     }/> {/* form to create details of an individual activity */}     
                  <Route path=":id" element={<ActivityDetail />}/>
+                 <Route path="organiser" element={<OrganiserActivitiesList />}/>
                 </Route>
                   {loggedInUser && <Route path="messages">
                     <Route index element={<Messages />}/>
@@ -179,11 +192,11 @@ const App = () => {
                     <Route path="profiles" element={<Profiles />} />
                     <Route path="profiles/:profileId" element={<ProfileDetail />} />
                     <Route path="profiles/:profileId/update" element={<ProfileForm />} />
-                    {/* {loggedInAdmin ?
+                    {loggedInAdmin ?
                     <Route path="profiles/:profileId/adminupdate" element={<AdminUpdateProfileForm />} />
                     :
                     <Route path="profiles/:profileId/update" element={<ProfileForm />} />
-                    } */}
+                    }
                   <Route path="profiles/:profileId/update" element={<ProfileForm />} />
                   </Route>
                   }
