@@ -14,7 +14,7 @@ const Messages = () => {
 
   useEffect(() => {
 
-    getMessages()
+  getMessages()
     .then(response =>{
       sessionStorage.setItem("messagesList", JSON.stringify(response))
       dispatch({
@@ -34,12 +34,11 @@ const Messages = () => {
     return (
         <>
           {<MessageForm />}
-          {console.log(loggedInUser)}
           {newMessageList.length ?
             <>
               {newMessageList.map(message => (
                 loggedInUser===message.receiver)&&
-                <Message key={message.message_id} message={message}/>  
+                <Message key={message.message_id} message={message} displayName={message.sender}/>  
               )} 
             </> 
             :

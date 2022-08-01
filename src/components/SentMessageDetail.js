@@ -1,40 +1,41 @@
 import { Link, useParams } from "react-router-dom" 
 import { useGlobalState } from "../utils/stateContext"
-import {Button, Container, Box, Card, CardContent, Typography } from "@mui/material"
-import { deleteMessage } from "../services/messagesServices"
+import { Button, Container, Box, Card, CardContent, Typography } from "@mui/material"
 //import messageList from "../data/msssageList.json"
+import { deleteSentMessage, getSentMessages } from "../services/sentMessagesServices"
 import {useNavigate} from "react-router-dom";
-import { getMessages } from "../services/messagesServices";
 
-const MessageDetail = () => {
-     const {store,dispatch} = useGlobalState()
-     const {messageList} = store
+const SentMessageDetail = () => {
+     const {store, dispatch} = useGlobalState()
+     const {sentMessageList} = store
     const params = useParams()
     const navigate = useNavigate()
     
     let newMessageList
-     if(typeof(messageList) === "string") {
-      newMessageList = JSON.parse(messageList)
+     if(typeof(sentMessageList) === "string") {
+      newMessageList = JSON.parse(sentMessageList)
       } else {
-        newMessageList = messageList
+        newMessageList = sentMessageList
       }
 
     const getMessage = (id) => {
         return newMessageList.find(m => m.message_id === parseInt(id))
     }
+
     const handleClick = () =>{
-    
-        deleteMessage(message.message_id).then(response =>console.log(response))  
-        getMessages()
-            .then(response =>{
-            sessionStorage.setItem("messagesList", JSON.stringify(response))
-            dispatch({
-            type: 'setMessagelist',
-            data: response
+        console.log(typeof(message.message_id))
+    deleteSentMessage(message.message_id).then(response =>console.log(response))  
+    getSentMessages()
+    .then(response =>{
+      sessionStorage.setItem("sentMessagesList", JSON.stringify(response))
+      dispatch({
+        type: 'setSentMessagelist',
+        data: response
     }) 
-    })
-        
-        navigate("../../member")
+    }) 
+    
+    
+    navigate("../sentmessages")
     }
 
     const message = getMessage(params.messageId)//{text: "test message", user: "Test user"}
@@ -45,12 +46,13 @@ const MessageDetail = () => {
                     { message ?
                         <Card>
                             <CardContent>
-                                <Typography variant='p'>{message.sender}</Typography>
+                                <Typography variant='p'>{message.receiver}</Typography>
                                 <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
                                 <Typography variant='h5'>{message.message}</Typography>
                                 <Box sx={{display: "flex"}} marginLeft={0}>
-                                    <Button size="small" variant="contained" color="secondary" onClick={({e})=>handleClick(e)} >Delete Message</Button>
+                                    <Button size="small" variant="contained" color="secondary" onClick={handleClick}>Delete Message</Button>
                                 </Box>
+                            
                             </CardContent>    
                         </Card>
                         :
@@ -67,4 +69,4 @@ const MessageDetail = () => {
 
 }
 
-export default MessageDetail
+export default SentMessageDetail

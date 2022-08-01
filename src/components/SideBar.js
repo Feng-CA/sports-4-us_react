@@ -13,6 +13,7 @@ import '../css/sidebar.css'
 import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { ExpandLess, StarBorder } from "@mui/icons-material";
 import { ExpandMore } from "@mui/icons-material";
+import SendIcon from '@mui/icons-material/Send';
 
 
 const Sidebar = () => {
@@ -104,23 +105,6 @@ const Sidebar = () => {
           </Box>
           <Box className="sidebarMenu">
             <Typography variant="h6" className="sidebarTitle">Message Board</Typography>
-            <List className="sidebarList">
-                <Link to="/messages" className="link">
-                  <ListItemButton>
-                    <ListItemIcon className="sidebarListItem">
-                      <DynamicFeedIcon className="sidebarIcon" />
-                    </ListItemIcon>
-                    <ListItemText primary="Inbox"/>
-                  </ListItemButton>
-                </Link>
-                <Link to="/messages/new" className="link">
-                  <ListItemButton>
-                      <ListItemIcon className="sidebarListItem">
-                        <ChatBubbleOutlineIcon className="sidebarIcon" /> 
-                      </ListItemIcon>
-                      <ListItemText primary="Direct Message"/>
-                    </ListItemButton>
-                </Link>
                 <ListItemButton onClick={handleClick}>
                     <ListItemIcon className="sidebarListItem">
                       <MailOutlineIcon className="sidebarIcon" />
@@ -130,7 +114,7 @@ const Sidebar = () => {
                 </ListItemButton>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
-                    <Link to="/messages/channels/general" className="link">
+                    <Link to="/messages/channelmessages" className="link">
                       <ListItemButton sx={{ pl: 4 }}>
                         <ListItemIcon>
                           <StarBorder />
@@ -204,6 +188,32 @@ const Sidebar = () => {
                     </ListItemButton>
                   </List>
                 </Collapse>
+                <List className="sidebarList">
+                <Link to="/messages" className="link">
+                  <ListItemButton>
+                    <ListItemIcon className="sidebarListItem">
+                      <DynamicFeedIcon className="sidebarIcon" />
+                    </ListItemIcon>
+                    <ListItemText primary="Inbox"/>
+                  </ListItemButton>
+                </Link>
+
+                <Link to="/messages/sentmessages" className="link">
+                  <ListItemButton>
+                      <ListItemIcon className="sidebarListItem">
+                        <SendIcon className="sidebarIcon" /> 
+                      </ListItemIcon>
+                      <ListItemText primary="Sent Messages"/>
+                    </ListItemButton>
+                </Link>
+                <Link to="/messages/new" className="link">
+                  <ListItemButton>
+                      <ListItemIcon className="sidebarListItem">
+                        <ChatBubbleOutlineIcon className="sidebarIcon" /> 
+                      </ListItemIcon>
+                      <ListItemText primary="Direct Message"/>
+                    </ListItemButton>
+                </Link>
               
                 
             </List>

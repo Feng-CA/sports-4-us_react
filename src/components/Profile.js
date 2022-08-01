@@ -46,7 +46,7 @@ const Profile = ({profile}) => {
                         <Typography variant="p" marginLeft={2}>{profile.account_id}</Typography>
                     </Box>
                     <Box className="profile_action" marginTop={1}>
-                        <Button size="small" variant="outlined" color="success" onClick={() => navigate("/messages")}>Chat with Me</Button>
+                        <Button size="small" variant="outlined" color="success" onClick={() => navigate("/messages/new")}>Chat with Me</Button>
                         {loggedInAdmin &&
                         <Button size="small" variant="outlined" onClick={() => navigate(`/member/profiles/${profile.id}`)}>Detail</Button>
                         }
