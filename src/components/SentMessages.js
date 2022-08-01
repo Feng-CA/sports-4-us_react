@@ -9,7 +9,7 @@ const SentMessages = () => {
     const {sentMessageList, loggedInUser} = store
     let newMessageList
 
-
+//Use effect to get sent messages from table
  useEffect(() => {
 
    getSentMessages()
