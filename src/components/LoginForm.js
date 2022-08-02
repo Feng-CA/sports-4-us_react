@@ -58,18 +58,18 @@ const LoginForm = () => {
                 <form onSubmit={handleSubmit}>
                     <Box marginTop={2}>
                         <Box marginBottom={2}>
-                            <InputLabel>Email:</InputLabel>
+                            <InputLabel>Your Email:</InputLabel>
                         </Box>
                         <TextField style={{width: 280}} type="email" name="email" id="email" placeholder="example@email.com" value={formData.email} onChange={handleFormData} required/>
                     </Box>
                     <Box marginTop={2}>
                         <Box marginBottom={2}>
-                            <InputLabel htmlFor="password">Password:</InputLabel>
+                            <InputLabel htmlFor="password">Your Password:</InputLabel>
                         </Box>
                         <TextField style={{width: 280}} type="password" name="password" id="password" placeholder="********" value={formData.password} onChange={handleFormData} required/>
                     </Box>
                     <Box marginTop={3}>
-                        <Button variant="outlined" type="submit" color="success">Login</Button>
+                        <Button variant="contained" type="submit" color="success">Login</Button>
                     </Box>
                 </form>
                 <Box>

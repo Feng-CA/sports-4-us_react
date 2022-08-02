@@ -61,7 +61,7 @@ const Sidebar = () => {
       <Box className="sidebar" >
         <Box className="sidebarWrapper">
           <Box className="sidebarMenu">
-            <Typography variant="h6" className="sidebarTitle">Dashboard</Typography>
+            <Typography variant="h6" className="sidebarTitle" marginLeft={2}>Dashboard</Typography>
             <List className="sidebarList">
               <Link to="/member/dashboard" className="dashboard_link">
                 <ListItemButton>
@@ -110,7 +110,7 @@ const Sidebar = () => {
             </List>
           </Box>
           <Box className="sidebarMenu">
-            <Typography variant="h6" className="sidebarTitle">All Members</Typography>
+            <Typography variant="h6" className="sidebarTitle" marginLeft={2}>All Members</Typography>
             <List className="sidebarList">
               <Link to="/member/profiles" className="link">
                 <ListItemButton>
@@ -123,7 +123,7 @@ const Sidebar = () => {
             </List>
           </Box>
           <Box className="sidebarMenu">
-            <Typography variant="h6" className="sidebarTitle">Message Board</Typography>
+            <Typography variant="h6" className="sidebarTitle" marginLeft={2}>Message Board</Typography>
             <List className="sidebarList">
                 <Link to="/messages/myinbox" className="link">
                   <ListItemButton>

@@ -6,7 +6,7 @@ const Dashboard = () => {
 
     return (
         <Box className="dashboard_container">
-            <Box sx={{display: "flex", flexDirection: "raw"}} marginTop={2}> 
+            <Box sx={{display: "flex", flexDirection: "raw"}} marginLeft={1}> 
                 <Sidebar />
                 <Box sx={{display: "flex", flexDirection: "column"}} marginTop={2}> 
                     <Box sx={{display: "flex", justifyContent: "center"}} marginTop={3}>

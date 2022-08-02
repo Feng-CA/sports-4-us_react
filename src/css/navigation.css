@@ -1,8 +1,10 @@
 .navbar {
     font-family: 'Poppins', sans-serif;
-    background-color: rgba(128, 133, 223, 0.411);
+    background-color: rgba(6, 13, 153, 0.411);
     overflow: hidden; 
-    padding: 12px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 15px;
 }
 
 .slider ul {
@@ -46,15 +48,29 @@
     font-size: 25px;
 }
 
-.green {
+#green {
     background-color: rgb(10, 126, 10);
     padding: 10px 40px;
     border-radius: 5px;
 }
-.purple {
+#purple {
     background-color: rgb(186, 74, 238);
-    padding: 10px 40px;
+    padding: 10px 20px;
     border-radius: 5px;
+    display: flex;
+    align-content: center;
+}
+
+.nav_option :hover {
+    color: rgb(96, 231, 231);
+    transition: all 0.5s ease;
+}
+
+.nav_avatar {
+    display: flex;
+    margin-left: auto;
+    margin-block: .5rem;
+    margin-inline: 2rem;
 }
 
 @media (max-width: 900px) {
@@ -70,6 +86,7 @@
     .slider.active {
         top: 0;
         transition: 1s ease;
+        z-index: 99999;
     }
     
     .slider ul {
@@ -106,5 +123,16 @@
     
     .closed .close {
         font-size: 25px;
+    }
+
+    .nav_avatar {
+        display: flex;
+        margin-block: .5rem;
+        margin-inline: 2rem;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
     }
 }
