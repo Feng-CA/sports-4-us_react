@@ -3,8 +3,8 @@
 import axios from 'axios'
 
 const sports4usAPI = axios.create({
-    //baseURL: 'https://sports4us-api.herokuapp.com/'
-    baseURL: 'http://localhost:4000/'
+    baseURL: 'https://sports4us-api.herokuapp.com/'
+    //baseURL: 'http://localhost:4000/'
 })
 
 sports4usAPI.interceptors.request.use(req => {
