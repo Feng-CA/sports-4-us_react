@@ -15,12 +15,15 @@ import PhoneInput from 'react-phone-input-2';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import 'react-phone-input-2/lib/style.css';
+import { updateProfile } from "../services/profilesServices";
+import { getProfiles } from "../services/profilesServices";
+import { useNavigate } from "react-router-dom"; 
 
 
 const ProfileForm = () => {
-    const {store} = useGlobalState()
-    const { loggedInUser, users } = store
-    // const navigate = useNavigate()
+    const {store, dispatch} = useGlobalState()
+    const { loggedInUser, users, profiles } = store
+    const navigate = useNavigate()
     // const [interest, setInterest] = useState({
     //     cycling: false,
     //     golf: false,
@@ -33,58 +36,67 @@ const ProfileForm = () => {
     // })
    
     let newUsers;
+    let tempProfiles;
    
     if(typeof(users) === "string") {
         newUsers = JSON.parse(users);
     } else {
         newUsers = users;
     }
+    if(typeof(profiles) === "string") {
+        tempProfiles = JSON.parse(profiles);
+    } else {
+        tempProfiles = profiles;
+    }
         
     // const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
     //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
     //const currentUser = (JSON.parse(newUsers).find(user => user.full_name === loggedInUser))
     const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
-    // console.log(currentUser)
+    let currentProfile = (tempProfiles.find(profile => profile.fullname === currentUser.full_name))
+
+    console.log(currentUser)
+    console.log("Current Profile", currentProfile)
     //const currentUser = users.find(user => user.full_name === loggedInUser)
-    const [location, setLocation] = useState()
+    
 
     const initialFormData = {
         fullname: loggedInUser,
         email: currentUser.email,
-        location: "",
-        contact_no: "",
-        emergency_contact: "",
-        emergency_contact_no: "",
-        account_type: "member",
-        cycling: false,
-        golf: false,
-        tennis: false,
-        soccer: false,
-        hiking: false,
-        cricket: false,
-        running: false,
-        basketball: false
+        location: currentProfile.location,
+        contact_no: currentProfile.contact_no,
+        emergency_contact: currentProfile.emergency_contact,
+        emergency_contact_no: currentProfile.emergency_contact_no,
+        account_type: currentProfile.account_id,
+        cycling: currentProfile.cycling,
+        golf: currentProfile.golf,
+        tennis: currentProfile.tennis,
+        soccer: currentProfile.soccer,
+        hiking: currentProfile.hiking,
+        cricket: currentProfile.cricket,
+        running: currentProfile.running,
+        basketball: currentProfile.basketball
     }
 
     const [formData, setFormData] = useState(initialFormData)
-    const [contactNo, setContactNo] = useState()
-    const [emergencyContactNo, setEmergencyContactNo] = useState()
-    const [emergencyContact, setEmergencyContact] = useState()
-    const [cycling, setCycling] = useState()
-    const [golf, setGolf] = useState()
-    const [tennis, setTennis] = useState()
-    const [soccer, setSoccer] = useState()
-    const [hiking, setHiking] = useState()
-    const [cricket, setCricket] = useState()
-    const [running, setRunning] = useState()
-    const [basketball, setBasketball] = useState()
+    const [contactNo, setContactNo] = useState(initialFormData.contact_no)
+    const [emergencyContactNo, setEmergencyContactNo] = useState(initialFormData.emergency_contact_no)
+    const [emergencyContact, setEmergencyContact] = useState(initialFormData.emergency_contact)
+    const [location, setLocation] = useState(initialFormData.location)
+    const [cycling, setCycling] = useState(initialFormData.cycling)
+    const [golf, setGolf] = useState(initialFormData.golf)
+    const [tennis, setTennis] = useState(initialFormData.tennis)
+    const [soccer, setSoccer] = useState(initialFormData.soccer)
+    const [hiking, setHiking] = useState(initialFormData.hiking)
+    const [cricket, setCricket] = useState(initialFormData.cricket)
+    const [running, setRunning] = useState(initialFormData.running)
+    const [basketball, setBasketball] = useState(initialFormData.basketball)
 
 
 
 
     // const [error, setError] = useState(null)
-    
-    
+   
     useEffect(() => {
         setFormData(() => ({
             contact_no: contactNo,
@@ -104,12 +116,32 @@ const ProfileForm = () => {
         console.log("after-useEffct:", formData)
     }, [contactNo, emergencyContact, emergencyContactNo, location, cycling, golf, tennis, soccer, hiking, cricket, running, basketball])
     
+   
     
     console.log("before:", formData)
+    console.log("temp Profiles",tempProfiles)
+    console.log("Profiles",profiles)
+
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log("after:", formData)
+        let tempProfileVar = tempProfiles
+        updateProfile(currentProfile.id,formData)
+            .then( response => currentProfile = response) 
+        console.log("after-submit current Profile:", currentProfile)
+        getProfiles()
+            .then( response => {
+              sessionStorage.setItem("profiles", JSON.stringify(response.data))
+              dispatch({
+               type: 'setProfiles',
+               data: response.data
+            })})
+           navigate(`../profiles/${Number(currentProfile.id)}`)
+          
+     
+        
+        
         // updateProfile(formData)
         // .then((profile) => {
 
@@ -199,11 +231,13 @@ const ProfileForm = () => {
                         <FormLabel id="demo-row-radio-buttons-group-label">Account Type</FormLabel>
                         <RadioGroup
                             row
-                            defaultValue="member"
+                            //defaultValue="member"
+                            defaultValue = {formData.account_type}
                             name="account_type"
                             >
-                            <FormControlLabel value="member" control={<Radio />} label="Member"/>
-                            <FormControlLabel value="organiser" control={<Radio />} label="Organiser" disabled/>
+                            <FormControlLabel value="Member" control={<Radio />} label="Member" disabled/>
+                            <FormControlLabel value="Organiser" control={<Radio />} label="Organiser" disabled/>
+                            <FormControlLabel value="Admin" control={<Radio />} label="Admin" disabled/>
                         </RadioGroup>
                     </FormControl>
                 </Box>

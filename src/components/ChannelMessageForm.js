@@ -42,7 +42,7 @@ const ChannelMessageForm = () => {
     }
     
     const addMessage = (data) => {
-        console.log(channelMessageList)
+        //console.log(channelMessageList)
         let newVar = channelMessageList
         createChannelMessage(data)
         .then(message =>{newVar.unshift(message)
