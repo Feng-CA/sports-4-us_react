@@ -34,7 +34,6 @@ const ReceivedMessages = () => {
     
     
     return (
-       
         <Box className='receivedMessages_container'>
           <Box className='sentMessages_sidebar'>
               <SideBar />
@@ -43,17 +42,16 @@ const ReceivedMessages = () => {
             <Box className="receivedMessges_title">
               <Typography  variant="h6" margin={3}>Your received messages:</Typography>
             </Box>
-          {newMessageList.length ?
-            <>
-              {newMessageList.map(message => (
-                loggedInUser===message.receiver)&&
-                <ReceivedMessage key={message.message_id} message={message} displayName={message.sender}/>  
-              )} 
-            </> 
-            :
-            <p>List of messages is empty</p>
-          
-          } 
+            {newMessageList.length ?
+              <>
+                {newMessageList.map(message => (
+                  loggedInUser===message.receiver)&&
+                  <ReceivedMessage key={message.message_id} message={message} displayName={message.sender}/>  
+                )} 
+              </> 
+              :
+              <p>List of messages is empty</p>
+            } 
           </Box>
         </Box>      
     )

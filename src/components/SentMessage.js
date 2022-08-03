@@ -4,9 +4,9 @@ import "../css/message.css"
 
 
 const SentMessage = ({message, displayName}) => {
+
     return (
-        <Box className="sentMessage_container" marginTop={2}>
-            
+        <Box className="sentMessage_container" marginTop={2}>         
             <Card style={{width: "auto", margin: "0 auto"}}>
                 <CardContent>
                     <Box className="sentMessagesCard">

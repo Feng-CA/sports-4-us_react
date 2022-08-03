@@ -1,11 +1,11 @@
-.sentMessages_container, .receivedMessages_container, .messageForm_container {
+.sentMessages_container, .receivedMessages_container, .messageForm_container, .channelMessages_container {
     display: flex;
     flex-direction: raw;
     width: 100%;
     height: 100vh;  
 }
 
-.sentMessages_wrap, .receivedMessages_wrap {
+.sentMessages_wrap, .receivedMessages_wrap , .channelMessages_wrap {
     display: flex;
     flex-direction: column;
     width: 35%;
@@ -13,7 +13,7 @@
     padding: 20px 0;
 }
 
-.sentMessagesCard, .receivedMessagesCard{
+.sentMessagesCard, .receivedMessagesCard, .channelMessagesCard {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -21,7 +21,7 @@
     justify-items: auto;
 }
 
-.messageForm_wrap {
+.messageForm_wrap, .channelMessageForm_wrap {
     display: flex;
     justify-content: center;
     width: 65vw;
@@ -29,7 +29,7 @@
     padding: 20px 0;  
 }
 
-.messageForm_textField {
+.messageForm_textField, .channelMessageForm_textField {
     width: 100%;
     padding: 1.5rem;
     border-radius: 0.5rem;
@@ -38,8 +38,12 @@
     resize: none;
 }
 
+.channelMessageForm_container {
+    display: flex;
+    justify-content: center;
+}
 @media (max-width: 900px) {
-    .sentMessages_container, .receivedMessages_container, .messageForm_container {
+    .sentMessages_container, .receivedMessages_container, .messageForm_container, .channelMessages_container {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;

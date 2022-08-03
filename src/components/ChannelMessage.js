@@ -1,22 +1,32 @@
-import {Container, Card, CardContent, Typography } from "@mui/material"
+import {Container, Card, CardContent, Typography, Box } from "@mui/material"
 import { Link } from "react-router-dom";
+import "../css/message.css";
+
 
 const ChannelMessage = ({message, displayName}) => {
-    //console.log(message)
+
     return (
-        <Container className="message_container">
-            <Card style={{width: 380, margin: "0 auto"}}>
+        <Box className="channelMessage_container" marginTop={2}>
+            <Card style={{width: "auto", margin: "0 auto"}}>
                 <CardContent>
-                    <Link to={`/messages/user/${displayName}`}>
-                        <Typography variant='p'>{displayName}</Typography>
-                    </Link>
-                    <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
-                    <Link to={`/messages/${message.id}`} style={{textDecoration: 'none'}}>
-                        <Typography variant='h5'>{message.message}</Typography>
-                    </Link>
+                    <Box className="channelMessagesCard">
+                        <Box>
+                            <Link to={`/messages/user/${displayName}`}>
+                                <Typography variant='p'>{displayName}</Typography>
+                            </Link>
+                        </Box>
+                        <Box marginLeft={2}>
+                            <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
+                        </Box>
+                    </Box>
+                    <Box marginTop={2}>
+                        <Link to={`/messages/${message.id}`} style={{textDecoration: 'none'}}>
+                            <Typography variant='h5'>{message.message}</Typography>
+                        </Link>
+                    </Box>
                 </CardContent>
             </Card>
-        </Container>
+        </Box>
     )
 
 }
