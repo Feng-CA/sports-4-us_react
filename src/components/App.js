@@ -27,7 +27,7 @@ import ReceivedMessages from './ReceivedMessages';
 import ReceivedMessageDetail from './ReceivedMessageDetail';
 import Dashboard from './Dashboard';
 import { Box } from '@mui/material';
-import { getMessages } from '../services/messagesServices';
+import { getReceivedMessages } from '../services/messagesServices';
 import SentMessages from './SentMessages';
 import { getSentMessages } from '../services/sentMessagesServices';
 import SentMessageDetail from './SentMessageDetail';
@@ -93,10 +93,10 @@ const App = () => {
        data: response.data
     })
     }) 
-    getMessages()
-    
+
+    getReceivedMessages()
     .then(response =>{
-      sessionStorage.setItem("messagesList", JSON.stringify(response))
+      sessionStorage.setItem("receivedMessagesList", JSON.stringify(response))
       dispatch({
         type: 'setReceivedMessagelist',
         data: response
@@ -111,6 +111,7 @@ const App = () => {
         data: response
     }) 
     }) 
+
     getChannelMessages()
     .then(response =>{
       sessionStorage.setItem("channelMessageList", JSON.stringify(response))

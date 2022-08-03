@@ -2,8 +2,8 @@
 //import messageList from "../data/msssageList.json";
 import ReceivedMessage from './ReceivedMessage';
 import { useEffect } from 'react';
-import { getMessages } from '../services/messagesServices';
-// import SideBar from './SideBar';
+import { getReceivedMessages } from '../services/messagesServices';
+import SideBar from './SideBar';
 import { Box, Typography } from '@mui/material';
 import "../css/message.css";
 
@@ -16,7 +16,7 @@ const ReceivedMessages = () => {
 
   useEffect(() => {
 
-  getMessages()
+  getReceivedMessages()
     .then(response =>{
       sessionStorage.setItem("ReceivedMessagesList", JSON.stringify(response))
       dispatch({
@@ -36,9 +36,9 @@ const ReceivedMessages = () => {
     return (
        
         <Box className='receivedMessages_container'>
-          {/* <Box className='sentMessages_sidebar'>
+          <Box className='sentMessages_sidebar'>
               <SideBar />
-          </Box> */}
+          </Box>
           <Box className='receivedMessages_wrap'>
             <Box className="receivedMessges_title">
               <Typography  variant="h6" margin={3}>Your received messages:</Typography>

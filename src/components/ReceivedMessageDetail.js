@@ -4,19 +4,19 @@ import {Button, Container, Box, Card, CardContent, Typography } from "@mui/mater
 import { deleteMessage } from "../services/messagesServices"
 //import messageList from "../data/msssageList.json"
 import {useNavigate} from "react-router-dom";
-import { getMessages } from "../services/messagesServices";
+import { getReceivedMessages } from "../services/messagesServices";
 
 const ReceivedMessageDetail = () => {
      const {store,dispatch} = useGlobalState()
-     const {messageList} = store
+     const {receivedMessageList} = store
     const params = useParams()
     const navigate = useNavigate()
     
     let newMessageList
-     if(typeof(messageList) === "string") {
-      newMessageList = JSON.parse(messageList)
+     if(typeof(receivedMessageList) === "string") {
+      newMessageList = JSON.parse(receivedMessageList)
       } else {
-        newMessageList = messageList
+        newMessageList = receivedMessageList
       }
 
     const getMessage = (id) => {
@@ -25,11 +25,11 @@ const ReceivedMessageDetail = () => {
     const handleClick = () =>{
     
         deleteMessage(message.message_id).then(response =>console.log(response))  
-        getMessages()
+        getReceivedMessages()
             .then(response =>{
-            sessionStorage.setItem("messagesList", JSON.stringify(response))
+            sessionStorage.setItem("receivedMessageList", JSON.stringify(response))
             dispatch({
-            type: 'setMessagelist',
+            type: 'setReceivedMessagelist',
             data: response
     }) 
     })
