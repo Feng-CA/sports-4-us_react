@@ -7,6 +7,7 @@ import SideBar from './SideBar';
 import { Box, Typography } from '@mui/material';
 import "../css/message.css";
 
+
 const SentMessages = () => {
     const {store, dispatch}= useGlobalState()
     const {sentMessageList, loggedInUser} = store
@@ -41,7 +42,6 @@ const SentMessages = () => {
             <Box className="sentMessges_title">
               <Typography  variant="h6" margin={3}>Your sent messages:</Typography>
             </Box>
-            {console.log(loggedInUser)}
             {newMessageList.length ?
               <>
                 {newMessageList.map(message => (

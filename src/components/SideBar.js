@@ -248,7 +248,7 @@ const Sidebar = () => {
 
                 </Collapse>
               
-                <Link to="/messages" className="link">
+                <Link to="/messages/receivedmessages" className="link">
                   <ListItemButton>
                     <ListItemIcon className="sidebarListItem">
                       <DynamicFeedIcon className="sidebarIcon" />

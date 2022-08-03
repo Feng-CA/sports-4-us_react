@@ -43,8 +43,11 @@
 }
 
 
-/* @media (max-width: 900px) {
+@media (max-width: 900px) {
+  .sidebar {
+    width: 20vw;
+  }
   .sidebarIcon .sidebarListItem {
     display: none;
   }
-} */
+}

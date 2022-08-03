@@ -6,7 +6,7 @@ import { deleteMessage } from "../services/messagesServices"
 import {useNavigate} from "react-router-dom";
 import { getMessages } from "../services/messagesServices";
 
-const MessageDetail = () => {
+const ReceivedMessageDetail = () => {
      const {store,dispatch} = useGlobalState()
      const {messageList} = store
     const params = useParams()
@@ -67,4 +67,4 @@ const MessageDetail = () => {
 
 }
 
-export default MessageDetail
+export default ReceivedMessageDetail

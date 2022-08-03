@@ -43,7 +43,7 @@ const App = () => {
     users: sessionStorage.getItem("users") || [],
     profiles: sessionStorage.getItem("profiles") || [],
     token: sessionStorage.getItem("token")||null,
-    messageList: sessionStorage.getItem("messagesList")||[],
+    receivedMessageList: sessionStorage.getItem("receivedMessagesList")||[],
     sentMessageList: sessionStorage.getItem("sentMessagesList")||[],
     channelMessageList: sessionStorage.getItem("channelMessageList")||[],
     //messageList: [],
@@ -98,7 +98,7 @@ const App = () => {
     .then(response =>{
       sessionStorage.setItem("messagesList", JSON.stringify(response))
       dispatch({
-        type: 'setMessagelist',
+        type: 'setReceivedMessagelist',
         data: response
     }) 
     })  

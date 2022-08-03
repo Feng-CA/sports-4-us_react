@@ -5,7 +5,9 @@
     display: flex;
     justify-content: space-evenly;
     padding: 15px;
+
 }
+
 
 .slider ul {
     width: 100%;

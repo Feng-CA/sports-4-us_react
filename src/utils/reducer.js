@@ -51,12 +51,12 @@ export const reducer = (state, action) => {
                 token: action.data
             }
         }
-        case "setMessagelist": {
+        case "setReceivedMessagelist": {
             //updates the messages array
             console.log("it was here")
             return {
                 ...state,
-                messageList: action.data
+                ReceivedmessageList: action.data
             }
         }
 
