@@ -167,12 +167,25 @@
 /* profile detail page styling */
 .profiledetail_container {
     display: flex;
-    flex-direction: raw;
-    width: 100%;
+    justify-content: center;
     height: 100vh;
+}
+.profiledetail_wrap_container {
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 80vh;
+    padding: 40px 20px;
     position: relative;
 }
 .profiledetail_wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 80%;
+    height: 80vh;
+    padding: 40px 20px;
+    position: relative;
     margin: 0 auto;
     width: 80%;
 }

@@ -1,9 +1,8 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
-// import "../style.css";
 import categoryList from "../data/categoryList.json";
 
 
@@ -23,7 +22,6 @@ const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
-    const navigate = useNavigate()
 
     console.log(params.id)
 

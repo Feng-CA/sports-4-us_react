@@ -68,7 +68,7 @@ const ProfileDetail = () => {
                 <Box>
                     <Sidebar />
                 </Box>
-                <Box className="profiledetail_wrap"> 
+                <Box className="profiledetail_wrap_container"> 
                 { profile ?
                     <Card className="profiledetail_wrap" sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
                         <Box>

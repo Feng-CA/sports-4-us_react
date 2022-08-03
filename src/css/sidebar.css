@@ -45,9 +45,9 @@
 
 @media (max-width: 900px) {
   .sidebar {
-    width: 20vw;
+    width: 32vw;
   }
-  .sidebarIcon .sidebarListItem {
+  .sidebarIcon, link {
     display: none;
   }
 }
