@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { autocompleteClasses, Avatar, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
-import { MenuOutlined, Close, Sports } from '@mui/icons-material';
+import { MenuOutlined, Close } from '@mui/icons-material';
 import "../css/navigation.css";
 import { Box } from '@mui/system';
 
@@ -75,7 +75,7 @@ const Navigation = () => {
       }
     return (
         <Box className= "navbar">
-            <Sports sx={{ display: { xs: 'none', md: 'flex'}}} />
+            {/* <Sports sx={{ display: { xs: 'none', md: 'flex'}}} /> */}
             <Typography
                 variant="h6"
                 noWrap

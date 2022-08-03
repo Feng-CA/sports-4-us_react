@@ -2,14 +2,19 @@
 //import messageList from "../data/msssageList.json";
 import Message from './Message';
 import MessageForm from "./MessageForm";
-import { useEffect } from 'react';
+import { useEffect, Navigate } from 'react';
 import { getMessages } from '../services/messagesServices';
+import { Box } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { useNavigate } from "react-router-dom";
+import "../css/message.css";
 
 
 const Messages = () => {
      const {store, dispatch}= useGlobalState()
      const {messageList, loggedInUser} = store
-     let newMessageList
+     let newMessageList;
+     const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -33,6 +38,9 @@ const Messages = () => {
     
     return (
         <>
+          <Box>
+              <ArrowBack onClick={() => navigate("/member")}/>
+          </Box>
           {<MessageForm />}
           {newMessageList.length ?
             <>

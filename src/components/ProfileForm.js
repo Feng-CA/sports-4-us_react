@@ -114,6 +114,7 @@ const ProfileForm = () => {
         }))
         
         console.log("after-useEffct:", formData)
+        // eslint-disable-next-line
     }, [contactNo, emergencyContact, emergencyContactNo, location, cycling, golf, tennis, soccer, hiking, cricket, running, basketball])
     
    
@@ -126,7 +127,7 @@ const ProfileForm = () => {
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log("after:", formData)
-        let tempProfileVar = tempProfiles
+        // let tempProfileVar = tempProfiles
         updateProfile(currentProfile.id,formData)
             .then( response => currentProfile = response) 
         console.log("after-submit current Profile:", currentProfile)

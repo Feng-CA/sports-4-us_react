@@ -22,7 +22,7 @@ const ProfileDetail = () => {
                 type: 'setProfiles',
                data: response.data
             })})
-       
+       // eslint-disable-next-line
     },[]);
    
 

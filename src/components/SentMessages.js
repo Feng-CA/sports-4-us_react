@@ -3,6 +3,9 @@ import { useGlobalState } from '../utils/stateContext'
 import SentMessage from './SentMessage';
 import { useEffect } from 'react';
 import { getSentMessages } from '../services/sentMessagesServices';
+import SideBar from './SideBar';
+import { Box, Typography } from '@mui/material';
+import "../css/message.css";
 
 const SentMessages = () => {
     const {store, dispatch}= useGlobalState()
@@ -30,21 +33,29 @@ const SentMessages = () => {
    
    
    return (
-       <>
-         {console.log(loggedInUser)}
-         {newMessageList.length ?
-           <>
-             {newMessageList.map(message => (
-               loggedInUser===message.sender)&&
-               <SentMessage key={message.message_id} message={message} displayName = {message.receiver}/>  
-             )} 
-           </> 
-           :
-           <p>List of messages is empty</p>
-         
-         } 
+       <Box className='sentMessages_container'>
+          <Box className='sentMessages_sidebar'>
+              <SideBar />
+          </Box>
+          <Box className='sentMessages_wrap'>
+            <Box className="sentMessges_title">
+              <Typography  variant="h6" margin={3}>Your sent messages:</Typography>
+            </Box>
+            {console.log(loggedInUser)}
+            {newMessageList.length ?
+              <>
+                {newMessageList.map(message => (
+                  loggedInUser===message.sender)&&
+                  <SentMessage key={message.message_id} message={message} displayName = {message.receiver}/>  
+                  )} 
+              </> 
+              :
+              <p>List of messages is empty</p>
+              
+              } 
+          </Box>
            
-       </>
+       </Box>
    )
 
 }

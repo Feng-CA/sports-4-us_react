@@ -187,11 +187,13 @@
 }
 .profile_avatar_container {
     display: flex;
-    margin: 16px;
+    margin: auto 0;
+    padding: 15px;
 }
 
 .profile_avatar {
     display: flex;
+    justify-content: center;
     height: 50px;
     width: 50px;
     padding: 3rem;
@@ -200,9 +202,13 @@
     border-radius: 50%;
 }
 
-.profile_action Button {
-    background-color: transparent;
-    color: rgb(18, 97, 215);
+.profile_action {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   /* justify-content: space-between; */
+   /* padding: 10px; */
+   /* justify-items: space-around; */
 }
 
 /* dashboard page styling */
