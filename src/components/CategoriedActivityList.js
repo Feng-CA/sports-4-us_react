@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import { useGlobalState } from "../utils/stateContext";
@@ -23,6 +23,7 @@ const CategoriedActivityList = () => {
     const {store} = useGlobalState()
     const {activities} = store
     const params = useParams()
+    const navigate = useNavigate()
 
     console.log(params.id)
 
@@ -34,7 +35,8 @@ const CategoriedActivityList = () => {
     } else {
         newActivities = activities
     }
- 
+
+
     return (
         <Container className="categoriedActivityList_container">
 

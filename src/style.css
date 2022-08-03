@@ -132,14 +132,15 @@
 
 /* login form styling */
 .login_container {
+    height: 100vh;
     text-align: center;
 }
 
 .login_form {
-    width: 380;
+    width: 380px;
     background: #ffffff;
     padding: 40px 20px;
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 .login_input {
@@ -149,6 +150,7 @@
 /* signup form styling */
 .signup_container {
     width: 40%;
+    height: 100vh;
     margin: 0 auto;
     text-align: center;
 }
