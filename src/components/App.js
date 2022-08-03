@@ -17,6 +17,7 @@ import "../style.css";
 import { getActivities, getMemberActivities } from "../services/activitiesServices";
 import { getUsers } from "../services/usersServices";
 import { getProfiles } from "../services/profilesServices";
+import { getChannelMessages } from '../services/channelMessagingServices';
 import Profiles from "./Profiles";
 import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
@@ -26,6 +27,11 @@ import Messages from './Messages';
 import MessageDetail from './MessageDetail';
 import Dashboard from './Dashboard';
 import { Box } from '@mui/material';
+import { getMessages } from '../services/messagesServices';
+import SentMessages from './SentMessages';
+import { getSentMessages } from '../services/sentMessagesServices';
+import SentMessageDetail from './SentMessageDetail';
+import ChannelMessages from './ChannelMessages';
 import OrganiserActivitiesList from './OrganiserActivityList';
 
 
@@ -36,7 +42,13 @@ const App = () => {
     memberActivities: sessionStorage.getItem("memberActivities") || [],
     users: sessionStorage.getItem("users") || [],
     profiles: sessionStorage.getItem("profiles") || [],
-    token: sessionStorage.getItem("token") || null
+    token: sessionStorage.getItem("token")||null,
+    messageList: sessionStorage.getItem("messagesList")||[],
+    sentMessageList: sessionStorage.getItem("sentMessagesList")||[],
+    channelMessageList: sessionStorage.getItem("channelMessageList")||[],
+    //messageList: [],
+    receiverId: "",
+    messagingChannelId: sessionStorage.getItem("messagingChannelId")||1
   }
   
 
@@ -75,16 +87,44 @@ const App = () => {
     getProfiles()
     .then( response => {
       sessionStorage.setItem("profiles", JSON.stringify(response.data))
+      
       dispatch({
         type: 'setProfiles',
-        data: response.data
+       data: response.data
     })
-    })   
+    }) 
+    getMessages()
+    
+    .then(response =>{
+      sessionStorage.setItem("messagesList", JSON.stringify(response))
+      dispatch({
+        type: 'setMessagelist',
+        data: response
+    }) 
+    })  
+    
+    getSentMessages()
+    .then(response =>{
+      sessionStorage.setItem("sentMessagesList", JSON.stringify(response))
+      dispatch({
+        type: 'setSentMessagelist',
+        data: response
+    }) 
+    }) 
+    getChannelMessages()
+    .then(response =>{
+      sessionStorage.setItem("channelMessageList", JSON.stringify(response))
+      dispatch({
+        type: 'setChannelMessageList',
+        data: response
+    }) 
+    }) 
+
   },[]);
 
   const [store, dispatch] = useReducer(reducer, initialState)
-  const {loggedInUser, profiles } = store
-
+  const {loggedInUser, profiles} = store
+  
   // get admin profile
   let newProfiles;
    
@@ -140,6 +180,9 @@ const App = () => {
                       } />
                       <Route path=":messageId" element={<MessageDetail />} />
                       <Route path="mymessages" element={<Messages />} />
+                      <Route path="sentmessages" element={<SentMessages />} />
+                      <Route path="sentmessages/:messageId" element={<SentMessageDetail />} />
+                      <Route path="channelmessages" element={<ChannelMessages />} />
                   </Route>
                   }
                   

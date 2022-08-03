@@ -3,15 +3,29 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
 import Sidebar from "./SideBar";
+import { useEffect } from "react";
+import { getProfiles } from "../services/profilesServices";
 
 
 
 const ProfileDetail = () => {
-    const {store} = useGlobalState()
+    const {store, dispatch} = useGlobalState()
     const { loggedInUser, profiles } = store
     const navigate = useNavigate()
 
     const params = useParams()
+    useEffect(() => {
+        getProfiles()
+            .then(response => {
+              sessionStorage.setItem("profiles", JSON.stringify(response.data))
+              dispatch({
+                type: 'setProfiles',
+               data: response.data
+            })})
+       
+    },[]);
+   
+
 
     let newProfiles;
     
@@ -46,6 +60,8 @@ const ProfileDetail = () => {
     const handleClick = () => {
 
     }
+
+  
 
     return (
         <Box className="profiledetail_container">

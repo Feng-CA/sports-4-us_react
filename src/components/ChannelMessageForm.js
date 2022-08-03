@@ -1,26 +1,27 @@
 import { Button, Container, Box, InputLabel, TextField } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createMessage } from "../services/messagesServices";
-import { createSentMessage } from "../services/sentMessagesServices";
+//import { useNavigate } from "react-router-dom";
+//import { createSentMessage } from "../services/sentMessagesServices";
 import { useGlobalState } from "../utils/stateContext";
-import SendersList from "./SendersList";
+import ChannelsList from "./ChannelsList";
+import { createChannelMessage } from "../services/channelMessagingServices";
 
-const MessageForm = () => {
+
+
+const ChannelMessageForm = () => {
     const {store, dispatch} = useGlobalState()
-    const {loggedInUser, receiverId} = store
+    const {loggedInUser, messagingChannelId, channelMessageList} = store
 
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
     const initialFormData = {
         message: "",
-        receiver_user_id: ""
+        category_id: ""
     }
     const [formData, setFormData] = useState(initialFormData)
     
     const handleFormData = (e) => {
-        //console.log(e)
         setFormData({
-            receiver_user_id: receiverId,
+            category_id: messagingChannelId!==1?(messagingChannelId-1):9,
             [e.target.id]: e.target.value
         })
     }
@@ -31,45 +32,37 @@ const MessageForm = () => {
             console.log("empty message")
         }else {
             //formData.sender_user_id = senderId
-            console.log(e)
+            //console.log(e)
             console.log(formData)
             addMessage(formData)
             cleanMessage()
         }
+        //navigate("../")
         //adds the message to the list  
     }
     
     const addMessage = (data) => {
-        
-        createMessage(data)
-        .then(message => {
+        //console.log(channelMessageList)
+        let newVar = channelMessageList
+        createChannelMessage(data)
+        .then(message =>{newVar.unshift(message)
             dispatch({
-                type: "setMessagelist",
-                data: message
-                })
-          
-    })
-
-    createSentMessage(data)
-    .then(message => {console.log(message)
-        dispatch({
-            type: "setSentMessagelist",
-            data: message
-            })
-        navigate("/messages")
+                data: newVar,
+                type: "setChannelMessageList"
+            })      
     })}
-
-   
 
     const cleanMessage = () => {
         setFormData(initialFormData)
     }
+ 
+
     return (
         <Container className="messageForm_container" sx={{width: 380}} style={{display: "flex", justifyContent: "center"}}>
             <form onSubmit={handleSubmit}>
                 <Box sx={{display: "flex", flexDirection: "column"}}  marginTop={2}>
                     <InputLabel>{`Hi ${loggedInUser},`}</InputLabel>
-                    <SendersList/>
+                    <ChannelsList/>
                     <Box marginTop={2}>
                         <TextField required sx={{width: 320}} type="textarea" name="message" id="message" placeholder={"what would you like to say?"} value={formData.message} onChange={handleFormData}/>
                     </Box>
@@ -84,4 +77,4 @@ const MessageForm = () => {
 
 }
 
-export default MessageForm
+export default ChannelMessageForm

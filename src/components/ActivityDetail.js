@@ -10,6 +10,7 @@ const ActivityDetail = () => {
     const { activities, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
+    console.log(typeof(activities))
 
     
     let newProfiles;
@@ -47,7 +48,8 @@ const ActivityDetail = () => {
     const handleDelete = () => {
 
     }
-
+    
+    console.log(newActivities[Number(params.id-1)].organiser)
 
     return (
         <Container className="activitydetail_container" maxWidth="lg">
