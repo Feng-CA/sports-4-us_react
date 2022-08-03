@@ -10,7 +10,7 @@ import "../css/message.css";
 const SentMessages = () => {
     const {store, dispatch}= useGlobalState()
     const {sentMessageList, loggedInUser} = store
-    let newMessageList
+    let newMessageList;
 
 //Use effect to get sent messages from table
  useEffect(() => {

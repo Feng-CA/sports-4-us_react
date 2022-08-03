@@ -23,8 +23,8 @@ import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
 import AdminUpdateProfileForm from './AdminUpdateProfileForm'
 import MessageForm from './MessageForm';
-import Messages from './Messages';
-import MessageDetail from './MessageDetail';
+import ReceivedMessages from './ReceivedMessages';
+import ReceivedMessageDetail from './ReceivedMessageDetail';
 import Dashboard from './Dashboard';
 import { Box } from '@mui/material';
 import { getMessages } from '../services/messagesServices';
@@ -171,15 +171,16 @@ const App = () => {
                  <Route path="organiser" element={<OrganiserActivitiesList />}/>
                 </Route>
                   {loggedInUser && <Route path="messages">
-                    <Route index element={<Messages />}/>
+                    <Route index element={<ReceivedMessages />}/>
                       <Route path="new" element={
                         loggedInUser?
                         <MessageForm  />
                         :
                         <Navigate to="/login" />
                       } />
-                      <Route path=":messageId" element={<MessageDetail />} />
-                      <Route path="mymessages" element={<Messages />} />
+                      {/* <Route path=":messageId" element={<MessageDetail />} /> */}
+                      <Route path="receivedmessages" element={<ReceivedMessages />} />
+                      <Route path="receivedmessages/:messageId" element={<ReceivedMessageDetail />} />
                       <Route path="sentmessages" element={<SentMessages />} />
                       <Route path="sentmessages/:messageId" element={<SentMessageDetail />} />
                       <Route path="channelmessages" element={<ChannelMessages />} />

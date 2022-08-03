@@ -4,7 +4,8 @@ import { Button, Container, Box, Card, CardContent, Typography } from "@mui/mate
 //import messageList from "../data/msssageList.json"
 import { deleteSentMessage, getSentMessages } from "../services/sentMessagesServices"
 import {useNavigate} from "react-router-dom";
-import SideBar from "./SideBar";
+// import { ArrowBack} from "./@mui/icons-material";
+// import SideBar from "./SideBar";
 
 const SentMessageDetail = () => {
      const {store, dispatch} = useGlobalState()
@@ -42,6 +43,9 @@ const SentMessageDetail = () => {
     const message = getMessage(params.messageId)//{text: "test message", user: "Test user"}
     return (
         <Container className="messageDetail_container" >
+            {/* <Box>
+              <ArrowBack onClick={() => navigate("/member")}/>
+            </Box> */}
             {/* <Box>
                 <SideBar />
             </Box> */}

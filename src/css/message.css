@@ -1,4 +1,4 @@
-.sentMessages_container {
+.sentMessages_container, .receivedMessages_container {
     display: flex;
     flex-direction: raw;
     width: 100%;
@@ -6,7 +6,7 @@
    
 }
 
-.sentMessages_wrap {
+.sentMessages_wrap, .receivedMessages_wrap {
     display: flex;
     flex-direction: column;
     width: 35%;
@@ -14,7 +14,7 @@
     padding: 20px 0;
 }
 
-.messagesCard {
+.sentMessagesCard {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

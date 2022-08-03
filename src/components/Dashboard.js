@@ -1,6 +1,7 @@
 import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
-import Messages from './Messages';
+import ReceivedMessages from './ReceivedMessages';
+// import ChannelMessages from './ChannelMessage';
 
 const Dashboard = () => {
 
@@ -15,7 +16,8 @@ const Dashboard = () => {
                         </Typography>
                     </Box>
                     <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}>
-                        <Messages /> 
+                        <ReceivedMessages /> 
+                        {/* <ChannelMessages />  */}
                     </Box>
                 </Box>
             </Box>

@@ -1,15 +1,15 @@
-import { Box, Card, CardContent, Typography } from "@mui/material"
+import {Box, Card, CardContent, Typography } from "@mui/material"
 import { Link } from "react-router-dom";
 import "../css/message.css"
 
 
-const SentMessage = ({message, displayName}) => {
+const ReceivedMessage = ({message, displayName}) => {
     return (
-        <Box className="sentMessage_container" marginTop={2}>
+        <Box className="receivedMessage_container" marginTop={2}>
             
             <Card style={{width: "auto", margin: "0 auto"}}>
                 <CardContent>
-                    <Box className="sentMessagesCard">
+                    <Box className="receivedMessagesCard">
                         <Box>
                             <Link to={`/messages/user/${displayName}`}>
                                 <Typography variant='p'>{displayName}</Typography>
@@ -20,7 +20,7 @@ const SentMessage = ({message, displayName}) => {
                         </Box>
                     </Box>
                     <Box marginTop={2}>
-                        <Link to={`/messages/sentmessages/${message.message_id}`} style={{textDecoration: 'none'}}>
+                        <Link to={`/messages/receivedmessages/${message.message_id}`} style={{textDecoration: 'none'}}>
                             <Typography variant='h5'>{message.message}</Typography>
                         </Link>
                     </Box>
@@ -28,7 +28,6 @@ const SentMessage = ({message, displayName}) => {
             </Card>
         </Box>
     )
-
 }
 
-export default SentMessage
+export default ReceivedMessage

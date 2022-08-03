@@ -41,7 +41,7 @@ const SendersList = () => {
                           </ListItemIcon>
                           {receiverId?
                           <ListItemText primary={(users.find((user)=>user.id===receiverId)).full_name}/>
-                          :<ListItemText primary="Message List"/>}
+                          :<ListItemText primary="Member List"/>}
                           {open? <ExpandLess/> : <ExpandMore/>}
           </ListItemButton>
           
