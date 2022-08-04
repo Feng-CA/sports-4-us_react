@@ -1,16 +1,11 @@
 import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
-<<<<<<< HEAD
-import Messages from './Messages';
+//import Messages from './Messages';
 import "../style.css";
 import { getProfiles } from '../services/profilesServices';
 import { useGlobalState } from "../utils/stateContext";
 import { useEffect } from 'react';
 
-=======
-// import ReceivedMessages from './ReceivedMessages';
-// import ChannelMessages from './ChannelMessage';
->>>>>>> copied-branch
 
 const Dashboard = () => {
 
