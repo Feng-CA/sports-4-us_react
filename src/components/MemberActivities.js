@@ -16,7 +16,16 @@ import "swiper/css/navigation";
 
 const MemberActivities = () => {
     const {store} = useGlobalState()
-    const {bookingsList, loggedInUser } = store
+    const {bookingsList, loggedInUser, activities } = store
+
+    let newActivities;
+    
+    if(typeof(activities) === "string") {
+        newActivities = JSON.parse(activities)
+    } else {
+        newActivities = activities;
+    }
+
    
     let newBookingsList;
     
@@ -45,10 +54,10 @@ const MemberActivities = () => {
                     pagination={{ clickable: true }}>
 
                 {memberActivities.map((activity, index) => {
-                 
                     return (
+                          
                         <SwiperSlide className="categoried_activity" key={index}>
-                            <Link to={`/activities/${activity.activity_id}`}>
+                            <Link to={`/activities/${(newActivities.indexOf(newActivities.find(({ id }) => id === activity.activity_id)))+1}`}>
                                 <Card>
                                     <CardMedia
                                         className="category_avatar"

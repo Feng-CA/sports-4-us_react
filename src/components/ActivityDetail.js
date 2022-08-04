@@ -10,7 +10,7 @@ const ActivityDetail = () => {
     const { activities, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
-    console.log(typeof(activities))
+    console.log(activities)
 
     
     let newProfiles;

@@ -33,7 +33,7 @@ const CategoriedActivityList = () => {
     } else {
         newActivities = activities
     }
-
+    //array.indexOf(2)
 
     return (
         <Container className="categoriedActivityList_container">
@@ -52,7 +52,8 @@ const CategoriedActivityList = () => {
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
                             <Card>
-                                <Link to={`/activities/${activity.id}`}>
+                                
+                                <Link to={`/activities/${index+1}`}>
                                     <CardMedia
                                         className="category_avatar"
                                         component="img"
