@@ -14,24 +14,24 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
 
-const OrganiserActivitiesList = () => {
+const MemberActivities = () => {
     const {store} = useGlobalState()
-    const {activities, loggedInUser } = store
+    const {bookingsList, loggedInUser } = store
    
-    let newActivities;
+    let newBookingsList;
     
-    if(typeof(activities) === "string") {
-        newActivities = JSON.parse(activities)
+    if(typeof(bookingsList) === "string") {
+        newBookingsList = JSON.parse(bookingsList)
     } else {
-        newActivities = activities;
+        newBookingsList = bookingsList;
     }
 
    
     // get all organiser activities
     console.log("loggedInUser:", loggedInUser)
     //console.log("organiser", activity)
-    const organiserActivities = newActivities.filter(activity => activity.organiser === loggedInUser)
-    console.log(organiserActivities)
+    const memberActivities = newBookingsList.filter(booking => booking.member === loggedInUser)
+    console.log(memberActivities)
 
     return (
         <Container className="organiserActivityList_container">
@@ -44,11 +44,11 @@ const OrganiserActivitiesList = () => {
                     navigation={true}
                     pagination={{ clickable: true }}>
 
-                {organiserActivities.map((activity, index) => {
+                {memberActivities.map((activity, index) => {
                  
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
-                            <Link to={`/activities/${activity.id}`}>
+                            <Link to={`/activities/${activity.activity_id}`}>
                                 <Card>
                                     <CardMedia
                                         className="category_avatar"
@@ -61,7 +61,7 @@ const OrganiserActivitiesList = () => {
                                             <Typography variant="p">{activity.date_time}</Typography>
                                         </Box>
                                         <Box>
-                                            <Typography variant="h5">{activity.title}</Typography>
+                                            <Typography variant="h5">{activity.activity_title}</Typography>
                                         </Box>
                                         <Box>
                                             <Typography variant="p">{activity.location}</Typography>
@@ -79,4 +79,4 @@ const OrganiserActivitiesList = () => {
     )
 }
 
-export default OrganiserActivitiesList
+export default MemberActivities

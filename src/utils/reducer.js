@@ -1,5 +1,5 @@
 export const reducer = (state, action) => {
-    console.log(state, action.type, action.data)
+    
     switch(action.type){
         
         case "setLoggedInUser": {
@@ -53,7 +53,7 @@ export const reducer = (state, action) => {
         }
         case "setReceivedMessagelist": {
             //updates the messages array
-            console.log("it was here")
+          
             return {
                 ...state,
                 ReceivedmessageList: action.data
@@ -62,7 +62,7 @@ export const reducer = (state, action) => {
 
         case "setSentMessagelist": {
             //updates the sent messages array
-            console.log("it was in setSentMessagelist")
+            
             return {
                 ...state,
                 sentMessageList: action.data
@@ -91,6 +91,14 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 messagingChannelId: action.data
+            }
+        }
+
+        case "setBookingsList": {
+            //sets Messaging Channel id
+            return {
+                ...state,
+                bookingsList: action.data
             }
         }
 
