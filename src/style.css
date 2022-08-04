@@ -22,14 +22,14 @@
 /* home page styling */
 
 .home_heading {
-    color: rgb(148, 247, 10);
+    color: rgb(227, 10, 247);
     margin: 30px;
     position: absolute;
     top: 30px;
 }
 
 .home_intro {
-    color: rgb(148, 247, 10);
+    color: #9d188b;
     font-size: 30px;
     margin: 30px;
     position: absolute;

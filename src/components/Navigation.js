@@ -172,7 +172,7 @@ if(loggedInUser){
             </nav>
           {loggedInUser&&
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="Open Sidebar">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                  { loggedInUser &&  <Avatar className='nav_avatar' {...stringAvatar(`${loggedInUser}`)}  />}
               </IconButton>
