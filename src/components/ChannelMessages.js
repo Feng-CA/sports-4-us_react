@@ -4,6 +4,9 @@ import ChannelMessage from './ChannelMessage';
 import ChannelMessageForm from './ChannelMessageForm';
 import { useEffect } from 'react';
 import { getChannelMessages } from '../services/channelMessagingServices';
+import SideBar from './SideBar';
+import { Box } from '@mui/material';
+import "../css/message.css";
 //import { ContactlessOutlined } from '@mui/icons-material';
 
 
@@ -36,12 +39,17 @@ const ChannelMessages = () => {
     console.log((channelMessageList.length))
 
     return (
-        <>
-          {<ChannelMessageForm />}
+      <Box className='channelMessages_container'>
+        <Box className='channelMessages_sidebar' margin={0}>
+            <SideBar />
+        </Box>
+        <Box className='channelMessages_wrap'>
+          <Box>
+            {<ChannelMessageForm />}
+          </Box>
           {newMessageList.length ?
             <>
               {newMessageList.map(message => (
-                
                 channels[messagingChannelId-1]===(message.channel))&& 
                 <ChannelMessage key={message.id} message={message} displayName={message.sender}/>  
               )} 
@@ -49,7 +57,8 @@ const ChannelMessages = () => {
             :
             <p>List of messages is empty</p>
           }   
-        </>
+          </Box>
+        </Box>
     )
 
 }

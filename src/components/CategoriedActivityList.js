@@ -3,7 +3,6 @@ import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
-import "../style.css";
 import categoryList from "../data/categoryList.json";
 
 
@@ -34,7 +33,8 @@ const CategoriedActivityList = () => {
     } else {
         newActivities = activities
     }
- 
+
+
     return (
         <Container className="categoriedActivityList_container">
 

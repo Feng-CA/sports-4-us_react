@@ -23,11 +23,11 @@ import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
 import AdminUpdateProfileForm from './AdminUpdateProfileForm'
 import MessageForm from './MessageForm';
-import Messages from './Messages';
-import MessageDetail from './MessageDetail';
+import ReceivedMessages from './ReceivedMessages';
+import ReceivedMessageDetail from './ReceivedMessageDetail';
 import Dashboard from './Dashboard';
 import { Box } from '@mui/material';
-import { getMessages } from '../services/messagesServices';
+import { getReceivedMessages } from '../services/messagesServices';
 import SentMessages from './SentMessages';
 import { getSentMessages } from '../services/sentMessagesServices';
 import SentMessageDetail from './SentMessageDetail';
@@ -43,7 +43,7 @@ const App = () => {
     users: sessionStorage.getItem("users") || [],
     profiles: sessionStorage.getItem("profiles") || [],
     token: sessionStorage.getItem("token")||null,
-    messageList: sessionStorage.getItem("messagesList")||[],
+    receivedMessageList: sessionStorage.getItem("receivedMessagesList")||[],
     sentMessageList: sessionStorage.getItem("sentMessagesList")||[],
     channelMessageList: sessionStorage.getItem("channelMessageList")||[],
     //messageList: [],
@@ -93,12 +93,12 @@ const App = () => {
        data: response.data
     })
     }) 
-    getMessages()
-    
+
+    getReceivedMessages()
     .then(response =>{
-      sessionStorage.setItem("messagesList", JSON.stringify(response))
+      sessionStorage.setItem("receivedMessagesList", JSON.stringify(response))
       dispatch({
-        type: 'setMessagelist',
+        type: 'setReceivedMessagelist',
         data: response
     }) 
     })  
@@ -111,6 +111,7 @@ const App = () => {
         data: response
     }) 
     }) 
+
     getChannelMessages()
     .then(response =>{
       sessionStorage.setItem("channelMessageList", JSON.stringify(response))
@@ -173,15 +174,16 @@ const App = () => {
                  <Route path="organiser" element={<OrganiserActivitiesList />}/>
                 </Route>
                   {loggedInUser && <Route path="messages">
-                    <Route index element={<Messages />}/>
+                    <Route index element={<ReceivedMessages />}/>
                       <Route path="new" element={
                         loggedInUser?
                         <MessageForm  />
                         :
                         <Navigate to="/login" />
                       } />
-                      <Route path=":messageId" element={<MessageDetail />} />
-                      <Route path="mymessages" element={<Messages />} />
+                      {/* <Route path=":messageId" element={<MessageDetail />} /> */}
+                      <Route path="receivedmessages" element={<ReceivedMessages />} />
+                      <Route path="receivedmessages/:messageId" element={<ReceivedMessageDetail />} />
                       <Route path="sentmessages" element={<SentMessages />} />
                       <Route path="sentmessages/:messageId" element={<SentMessageDetail />} />
                       <Route path="channelmessages" element={<ChannelMessages />} />

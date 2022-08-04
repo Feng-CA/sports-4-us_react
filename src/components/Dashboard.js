@@ -1,11 +1,16 @@
 import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
+<<<<<<< HEAD
 import Messages from './Messages';
 import "../style.css";
 import { getProfiles } from '../services/profilesServices';
 import { useGlobalState } from "../utils/stateContext";
 import { useEffect } from 'react';
 
+=======
+// import ReceivedMessages from './ReceivedMessages';
+// import ChannelMessages from './ChannelMessage';
+>>>>>>> copied-branch
 
 const Dashboard = () => {
 
@@ -27,7 +32,7 @@ const Dashboard = () => {
 
     return (
         <Box className="dashboard_container">
-            <Box sx={{display: "flex", flexDirection: "raw"}} marginTop={2}> 
+            <Box sx={{display: "flex", flexDirection: "raw"}} marginLeft={1}> 
                 <Sidebar />
                 <Box sx={{display: "flex", flexDirection: "column"}} marginTop={2}> 
                     <Box sx={{display: "flex", justifyContent: "center"}} marginTop={3}>
@@ -36,7 +41,8 @@ const Dashboard = () => {
                         </Typography>
                     </Box>
                     <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}>
-                        <Messages /> 
+                        {/* <ReceivedMessages />  */}
+                        {/* <ChannelMessages />  */}
                     </Box>
                 </Box>
             </Box>

@@ -22,7 +22,7 @@ const ProfileDetail = () => {
                 type: 'setProfiles',
                data: response.data
             })})
-       
+       // eslint-disable-next-line
     },[]);
    
 
@@ -65,9 +65,10 @@ const ProfileDetail = () => {
 
     return (
         <Box className="profiledetail_container">
-            <Box sx={{display: "flex", flexDirection: "raw"}}> 
-                <Sidebar />
-                <Box> 
+                <Box>
+                    <Sidebar />
+                </Box>
+                <Box className="profiledetail_wrap_container"> 
                 { profile ?
                     <Card className="profiledetail_wrap" sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
                         <Box>
@@ -149,7 +150,7 @@ const ProfileDetail = () => {
                     </>
                 }
                 </Box>
-            </Box>
+            {/* </Box> */}
         </Box>
     )
 }
