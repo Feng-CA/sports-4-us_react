@@ -3,14 +3,18 @@ import { Avatar, Typography } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { MenuOutlined, Close } from '@mui/icons-material';
-import "../css/navigation.css";
 import { Box } from '@mui/system';
-// import { Sports} from "@mui/icons-material";
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import "../css/navigation.css";
+
 
 
 const Navigation = () => {
     const {store, dispatch} = useGlobalState()
-    const {loggedInUser} = store
+    const {loggedInUser, profiles} = store
 
     const [active, setActive] = useState(false)
 
@@ -44,7 +48,8 @@ const Navigation = () => {
       
         navigate("/categories")
     }
-
+console.log("loggedinUser", loggedInUser)
+console.log("profiles", profiles)
 
     function stringToColor(string) {
         let hash = 0;
@@ -66,14 +71,53 @@ const Navigation = () => {
         return color;
       }
       
-      function stringAvatar(name) {
-        return {
-          sx: {
-            bgcolor: stringToColor(name),
-          },
-          children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
-        };
-      }
+    function stringAvatar(name) {
+    return {
+        sx: {
+        bgcolor: stringToColor(name),
+        },
+        children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    };
+    }
+let profile
+let loggedInAdmin
+
+if(loggedInUser){
+    let newProfiles;
+
+    if(typeof(profiles) === "string") {
+        newProfiles = JSON.parse(profiles)
+    } else {
+        newProfiles = profiles
+    }
+
+    profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+
+    //console.log("navbar:", profile)
+
+    // sets loggedInAdmin value
+    const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
+    
+    //let loggedInAdmin;
+
+    if (adminProfile.fullname === loggedInUser) {
+      loggedInAdmin = adminProfile.fullname
+    } else {
+      loggedInAdmin = null
+    }
+  }
+    // right side dropdown menu
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+      };
+    
+    const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+    };
+
+
     return (
         <Box className= "navbar">
             {/* <Sports sx={{ display: { xs: 'none', md: 'flex'}}} /> */}
@@ -117,18 +161,75 @@ const Navigation = () => {
                             <Link className="nav_link"  to='/contact'>Contact</Link>
                         </li>
                        
-                        { loggedInUser &&  <li className="nav_option" onClick={closeMobileMenu}>
+                        {/* { loggedInUser &&  <li className="nav_option" onClick={closeMobileMenu}>
                             <Link className="nav_link"  id="purple" onClick={logout} to='/categories'>Logout</Link>
-                        </li>}
+                        </li>} */}
                         { !loggedInUser &&  <li className="nav_option" onClick={closeMobileMenu}>
                             <Link className="nav_link" id="green" to='/login'>Login</Link>
                         </li>}      
-                        {/* { loggedInUser &&  <li className="nav_option" onClick={closeMobileMenu}>
-                            <Avatar {...stringAvatar(`${loggedInUser}`)}  />
-                        </li>} */}
+                        
                 </ul> 
             </nav>
-            { loggedInUser &&  <Avatar className='nav_avatar' {...stringAvatar(`${loggedInUser}`)}  />}
+          {loggedInUser&&
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                 { loggedInUser &&  <Avatar className='nav_avatar' {...stringAvatar(`${loggedInUser}`)}  />}
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+             
+                <MenuItem onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate(`/member/profiles/${profile.id}`)}>My Profile</Typography>
+                </MenuItem>
+                { !loggedInAdmin &&
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/activities/member")}>My Activities</Typography>
+                </MenuItem>}
+                { (profile.account_id === "Organiser") &&
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/activities/organiser")}>Organised Activities</Typography>
+                </MenuItem>}
+                { loggedInAdmin &&
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/activities/organiser")}>Create Activities</Typography>
+                </MenuItem>}
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/member/profiles")}>All Members</Typography>
+                </MenuItem>
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/messages")}>Inbox Messages</Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/messages/channelmessages")}>Channel Messages</Typography>
+                </MenuItem>
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/messages/new")}>New Message</Typography>
+                </MenuItem>
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" onClick={() => navigate("/messages/sentmessages")}>Sent Messages</Typography>
+                </MenuItem>
+                <MenuItem  onClick={handleCloseUserMenu} >
+                  <Typography textAlign="center" color="#03c2fc" onClick={logout} to='/categories'>Log out</Typography>
+                </MenuItem>
+             
+            </Menu>
+          </Box>}
         </Box>
                        
     )

@@ -56,16 +56,15 @@ const SentMessageDetail = () => {
                             <CardContent>
                                 <Typography variant='p'>{message.receiver}</Typography>
                                 <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
-                                <Typography variant='h5'>{message.message}</Typography>
-                                <Box sx={{display: "flex"}} marginLeft={0}>
+                                <Typography variant='h5' marginTop={2}>{message.message}</Typography>
+                                <Box sx={{display: "flex", justifyContent: "flex-end", alignItems: "center"}} marginTop={1}>
                                     <Button size="small" variant="contained" color="secondary" onClick={handleClick}>Delete Message</Button>
                                 </Box>
-                            
                             </CardContent>    
                         </Card>
                         :
                         <>
-                            <p>Message not found</p>
+                            <Typography variant='p'>Message not found</Typography>
                             <Link to="/messages">Go back to the main page</Link>
                         </>
                     }

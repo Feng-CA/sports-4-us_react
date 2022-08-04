@@ -58,7 +58,7 @@ const ActivityDetail = () => {
     console.log(newActivities[Number(params.id-1)])
 
     return (
-        <Container className="activitydetail_container" maxWidth="lg">
+        <Container className="activitydetail_container">
 
             {newActivities[Number(params.id-1)] ?
                 <Card sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>

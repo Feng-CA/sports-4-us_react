@@ -1,6 +1,6 @@
 import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
-//import Messages from './Messages';
+import FullActivityList from './FullActivityList'
 import "../style.css";
 import { getProfiles } from '../services/profilesServices';
 import { useGlobalState } from "../utils/stateContext";
@@ -23,7 +23,9 @@ const Dashboard = () => {
              data: response.data
           })
           }) 
-    },[]);
+    },
+    // eslint-disable-next-line
+    []);
 
     return (
         <Box className="dashboard_container">
@@ -35,9 +37,9 @@ const Dashboard = () => {
                         Check out what is going on here...
                         </Typography>
                     </Box>
-                    <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}>
-                        {/* <ReceivedMessages />  */}
-                        {/* <ChannelMessages />  */}
+                    {/* <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}> */}
+                    <Box>
+                        <FullActivityList /> 
                     </Box>
                 </Box>
             </Box>
