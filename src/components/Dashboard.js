@@ -1,7 +1,7 @@
 import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
+import FullActivityList from './FullActivityList'
 // import ReceivedMessages from './ReceivedMessages';
-// import ChannelMessages from './ChannelMessage';
 
 const Dashboard = () => {
 
@@ -15,9 +15,9 @@ const Dashboard = () => {
                         Check out what is going on here...
                         </Typography>
                     </Box>
-                    <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}>
-                        {/* <ReceivedMessages />  */}
-                        {/* <ChannelMessages />  */}
+                    {/* <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}> */}
+                    <Box>
+                        <FullActivityList /> 
                     </Box>
                 </Box>
             </Box>

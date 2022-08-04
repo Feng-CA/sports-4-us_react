@@ -26,33 +26,33 @@ const ChannelsList = () => {
       }
 
     return ( 
-    <>
-    <ListItemButton onClick={handleClick}>
-                    <ListItemIcon className="sidebarListItem">
-                      <PeopleIcon className="sidebarIcon" />
-                    </ListItemIcon>
-                    <ListItemText primary={channels[messagingChannelId-1]}/>
-                    {open? <ExpandLess/> : <ExpandMore/>}
-    </ListItemButton>
-    
-    <Collapse in={open} timeout="auto" unmountOnExit>
-    
-                <>
-                {channels.map(channel =>(
-                <List component="div" disablePadding>
-                   
-                      <ListItemButton sx={{ pl: 4 }} onClick={(e)=>senderClick(e)}>
-                        <ListItemIcon>
-                          <PersonIcon/>
+        <>
+        <ListItemButton onClick={handleClick}>
+                        <ListItemIcon className="sidebarListItem">
+                          <PeopleIcon className="sidebarIcon" />
                         </ListItemIcon>
-                        <ListItemText primary={channel} />
-                      </ListItemButton>
+                        <ListItemText primary={channels[messagingChannelId-1]}/>
+                        {open? <ExpandLess/> : <ExpandMore/>}
+        </ListItemButton>
+        
+        <Collapse in={open} timeout="auto" unmountOnExit>
+        
+                    <>
+                    {channels.map(channel =>(
+                    <List component="div" disablePadding>
+                      
+                          <ListItemButton sx={{ pl: 4 }} onClick={(e)=>senderClick(e)}>
+                            <ListItemIcon>
+                              <PersonIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={channel} />
+                          </ListItemButton>
+                        
+                      </List>
+                        ))}
+                    </>
                     
-                  </List>
-                    ))}
-                </>
-                 
-    </Collapse>
+        </Collapse>
 
     </> );
 }

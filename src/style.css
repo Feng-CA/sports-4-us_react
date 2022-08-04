@@ -288,9 +288,6 @@ html, body, body > box, .App {
         display: flex;
         flex-direction: column;
         margin: 3 auto;
-
-        /* justify-content: center;
-        justify-items: left; */
     }
     .main_heading {
         font-size: 25px;
