@@ -48,7 +48,8 @@ const Navigation = () => {
       
         navigate("/categories")
     }
-
+console.log("loggedinUser", loggedInUser)
+console.log("profiles", profiles)
 
     function stringToColor(string) {
         let hash = 0;
@@ -78,7 +79,10 @@ const Navigation = () => {
         children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
     }
+let profile
+let loggedInAdmin
 
+if(loggedInUser){
     let newProfiles;
 
     if(typeof(profiles) === "string") {
@@ -87,20 +91,21 @@ const Navigation = () => {
         newProfiles = profiles
     }
 
-    const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    profile = newProfiles.find(profile => profile.fullname === loggedInUser)
 
-    console.log("navbar:", profile)
+    //console.log("navbar:", profile)
 
     // sets loggedInAdmin value
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
     
-    let loggedInAdmin;
+    //let loggedInAdmin;
+
     if (adminProfile.fullname === loggedInUser) {
       loggedInAdmin = adminProfile.fullname
     } else {
       loggedInAdmin = null
     }
-
+  }
     // right side dropdown menu
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     
