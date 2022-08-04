@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
-import { Button, Input, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -19,7 +19,7 @@ import { ExpandLess} from "@mui/icons-material";
 import { ExpandMore } from "@mui/icons-material";
 
 const ActivityForm = () => {
-     const {store, dispatch} = useGlobalState()
+     const {store} = useGlobalState()
      const {users} = store
      const [open, setOpen] = useState(true)
     // const navigate = useNavigate()
@@ -39,7 +39,7 @@ const ActivityForm = () => {
     const [formData, setFormData] = useState(initialFormData)
     // const [error, setError] = useState(null)
     const [value, setValue] = useState(new Date());
-    const [selectedImage, setSelectedImage] = useState(null);
+    // const [selectedImage, setSelectedImage] = useState(null);
     let newUsers = {}
     if(typeof(users) === "string") {
         newUsers = JSON.parse(users)
@@ -52,7 +52,7 @@ const ActivityForm = () => {
             //date_time: value
             //image: selectedImage
         }))
-    }, [value, selectedImage])
+    }, [value])
 
     const handleSubmit = (e) =>{
         e.preventDefault()
