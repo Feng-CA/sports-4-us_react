@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardMedia, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom";
-import home from "../assets/home.png";
+import home from "../assets/home.jpg";
 // import "../style.css"
 import { useGlobalState } from "../utils/stateContext";
 
