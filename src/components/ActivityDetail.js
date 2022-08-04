@@ -40,6 +40,12 @@ const ActivityDetail = () => {
     // get all organiser data
     const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
     const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser )
+
+   // const handleBook =() =>{
+
+    //    navigate("../../activities/member")
+
+    //}
   
 
     const handleUpdate = () => {
@@ -115,7 +121,7 @@ const ActivityDetail = () => {
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
                                     </Box>
                                     <Box marginLeft={2}>
-                                        <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
+                                        <Button variant="contained" color="success" onClick={() => navigate("../../activities/member")}>Register</Button>
                                     </Box>
                                 </Box>
                             }

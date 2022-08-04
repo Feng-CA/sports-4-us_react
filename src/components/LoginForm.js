@@ -38,7 +38,7 @@ const LoginForm = () => {
                     data: user.jwt
                 })
                 setFormData(initialFormData)
-                navigate("/activities")
+                navigate("/member")
             }  
         })
         .catch(e => {console.log(e)})
