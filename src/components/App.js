@@ -33,6 +33,8 @@ import { getSentMessages } from '../services/sentMessagesServices';
 import SentMessageDetail from './SentMessageDetail';
 import ChannelMessages from './ChannelMessages';
 import OrganiserActivitiesList from './OrganiserActivityList';
+import MemberActivities from './MemberActivities';
+import { getBookings } from '../services/bookingServices';
 
 
 const App = () => {
@@ -48,7 +50,8 @@ const App = () => {
     channelMessageList: sessionStorage.getItem("channelMessageList")||[],
     //messageList: [],
     receiverId: "",
-    messagingChannelId: sessionStorage.getItem("messagingChannelId")||1
+    messagingChannelId: sessionStorage.getItem("messagingChannelId")||1,
+    bookingsList: sessionStorage.getItem("bookingsList")||[]
   }
   
 
@@ -121,6 +124,15 @@ const App = () => {
     }) 
     }) 
 
+    getBookings()
+    .then(response =>{
+      sessionStorage.setItem("bookingsList", JSON.stringify(response))
+      dispatch({
+        type: 'setBookingsList',
+        data: response
+    }) 
+    }) 
+
   },[]);
 
   
@@ -172,6 +184,7 @@ const App = () => {
                     }/> {/* form to create details of an individual activity */}     
                  <Route path=":id" element={<ActivityDetail />}/>
                  <Route path="organiser" element={<OrganiserActivitiesList />}/>
+                 <Route path="member" element={<MemberActivities/>}/>
                 </Route>
                   {loggedInUser && <Route path="messages">
                     <Route index element={<ReceivedMessages />}/>

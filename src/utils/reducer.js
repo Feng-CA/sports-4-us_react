@@ -94,6 +94,14 @@ export const reducer = (state, action) => {
             }
         }
 
+        case "setBookingsList": {
+            //sets Messaging Channel id
+            return {
+                ...state,
+                bookingsList: action.data
+            }
+        }
+
         
 
         default: return state
