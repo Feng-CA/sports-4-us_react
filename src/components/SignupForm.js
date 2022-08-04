@@ -80,7 +80,9 @@ const SignupForm = () => {
              data: response.data
           })
           }) 
-    },[profiles]);
+    },
+    // eslint-disable-next-line
+    [profiles]);
 
     return (
         <Container className="signup_container">

@@ -23,7 +23,9 @@ const Dashboard = () => {
              data: response.data
           })
           }) 
-    },[]);
+    },
+    // eslint-disable-next-line
+    []);
 
     return (
         <Box className="dashboard_container">
