@@ -130,6 +130,7 @@
     width: 580;
     align-content: center;
     display: flex;
+    height: 100vh;
     /* flex-direction: column; */
     margin-top: 3rem;
 }
