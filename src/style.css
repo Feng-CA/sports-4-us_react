@@ -42,7 +42,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     position: absolute;
-    bottom: 80px;
+    bottom: 100px;
 } 
 
 .home_buttons, .home_explorer {
