@@ -3,11 +3,13 @@ import { Container } from "@mui/system";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
+import { createBooking, getBookings } from "../services/bookingServices";
+
 
 
 const ActivityDetail = () => {
-    const {store} = useGlobalState()
-    const { activities, loggedInUser, profiles } = store
+    const {store, dispatch} = useGlobalState()
+    const { activities, loggedInUser, profiles, bookingslist} = store
     const params = useParams()
     const navigate = useNavigate()
     console.log(activities)
@@ -54,8 +56,24 @@ const ActivityDetail = () => {
     const handleDelete = () => {
 
     }
+
+    const handleBook = () => {
+        let newVar = bookingslist
+       // console.log(newActivities[Number(params.id-1)].id)       
+        createBooking({activity_id: newActivities[Number(params.id-1)].id})
+        .then(response =>{newVar.unshift(response)
+            dispatch({
+                type: 'setBookingsList',
+                data: response
+            })      
+            })
     
-    console.log(newActivities[Number(params.id-1)])
+            navigate("../../activities/member")
+        }
+
+      
+    
+    // console.log(newActivities[Number(params.id-1)])
 
     return (
         <Container className="activitydetail_container">
@@ -121,7 +139,7 @@ const ActivityDetail = () => {
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
                                     </Box>
                                     <Box marginLeft={2}>
-                                        <Button variant="contained" color="success" onClick={() => navigate("../../activities/member")}>Register</Button>
+                                        <Button variant="contained" color="success" onClick={handleBook}>Register</Button>
                                     </Box>
                                 </Box>
                             }

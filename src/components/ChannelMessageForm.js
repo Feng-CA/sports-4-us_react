@@ -50,7 +50,7 @@ const ChannelMessageForm = () => {
                 data: newVar,
                 type: "setChannelMessageList"
             })      
-    })}
+         })}
 
     const cleanMessage = () => {
         setFormData(initialFormData)

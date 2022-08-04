@@ -13,9 +13,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
+import { getBookings } from "../services/bookingServices";
+import { useEffect } from "react";
+
 
 const MemberActivities = () => {
-    const {store} = useGlobalState()
+    const {store, dispatch} = useGlobalState()
     const {bookingsList, loggedInUser, activities } = store
 
     let newActivities;
@@ -41,6 +44,18 @@ const MemberActivities = () => {
     //console.log("organiser", activity)
     const memberActivities = newBookingsList.filter(booking => booking.member === loggedInUser)
     console.log(memberActivities)
+
+useEffect(() => {
+    getBookings()
+    .then(response =>{
+      sessionStorage.setItem("bookingsList", JSON.stringify(response))
+      dispatch({
+        type: 'setBookingsList',
+        data: response
+    }) 
+    }) 
+
+  },[bookingsList]);
 
     return (
         <Container className="organiserActivityList_container">
