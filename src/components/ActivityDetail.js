@@ -109,7 +109,7 @@ const ActivityDetail = () => {
                                 </Box>
                             }
                   
-                            {(!organiserProfile && !loggedInAdmin) &&
+                            {(!organiserProfile && !loggedInAdmin && loggedInUser) &&
                                 <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
