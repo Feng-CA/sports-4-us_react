@@ -13,6 +13,8 @@ import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typogr
 import { ExpandLess, StarBorder } from "@mui/icons-material";
 import { ExpandMore } from "@mui/icons-material";
 import SendIcon from '@mui/icons-material/Send';
+import { useEffect } from "react";
+import { getProfiles } from "../services/profilesServices";
 
 
 const Sidebar = () => {
@@ -20,7 +22,24 @@ const Sidebar = () => {
     const { loggedInUser, profiles } = store
     const [open, setOpen] = useState(false)
     const channels = ["General", "Cycling", "Golf", "Tennis", "Soccer", "Hiking", "Cricket", "Running", "Basketball"]
+    const tempProfile = {
+      fullname: "",
+      email: "",
+      location: "",
+      contact_no: "",
+      emergency_contact: "",
+      emergency_contact_no: "",
+      account_type: "",
+      cycling: "",
+      golf: "",
+      tennis: "",
+      soccer: "",
+      hiking: "",
+      cricket: "",
+      running: "",
+      basketball: ""
 
+  }
     //const navigate = useNavigate
     console.log(profiles)
     // get loggedInUser profile
@@ -32,7 +51,8 @@ const Sidebar = () => {
             newProfiles = profiles
         }
     
-    const profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    let profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    if (!profile){profile=tempProfile}
     // const organiser = newProfiles.find(profile => profile.account_id === "Organiser")
     
     
@@ -69,6 +89,18 @@ const Sidebar = () => {
           data: (channels.indexOf(e.target.outerText)+1)
         })
     }
+
+    useEffect(() => {
+      console.log("At UseEffect", profiles)
+      getProfiles()
+      .then( response => {
+          sessionStorage.setItem("profiles", JSON.stringify(response.data))    
+          dispatch({
+            type: 'setProfiles',
+           data: response.data
+        })
+        }) 
+  },[]);
 
     return (
       <Box className="sidebar" >

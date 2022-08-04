@@ -49,7 +49,7 @@ const ActivityDetail = () => {
 
     }
     
-    console.log(newActivities[Number(params.id-1)].organiser)
+    console.log(newActivities[Number(params.id-1)])
 
     return (
         <Container className="activitydetail_container">

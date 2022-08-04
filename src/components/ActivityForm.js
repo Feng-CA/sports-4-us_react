@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
-// import { useGlobalState } from "../utils/stateContext";
+import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
 import { Button, Input, TextField, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
@@ -11,39 +11,54 @@ import Select from '@mui/material/Select';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-// import { createActivity } from "../services/activitiesServices";
-
+import { createActivity } from "../services/activitiesServices";
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+import PeopleIcon from '@mui/icons-material/People';
+import PersonIcon from '@mui/icons-material/Person';
+import { ExpandLess} from "@mui/icons-material";
+import { ExpandMore } from "@mui/icons-material";
 
 const ActivityForm = () => {
-    // const {store, dispatch} = useGlobalState()
-    // const { activities } = store
+     const {store, dispatch} = useGlobalState()
+     const {users} = store
+     const [open, setOpen] = useState(true)
     // const navigate = useNavigate()
 
     
     const initialFormData = {
         title: "",
-        category: "",
+        category_id: "",
         location: "",
         date_time: null,
-        image: null,
+        //image: null,
         cost: 0,
         quantity: 0,
-        description: ""
+        description: "",
+        user_id: 4
     }
     const [formData, setFormData] = useState(initialFormData)
     // const [error, setError] = useState(null)
     const [value, setValue] = useState(new Date());
     const [selectedImage, setSelectedImage] = useState(null);
+    let newUsers = {}
+    if(typeof(users) === "string") {
+        newUsers = JSON.parse(users)
+        } else {
+          newUsers = users
+        }
     
     useEffect(() => {
         setFormData(() => ({
-            date_time: value,
-            image: selectedImage
+            //date_time: value
+            //image: selectedImage
         }))
     }, [value, selectedImage])
 
     const handleSubmit = (e) =>{
         e.preventDefault()
+        console.log(formData)
+        createActivity(formData)
+         .then(response=>console.log(response))
       
         // createActivity(formData)
         // .then((activities) => {
@@ -68,11 +83,22 @@ const ActivityForm = () => {
     }
 
     const handleFormData = (e) => {
+        console.log(e.target.name)
         setFormData((formData) => ({
             ...formData,
             [e.target.name]: e.target.value
         }))
     }
+    const senderClick = (e) => {        
+          setOpen(!open);
+          console.log(e.target.outerText)
+          console.log((newUsers.find(({full_name})=>full_name===(e.target.outerText))).id)
+      }
+    
+      const handleClick = () => {
+        setOpen(!open);
+        console.log("You have clicked")
+      }
 
     
     return (
@@ -115,21 +141,21 @@ const ActivityForm = () => {
                             <InputLabel>Category</InputLabel>
                             <Select
 
-                                name="category"
+                                name="category_id"
                                 id="category"
-                                value={formData.category}
+                                value={formData.category_id}
                                 label="Category"
                                 onChange={handleFormData}
                             >
-                                <MenuItem value={"Cycling"}>Cycling</MenuItem>
-                                <MenuItem value={"Golf"}>Golf</MenuItem>
-                                <MenuItem value={"Tennis"}>Tennis</MenuItem>
-                                <MenuItem value={"Soccer"}>Soccer</MenuItem>
-                                <MenuItem value={"Hiking"}>Hiking</MenuItem>
-                                <MenuItem value={"Cricket"}>Cricket</MenuItem>
-                                <MenuItem value={"Running"}>Running</MenuItem>
-                                <MenuItem value={"Basketball"}>Basketball</MenuItem>
-                            </Select>
+                                <MenuItem value={1}>Cycling</MenuItem>
+                                <MenuItem value={2}>Golf</MenuItem>
+                                <MenuItem value={3}>Tennis</MenuItem>
+                                <MenuItem value={4}>Soccer</MenuItem>
+                                <MenuItem value={5}>Hiking</MenuItem>
+                                <MenuItem value={6}>Cricket</MenuItem>
+                                <MenuItem value={7}>Running</MenuItem>
+                                <MenuItem value={8}>Basketball</MenuItem>
+    </Select> 
                         </FormControl>
                     </Box>
                 </Box>
@@ -149,18 +175,59 @@ const ActivityForm = () => {
                 <Box sx={{display: "flex"}} marginTop={2}> 
                     <Box>
                         <InputLabel>Quantity</InputLabel>
-                        <TextField sx={{width: 152}} type="number" name="quantity" id="quantity" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.quantity} onChange={handleFormData}/>
+                        <TextField sx={{width: 152}} type="number" name="quantity" id="quantity" InputProps={{inputProps: {max: 100, min: 0}}} value={Number(formData.quantity)} onChange={handleFormData}/>
                     </Box>
                     <Box marginLeft={2}>
                         <InputLabel>Cost</InputLabel>
-                        <TextField sx={{width: 152}}type="number" name="cost" id="cost" InputProps={{inputProps: {max: 100, min: 0}}} value={formData.cost} onChange={handleFormData}/>
+                        <TextField sx={{width: 152}}type="number" name="cost" id="cost" InputProps={{inputProps: {max: 100, min: 0}}} value={Number(formData.cost)} onChange={handleFormData}/>
                     </Box>
                 </Box>
-                <Box marginTop={2}>
-                    <InputLabel>Upload image</InputLabel>
-                    {/*<Input sx={{width: 320}} type="file" name="image" id="image" value={selectedImage} onChange={(e)=> setSelectedImage(e.target.files[0])}/>*/}
-                    <Input sx={{width: 320}} type="file" name="image" id="image" onChange={(e)=> setSelectedImage(e.target.files[0])}/>
+
+                {/*<Box marginTop={2}>
+                    <FormControl required sx={{width: 320}}>
+                            <InputLabel>Organiser</InputLabel>
+                            {/*<Select
+                                defaultValue={""}
+                                name="user_id"
+                                id="organiser_id"
+                                value={formData.user_id}
+                                label="Organiser"
+                                onChange={handleFormData}
+                        >*/}
+
+            {/*****************************************************************/}
+             <Box marginTop={2} sx = {{ border: 1, borderColor: 'grey.400',borderRadius: '4px', width: 320}}>
+                <ListItemButton onClick={handleClick}>
+                    <ListItemIcon className="sidebarListItem">
+                      <PeopleIcon className="sidebarIcon" />
+                    </ListItemIcon>
+                    <ListItemText primary={"Select an Orgaiser"}/>
+                    {open? <ExpandLess/> : <ExpandMore/>}
+                </ListItemButton>
+
+                            <Collapse in={open} timeout="auto" unmountOnExit>
+                                    {newUsers.map(user =>(
+                                    <List component="div" disablePadding>
+                                        <ListItemButton sx={{ pl: 4 }} onClick={(e)=>senderClick(e)}>
+                                            <ListItemIcon>
+                                            <PersonIcon/>
+                                            </ListItemIcon>
+                                            <ListItemText primary={user.full_name} />
+                                        </ListItemButton>
+                                        
+                                    </List>
+                                        ))}
+                                   </Collapse>
                 </Box>
+         {/*</Select>
+                    </FormControl>
+                </Box>
+
+                {/*<Box marginTop={2}>
+                    <InputLabel>Upload image</InputLabel>
+                    {/*<Input sx={{width: 320}} type="file" name="image" id="image" value={selectedImage} onChange={(e)=> setSelectedImage(e.target.files[0])}/>
+                    <Input sx={{width: 320}} type="file" name="image" id="image" onChange={(e)=> setSelectedImage(e.target.files[0])}/>
+                </Box>*/}
                 <Box marginTop={2}>
                     <InputLabel>Description</InputLabel>
                     <TextField required sx={{width: 320}} type="textarea" name="description" id="description" value={formData.description} onChange={handleFormData}/>

@@ -3,9 +3,12 @@ import { useState } from "react"
 import { signUp } from "../services/authServices"
 import { useGlobalState } from "../utils/stateContext";
 import {useNavigate} from "react-router-dom";
+import { createProfile, getProfiles } from "../services/profilesServices";
+import { useEffect } from "react";
 
 const SignupForm = () => {
-    const {dispatch} = useGlobalState();
+    const {dispatch, store} = useGlobalState();
+    const {profiles} = store
     const navigate = useNavigate()
     
     const initialFormData = {
@@ -42,13 +45,23 @@ const SignupForm = () => {
                         data: user.jwt
                     })
                     setFormData(initialFormData)
-                    navigate("/") 
+                const newProfileData = {account_id:1}
+                let newVar = profiles
+                    createProfile(newProfileData)
+                        .then((profile)=>newVar.push(profile))
+                            dispatch({
+                                data: newVar,
+                                type: "setProfiles"
+                            }) 
+                   
+                    //navigate("/") 
                 }   
             })
-            .catch(e => {setError(e)})
-        
+            .catch(e => {setError(e)})    
         
     }
+     
+
 
     const handleFormData = (e) => {
         setFormData({
@@ -56,6 +69,19 @@ const SignupForm = () => {
             [e.target.id]: e.target.value
         })
     }
+
+    useEffect(() => {
+        getProfiles()
+        .then( response => {
+            sessionStorage.setItem("profiles", JSON.stringify(response.data))
+            
+            dispatch({
+              type: 'setProfiles',
+             data: response.data
+          })
+          }) 
+    },[profiles]);
+
     return (
         <Container className="signup_container">
             <Box className="login_form">
