@@ -18,12 +18,38 @@ import 'react-phone-input-2/lib/style.css';
 import { updateProfile } from "../services/profilesServices";
 import { getProfiles } from "../services/profilesServices";
 import { useNavigate } from "react-router-dom"; 
+import { getUsers } from "../services/usersServices";
 
 
 const ProfileForm = () => {
     const {store, dispatch} = useGlobalState()
     const { loggedInUser, users, profiles } = store
     const navigate = useNavigate()
+    const tempUsers = {
+        id: "",
+        full_name:"",
+        email: "",
+        password_digest: ""
+    }
+    const tempProfile = {
+        fullname: "",
+        email: "",
+        location: "",
+        contact_no: "",
+        emergency_contact: "",
+        emergency_contact_no: "",
+        account_type: "",
+        cycling: "",
+        golf: "",
+        tennis: "",
+        soccer: "",
+        hiking: "",
+        cricket: "",
+        running: "",
+        basketball: ""
+  
+    }
+    
     // const [interest, setInterest] = useState({
     //     cycling: false,
     //     golf: false,
@@ -48,15 +74,19 @@ const ProfileForm = () => {
     } else {
         tempProfiles = profiles;
     }
-        
+
+    let currentProfile ={}
     // const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
     //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
     //const currentUser = (JSON.parse(newUsers).find(user => user.full_name === loggedInUser))
-    const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
-    let currentProfile = (tempProfiles.find(profile => profile.fullname === currentUser.full_name))
-
-    console.log(currentUser)
-    console.log("Current Profile", currentProfile)
+    let currentUser = (newUsers.find(user =>(user.full_name&&(user.full_name === loggedInUser))))
+    if (currentUser){
+     currentProfile = (tempProfiles.find(profile => profile.fullname === currentUser.full_name))
+    }else{
+        currentUser = tempUsers
+        currentProfile = tempProfile
+    }
+ 
     //const currentUser = users.find(user => user.full_name === loggedInUser)
     
 
@@ -92,9 +122,6 @@ const ProfileForm = () => {
     const [running, setRunning] = useState(initialFormData.running)
     const [basketball, setBasketball] = useState(initialFormData.basketball)
 
-
-
-
     // const [error, setError] = useState(null)
    
     useEffect(() => {
@@ -113,19 +140,36 @@ const ProfileForm = () => {
             basketball: basketball,
         }))
         
-        console.log("after-useEffct:", formData)
     }, [contactNo, emergencyContact, emergencyContactNo, location, cycling, golf, tennis, soccer, hiking, cricket, running, basketball])
     
-   
+  // useEffect(()=>{
+  // console.log("In UseEffect")
+  //  getUsers()
+  //  .then(response => {
+   //   sessionStorage.setItem("users", JSON.stringify(response.data))
+   //   dispatch({
+   //     type: 'setUsers',
+ //       data: response.data
+ //     })
+//    })
     
-    console.log("before:", formData)
-    console.log("temp Profiles",tempProfiles)
-    console.log("Profiles",profiles)
+    //Get all the profiles from the back end
+// //   getProfiles()
+ //   .then( response => {
+ //     sessionStorage.setItem("profiles", JSON.stringify(response.data))
+      
+ //     dispatch({
+  //      type: 'setProfiles',
+  //     data: response.data
+ //   })
+//    }) 
+
+ //  },[users,profiles])
+
 
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log("after:", formData)
         let tempProfileVar = tempProfiles
         updateProfile(currentProfile.id,formData)
             .then( response => currentProfile = response) 

@@ -122,6 +122,8 @@ const App = () => {
 
   },[]);
 
+  
+
   const [store, dispatch] = useReducer(reducer, initialState)
   const {loggedInUser, profiles} = store
   

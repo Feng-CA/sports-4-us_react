@@ -2,8 +2,28 @@ import Sidebar from './SideBar';
 import { Box, Typography } from '@mui/material';
 import Messages from './Messages';
 import "../style.css";
+import { getProfiles } from '../services/profilesServices';
+import { useGlobalState } from "../utils/stateContext";
+import { useEffect } from 'react';
+
 
 const Dashboard = () => {
+
+    const {dispatch, store} = useGlobalState();
+    const {profiles} = store
+
+    useEffect(() => {
+        console.log("At UseEffect", profiles)
+        getProfiles()
+        .then( response => {
+            sessionStorage.setItem("profiles", JSON.stringify(response.data))
+            
+            dispatch({
+              type: 'setProfiles',
+             data: response.data
+          })
+          }) 
+    },[]);
 
     return (
         <Box className="dashboard_container">
