@@ -100,7 +100,9 @@ const Sidebar = () => {
            data: response.data
         })
         }) 
-  },[]);
+  },
+  // eslint-disable-next-line
+  []);
 
     return (
       <Box className="sidebar" >
