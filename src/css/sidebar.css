@@ -43,6 +43,8 @@
 }
 
 
+/* small screen responsive styling */
+
 @media (max-width: 900px) {
   .sidebar {
     width: 32vw;

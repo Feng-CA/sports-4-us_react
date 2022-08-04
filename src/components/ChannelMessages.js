@@ -5,7 +5,7 @@ import ChannelMessageForm from './ChannelMessageForm';
 import { useEffect } from 'react';
 import { getChannelMessages } from '../services/channelMessagingServices';
 import SideBar from './SideBar';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import "../css/message.css";
 //import { ContactlessOutlined } from '@mui/icons-material';
 

@@ -20,14 +20,40 @@
 }
 
 /* home page styling */
-.home_heading, .home_intro {
+
+.home_heading {
     color: rgb(148, 247, 10);
-    margin: 30px;  
+    margin: 30px;
+    position: absolute;
+    top: 30px;
 }
+
+.home_intro {
+    color: rgb(148, 247, 10);
+    font-size: 30px;
+    margin: 30px;
+    position: absolute;
+    bottom: 170px;
+}
+
+.home_actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 80px;
+} 
+
+.home_buttons, .home_explorer {
+   margin: auto;
+}
+
 
 .main_heading {
     display: flex;
     justify-content: center;
+    font-size: 38px;
 }
 .home img {
     width: 100%;
@@ -239,9 +265,6 @@
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-   /* justify-content: space-between; */
-   /* padding: 10px; */
-   /* justify-items: space-around; */
 }
 
 /* dashboard page styling */
@@ -252,3 +275,30 @@
 html, body, body > box, .App {
     height: 100%;
 }
+
+/* small screen responsive styling */
+@media (max-width: 900px) {
+    
+    .home_intro {
+        position: absolute;
+        bottom: 240px;
+        font-size: 18px;
+    }
+    .home_actions {
+        display: flex;
+        flex-direction: column;
+        margin: 3 auto;
+
+        /* justify-content: center;
+        justify-items: left; */
+    }
+    .main_heading {
+        font-size: 25px;
+    }
+    .home_explorer {
+        margin: 16px;
+    }
+    .home_action {
+        size: small;
+    }
+  }

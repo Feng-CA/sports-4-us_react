@@ -5,6 +5,7 @@ import { useGlobalState } from "../utils/stateContext";
 import { MenuOutlined, Close } from '@mui/icons-material';
 import "../css/navigation.css";
 import { Box } from '@mui/system';
+// import { Sports} from "@mui/icons-material";
 
 
 const Navigation = () => {
@@ -87,7 +88,7 @@ const Navigation = () => {
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'inherit',
+                color: '#fff',
                 textDecoration: 'none',
                 alignItems: "center"
                 }}
