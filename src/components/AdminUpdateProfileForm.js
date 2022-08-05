@@ -21,7 +21,7 @@ const AdminUpdateProfileForm = () => {
     const {store} = useGlobalState()
     const { loggedInUser, users, profiles } = store
     const params = useParams()
-
+  
     let newProfiles;
     
     if(typeof(profiles) === "string") {
@@ -35,6 +35,8 @@ const AdminUpdateProfileForm = () => {
     }
 
     const profile = getProfile(params.profileId)
+
+    console.log("profile", profile)
 
    
 
@@ -79,9 +81,9 @@ const AdminUpdateProfileForm = () => {
     }
 
     const [formData, setFormData] = useState(initialFormData)
-    const [contactNo, setContactNo] = useState()
-    const [emergencyContactNo, setEmergencyContactNo] = useState()
-    const [emergencyContact, setEmergencyContact] = useState()
+    const [contactNo, setContactNo] = useState(initialFormData.contact_no)
+    const [emergencyContactNo, setEmergencyContactNo] = useState(initialFormData.emergency_contact_no)
+    const [emergencyContact, setEmergencyContact] = useState(initialFormData.emergency_contact)
     const [email, setEmail] = useState(currentUser.email)
 
     const handleChange = (event) => {
@@ -96,8 +98,7 @@ const AdminUpdateProfileForm = () => {
     
     useEffect(() => {
         setFormData(() => ({
-            fullname: profile.full_name,
-            email: profile.email,
+           
             interests: interest,
             contact_no: contactNo,
             emergency_contact_no: emergencyContactNo,

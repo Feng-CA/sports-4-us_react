@@ -17,18 +17,24 @@ const ActivityDetail = () => {
     
     let newProfiles;
     let newActivities;
+    //let newBookingslist;
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
         newActivities = activities
     }
+   // if(typeof(bookingslist) === "string") {
+   //     newBookingslist = JSON.parse(bookingslist)
+   // } else {
+   //     newBookingslist = bookingslist
+   // }
     
     if(typeof(profiles) === "string") {
         newProfiles = JSON.parse(profiles)
     } else {
         newProfiles = profiles
     }
-
+   
     // check whether loggedInUser is admin
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
     
@@ -38,6 +44,11 @@ const ActivityDetail = () => {
     } else {
         loggedInAdmin = null
     }
+
+    //if(loggedInUser){
+    //    console.log(bookingslist)
+   // console.log(bookingslist.map((booking)=>(booking.member===loggedInUser)))
+   // }
     
     // get all organiser data
     const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
@@ -58,7 +69,10 @@ const ActivityDetail = () => {
     }
 
     const handleBook = () => {
-        let newVar = bookingslist
+       console.log(loggedInUser)
+       let newVar = bookingslist
+    if(loggedInUser!=null){  
+       
        // console.log(newActivities[Number(params.id-1)].id)       
         createBooking({activity_id: newActivities[Number(params.id-1)].id})
         .then(response =>{newVar.unshift(response)
@@ -69,6 +83,7 @@ const ActivityDetail = () => {
             })
     
             navigate("../../activities/member")
+      }else{navigate("../../login")}
         }
 
       
@@ -134,10 +149,16 @@ const ActivityDetail = () => {
                             }
                   
                             {(!organiserProfile && !loggedInAdmin) &&
-                                <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
+                                <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}>
+                                    {loggedInUser&&
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
-                                    </Box>
+                                    </Box>}
+                                    {!loggedInUser&&
+                                    <Box marginLeft={3}> 
+                                        <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("../../contact")}>Enquiry</Button>
+                                    </Box>}
+
                                     <Box marginLeft={2}>
                                         <Button variant="contained" color="success" onClick={handleBook}>Register</Button>
                                     </Box>
