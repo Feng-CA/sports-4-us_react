@@ -176,7 +176,7 @@ const ActivityDetail = () => {
                         <Link to="/activities">Go back to the activities page</Link>
                     </Box>
                 </>
-            }
+            }ran
         </Container>
     )
 }
