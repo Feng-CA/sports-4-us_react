@@ -81,8 +81,8 @@ const ProfileDetail = () => {
                                 />
                         </Box>
                         <Box className="profiledetail_content">
-                            <Box sx={{display: "flex", justifyContent: "center"}}>
-                                <Typography variant="h5">My Profile</Typography>
+                            <Box sx={{display: "flex", justifyContent: "center"}} marginTop={2}>
+                                <Typography variant="h4">My Profile</Typography>
                             </Box>
                             <CardContent>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
