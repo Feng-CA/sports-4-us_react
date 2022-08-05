@@ -5,7 +5,7 @@ import home from "../assets/home.jpg";
 import { useGlobalState } from "../utils/stateContext";
 
 const Home = () => {
-    const {store} = useGlobalState()
+    const {store} = useGlobalState() 
     const {loggedInUser} = store
 
     const navigate = useNavigate()

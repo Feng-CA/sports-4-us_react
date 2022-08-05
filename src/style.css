@@ -20,17 +20,27 @@
 }
 
 /* home page styling */
+.home {
+    height: 100vh;
+}
+
+/* .home_card {
+    opacity: 0.6;
+} */
 
 .home_heading {
     color: rgb(227, 10, 247);
+    font-weight: 500;
     margin: 30px;
     position: absolute;
     top: 30px;
+    left: 100px;
 }
 
 .home_intro {
     color: #9d188b;
     font-size: 30px;
+    font-weight: 500;
     margin: 30px;
     position: absolute;
     bottom: 170px;
@@ -54,6 +64,7 @@
     display: flex;
     justify-content: center;
     font-size: 38px;
+
 }
 .home img {
     width: 100%;
@@ -299,7 +310,7 @@ html, body, body > box, .App {
     .home_intro {
         position: absolute;
         bottom: 240px;
-        font-size: 18px;
+        font-size: 25px;
     }
     .home_actions {
         display: flex;
