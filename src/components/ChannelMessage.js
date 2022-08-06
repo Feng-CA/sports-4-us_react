@@ -20,7 +20,7 @@ const ChannelMessage = ({message, displayName}) => {
                         </Box>
                     </Box>
                     <Box marginTop={2}>
-                        <Link to={`/messages/${message.id}`} style={{textDecoration: 'none'}}>
+                        <Link to={`/channelmessages/${message.id}`} style={{textDecoration: 'none'}}>
                             <Typography variant='h5'>{message.message}</Typography>
                         </Link>
                     </Box>

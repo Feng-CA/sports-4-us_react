@@ -21,7 +21,7 @@ const MessageForm = () => {
     const [formData, setFormData] = useState(initialFormData)
     
     const handleFormData = (e) => {
-        //console.log(e)
+      
         setFormData({
             receiver_user_id: receiverId,
             [e.target.id]: e.target.value
@@ -33,9 +33,6 @@ const MessageForm = () => {
         if (formData.text === ""){
             console.log("empty message")
         }else {
-            //formData.sender_user_id = senderId
-            console.log(e)
-            console.log(formData)
             addMessage(formData)
             cleanMessage()
         }

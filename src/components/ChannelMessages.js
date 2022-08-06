@@ -7,14 +7,13 @@ import { getChannelMessages } from '../services/channelMessagingServices';
 import SideBar from './SideBar';
 import { Box, Stack } from '@mui/material';
 import "../css/message.css";
-//import { ContactlessOutlined } from '@mui/icons-material';
 
 
 const ChannelMessages = () => {
-     const {store, dispatch}= useGlobalState()
-     const {channelMessageList, messagingChannelId} = store
-     let newMessageList
-     const channels = ["General", "Cycling", "Golf", "Tennis", "Soccer", "Hiking", "Cricket", "Running", "Basketball"]
+  const {store, dispatch}= useGlobalState()
+  const {channelMessageList, messagingChannelId} = store
+  let newMessageList;
+  const channels = ["General", "Cycling", "Golf", "Tennis", "Soccer", "Hiking", "Cricket", "Running", "Basketball"]
 
 
   useEffect(() => {
@@ -34,9 +33,6 @@ const ChannelMessages = () => {
       } else {
         newMessageList = channelMessageList
       }
-    //console.log(channels[messagingChannelId-1])
-    console.log(newMessageList)
-    console.log((channelMessageList.length))
 
     return (
       <Box className='channelMessages_container'>
