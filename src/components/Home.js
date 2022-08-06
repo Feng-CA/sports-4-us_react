@@ -9,8 +9,6 @@ const Home = () => {
 
     const navigate = useNavigate()
 
-
-
     return (
         <div className="home"> 
             <Card style={{position: "relative"}}>

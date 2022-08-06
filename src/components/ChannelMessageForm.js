@@ -32,8 +32,7 @@ const ChannelMessageForm = () => {
             console.log("empty message")
         }else {
             //formData.sender_user_id = senderId
-            //console.log(e)
-            console.log(formData)
+         
             addMessage(formData)
             cleanMessage()
         }
