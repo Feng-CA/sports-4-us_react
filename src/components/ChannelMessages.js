@@ -5,7 +5,7 @@ import ChannelMessageForm from './ChannelMessageForm';
 import { useEffect } from 'react';
 import { getChannelMessages } from '../services/channelMessagingServices';
 import SideBar from './SideBar';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import "../css/message.css";
 //import { ContactlessOutlined } from '@mui/icons-material';
 
@@ -48,12 +48,12 @@ const ChannelMessages = () => {
             {<ChannelMessageForm />}
           </Box>
           {newMessageList.length ?
-            <>
+            <Stack direction="column" spacing={2}>
               {newMessageList.map(message => (
                 channels[messagingChannelId-1]===(message.channel))&& 
                 <ChannelMessage key={message.id} message={message} displayName={message.sender}/>  
               )} 
-            </> 
+            </Stack>
             :
             <p>List of messages is empty</p>
           }   

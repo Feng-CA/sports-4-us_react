@@ -70,10 +70,10 @@ const ProfileDetail = () => {
                 </Box>
                 <Box className="profiledetail_wrap_container"> 
                 { profile ?
-                    <Card className="profiledetail_wrap" sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
-                        <Box>
+                    <Card className="profiledetail_wrap">
+                        <Box className="profile_image">
                             <CardMedia
-                                className="profile_image"
+                                // className="profile_image"
                                 component="img"
                                 height="380"
                                 image={running}
@@ -82,43 +82,43 @@ const ProfileDetail = () => {
                         </Box>
                         <Box className="profiledetail_content">
                             <Box sx={{display: "flex", justifyContent: "center"}} marginTop={2}>
-                                <Typography variant="h4" marginTop={2}>My Profile</Typography>
+                                <Typography variant="h4">My Profile</Typography>
                             </Box>
                             <CardContent>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Full Name: </Typography>
-                                    <Typography variant="h5">{profile.fullname}</Typography>
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Full Name: </Typography>
+                                    <Typography className="profileDetail" variant="p">{profile.fullname}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Location: </Typography>
-                                    <Typography variant="h5">{profile.location}</Typography>
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Location: </Typography>
+                                    <Typography className="profileDetail" variant="p">{profile.location}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Contact: </Typography>
-                                    <Typography variant="h5">{profile.contact_no}</Typography>
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Contact: </Typography>
+                                    <Typography className="profileDetail" variant="p">{profile.contact_no}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Emergency Contact: </Typography>
-                                    <Typography variant="h5">{profile.emergency_contact}</Typography>
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Emergency Contact: </Typography>
+                                    <Typography className="profileDetail" variant="p">{profile.emergency_contact}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Emergency Contact Number: </Typography>
-                                    <Typography variant="h5">{profile.emergency_contact_no}</Typography>
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Emergency Contact Number: </Typography>
+                                    <Typography className="profileDetail" variant="p">{profile.emergency_contact_no}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", flexDirection: "row", justifyContent: "flex-start", flexWrap: "wrap"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Interests:</Typography>
-                                    {(profile.cycling === true) && <Typography marginRight={1} variant="h6">Cycling</Typography>}
-                                    {(profile.golf === true) && <Typography marginRight={1} variant="h6">Golf</Typography>}
-                                    {(profile.tennis === true) && <Typography marginRight={1} variant="h6">Tennis</Typography>}
-                                    {(profile.soccer === true) && <Typography marginRight={1} variant="h6">Soccer</Typography>}
-                                    {(profile.hiking === true) && <Typography marginRight={1} variant="h6">Hiking</Typography>}
-                                    {(profile.cricket === true) && <Typography marginRight={1} variant="h6">Cricket</Typography>}
-                                    {(profile.running === true) && <Typography marginRight={1} variant="h6">Running</Typography>}
-                                    {(profile.basketball === true) && <Typography marginRight={1} variant="h6">Basketball</Typography>}
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Interests:</Typography>
+                                    {(profile.cycling === true) && <Typography className="profileDetail" marginRight={1} variant="p">Cycling</Typography>}
+                                    {(profile.golf === true) && <Typography className="profileDetail" marginRight={1} variant="p">Golf</Typography>}
+                                    {(profile.tennis === true) && <Typography className="profileDetail" marginRight={1} variant="p">Tennis</Typography>}
+                                    {(profile.soccer === true) && <Typography className="profileDetail" marginRight={1} variant="p">Soccer</Typography>}
+                                    {(profile.hiking === true) && <Typography className="profileDetail" marginRight={1} variant="p">Hiking</Typography>}
+                                    {(profile.cricket === true) && <Typography className="profileDetail" marginRight={1} variant="p">Cricket</Typography>}
+                                    {(profile.running === true) && <Typography className="profileDetail" marginRight={1} variant="p">Running</Typography>}
+                                    {(profile.basketball === true) && <Typography className="profileDetail" marginRight={1} variant="p">Basketball</Typography>}
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "flex-start"}} marginTop={2}>
-                                    <Typography variant="h5" marginRight={1}>Account Type: </Typography>
-                                    <Typography variant="h5">{profile.account_id}</Typography>
+                                    <Typography className="profileItem" variant="p" marginRight={1}>Account Type: </Typography>
+                                    <Typography className="profileDetail" variant="p">{profile.account_id}</Typography>
                                 </Box>
                                 <Box sx={{display: "flex", justifyContent: "flex-end"}} marginTop={2}> 
                                 { loggedInAdmin ?

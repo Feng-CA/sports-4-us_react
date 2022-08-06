@@ -52,7 +52,7 @@ const ActivityDetail = () => {
     console.log(newActivities[Number(params.id-1)])
 
     return (
-        <Container className="activitydetail_container" maxWidth="lg">
+        <Container className="activitydetail_container">
 
             {newActivities[Number(params.id-1)] ?
                 <Card sx={{display: "flex", justifyContent: "space-evenly", flexDirection: "columen", flexWrap: "wrap"}} margin={3}>
@@ -109,7 +109,7 @@ const ActivityDetail = () => {
                                 </Box>
                             }
                   
-                            {(!organiserProfile && !loggedInAdmin) &&
+                            {(!organiserProfile && !loggedInAdmin && loggedInUser) &&
                                 <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>

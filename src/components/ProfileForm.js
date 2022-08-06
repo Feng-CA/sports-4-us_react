@@ -18,7 +18,7 @@ import 'react-phone-input-2/lib/style.css';
 import { updateProfile } from "../services/profilesServices";
 import { getProfiles } from "../services/profilesServices";
 import { useNavigate } from "react-router-dom"; 
-import { getUsers } from "../services/usersServices";
+// import { getUsers } from "../services/usersServices";
 
 
 const ProfileForm = () => {
@@ -172,7 +172,7 @@ const ProfileForm = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        let tempProfileVar = tempProfiles
+        // let tempProfileVar = tempProfiles
         console.log("after:", formData)
         // let tempProfileVar = tempProfiles
         updateProfile(currentProfile.id,formData)
