@@ -6,6 +6,5 @@ export async function getChannelMessages(){
 }
 export async function createChannelMessage(data){
     const response = await sports4usAPI.post('/channelmessages', data)
-    console.log(response.data)
     return response.data
 }   

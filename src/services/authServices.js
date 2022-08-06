@@ -7,7 +7,6 @@ export async function signUp(data){
 }
 
 export async function signIn(data){
-    console.log(data)
     const response = await sports4usAPI.post('/auth/signin', data)
     return response.data
 }

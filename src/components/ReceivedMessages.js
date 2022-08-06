@@ -13,7 +13,7 @@ const ReceivedMessages = () => {
      const {receivedMessageList, loggedInUser} = store
      let newMessageList;
 
-
+  // console.log(receivedMessageList)
   useEffect(() => {
 
   getReceivedMessages()
@@ -23,8 +23,9 @@ const ReceivedMessages = () => {
         type: 'setReceivedMessagelist',
         data: response
     }) 
-    })// eslint-disable-next-line
-  },[]);
+    })
+    // eslint-disable-next-line
+  },[receivedMessageList]);
 
      if(typeof(receivedMessageList) === "string") {
       newMessageList = JSON.parse(receivedMessageList)

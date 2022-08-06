@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { Container } from '@mui/system';
 import { Box, Button, TextField, Typography } from '@mui/material';
-// import '../style.css'
+
 
 const Contact = () => {
     const form = useRef();

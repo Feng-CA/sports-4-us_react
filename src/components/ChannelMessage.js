@@ -7,11 +7,11 @@ const ChannelMessage = ({message, displayName}) => {
 
     return (
         <Box className="channelMessage_container" marginTop={2}>
-            <Card style={{width: "auto", margin: "0 auto"}}>
+            <Card style={{width: "auto", margin: "0 auto", backgroundColor: "#cef5f7"}}>
                 <CardContent>
                     <Box className="channelMessagesCard">
                         <Box>
-                            <Link to={`/messages/user/${displayName}`}>
+                            <Link to="/messages/new">
                                 <Typography variant='p'>{displayName}</Typography>
                             </Link>
                         </Box>
@@ -20,7 +20,7 @@ const ChannelMessage = ({message, displayName}) => {
                         </Box>
                     </Box>
                     <Box marginTop={2}>
-                        <Link to={`/messages/${message.id}`} style={{textDecoration: 'none'}}>
+                        <Link to={`../../messages/channelmessages/messages/${message.id}`} style={{textDecoration: 'none'}}>
                             <Typography variant='h5'>{message.message}</Typography>
                         </Link>
                     </Box>

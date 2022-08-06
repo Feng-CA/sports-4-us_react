@@ -32,6 +32,7 @@ import SentMessages from './SentMessages';
 import { getSentMessages } from '../services/sentMessagesServices';
 import SentMessageDetail from './SentMessageDetail';
 import ChannelMessages from './ChannelMessages';
+import ChannelMessageDetail from './ChannelMessageDetail'
 import OrganiserActivitiesList from './OrganiserActivityList';
 import MemberActivities from './MemberActivities';
 import { getBookings } from '../services/bookingServices';
@@ -48,7 +49,6 @@ const App = () => {
     receivedMessageList: sessionStorage.getItem("receivedMessagesList")||[],
     sentMessageList: sessionStorage.getItem("sentMessagesList")||[],
     channelMessageList: sessionStorage.getItem("channelMessageList")||[],
-    //messageList: [],
     receiverId: "",
     messagingChannelId: sessionStorage.getItem("messagingChannelId")||1,
     bookingsList: sessionStorage.getItem("bookingsList")||[]
@@ -105,6 +105,8 @@ const App = () => {
         data: response
     }) 
     })  
+
+    
     
     getSentMessages()
     .then(response =>{
@@ -153,14 +155,14 @@ const App = () => {
   
   // get loggedInAdmin value
   let loggedInAdmin;
- //Introduced check for adminProfile in case it is an empty array
- if(adminProfile){
-  if (adminProfile.fullname === loggedInUser) {
-    loggedInAdmin = adminProfile.fullname
-} 
-}else {
-    loggedInAdmin = null
-}
+  //Introduced check for adminProfile in case it is an empty array
+  if(adminProfile) {
+    if (adminProfile.fullname === loggedInUser) {
+      loggedInAdmin = adminProfile.fullname
+    } 
+  }else {
+      loggedInAdmin = null
+  }
 
  
   return (
@@ -200,6 +202,7 @@ const App = () => {
                       <Route path="sentmessages" element={<SentMessages />} />
                       <Route path="sentmessages/:messageId" element={<SentMessageDetail />} />
                       <Route path="channelmessages" element={<ChannelMessages />} />
+                      <Route path="channelmessages/messages/:messageId" element={<ChannelMessageDetail />} />
                   </Route>
                   }
                   

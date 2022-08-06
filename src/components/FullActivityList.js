@@ -3,6 +3,8 @@ import { Container } from "@mui/system";
 import { Card, CardMedia, CardContent, Typography, Box } from "@mui/material"
 import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
+import { useEffect } from "react";
+
 
 // import Swiper core and required modules
 import { Pagination, Navigation } from 'swiper';
@@ -13,9 +15,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
+import { getActivities } from "../services/activitiesServices";
 
 const ActivitiesList = () => {
-    const {store} = useGlobalState()
+    const {store, dispatch} = useGlobalState()
     const {activities} = store
    
     let newActivities;
@@ -26,9 +29,26 @@ const ActivitiesList = () => {
         newActivities = activities;
     }
 
+    useEffect(() => {
+        //Get all the activities from the back end
+        getActivities()
+        .then(response => {
+          sessionStorage.setItem("activities", JSON.stringify(response.data))
+          dispatch({
+            type: 'setActivities',
+            data: response.data
+          })
+        })
+        // eslint-disable-next-line
+    },[]);
 
     return (
-        <Container className="fullActivityList_container">
+        <>
+        <Typography className="main_heading" variant="p">
+                        All Activities
+        </Typography>
+       
+        <Container className="fullActivityList_container">         
 
             <Swiper className="fullActivityList_swiper"
                     // install Swiper modules
@@ -41,7 +61,9 @@ const ActivitiesList = () => {
                 {newActivities.map((activity, index) => {
                  
                     return (
+                    
                         <SwiperSlide className="categoried_activity" key={index}>
+                  
                             <Card>
                                 <Link to={`/activities/${activity.id}`}>
                                 <CardMedia
@@ -69,7 +91,7 @@ const ActivitiesList = () => {
             </Swiper>
         
         </Container>
-        
+     </>   
     )
 }
 

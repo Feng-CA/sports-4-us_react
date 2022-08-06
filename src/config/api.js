@@ -10,7 +10,6 @@ const sports4usAPI = axios.create({
 sports4usAPI.interceptors.request.use(req => {
     // send the token in the request
     const token = sessionStorage.getItem("token")
-    // console.log(token)
     // Authorization -> Bearer token -> paste the token
     if (token) {
         req.headers["Authorization"] = `Bearer ${token}`

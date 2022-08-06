@@ -7,11 +7,11 @@ const ReceivedMessage = ({message, displayName}) => {
     return (
         <Box className="receivedMessage_container" marginTop={2}>
             
-            <Card style={{width: "auto", margin: "0 auto"}}>
+            <Card style={{width: "auto", margin: "0 auto", backgroundColor: "#cef5f7"}}>
                 <CardContent>
                     <Box className="receivedMessagesCard">
                         <Box>
-                            <Link to={`/messages/user/${displayName}`}>
+                            <Link to={`/messages/new`}>
                                 <Typography variant='p'>{displayName}</Typography>
                             </Link>
                         </Box>

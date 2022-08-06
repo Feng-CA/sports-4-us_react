@@ -41,7 +41,7 @@ const Sidebar = () => {
 
   }
     //const navigate = useNavigate
-    console.log(profiles)
+
     // get loggedInUser profile
     let newProfiles;
    
@@ -82,7 +82,7 @@ const Sidebar = () => {
     }
 
     const handleChanelClick = (e)=>{
-        console.log(channels.indexOf(e.target.outerText))
+     
         sessionStorage.setItem("messagingChannelId",(channels.indexOf(e.target.outerText)+1) )
         dispatch({
           type: 'setMessagingChannelId',
@@ -91,7 +91,7 @@ const Sidebar = () => {
     }
 
     useEffect(() => {
-      console.log("At UseEffect", profiles)
+
       getProfiles()
       .then( response => {
           sessionStorage.setItem("profiles", JSON.stringify(response.data))    
@@ -144,13 +144,13 @@ const Sidebar = () => {
                   <ListItemText primary="Organised Activities"/>
                 </ListItemButton>
               </Link>}
-              { (profile.account_id !== "Admin") &&
+              { (profile.account_id === "Member") &&
               <Link to="/activities/member" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
                     <TimelineIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText sx={{display: "flex", flexDirection: "column", flexWrap: "wrap"}}  primary="Paticipating Activities"/>
+                  <ListItemText sx={{display: "flex", flexDirection: "column", flexWrap: "wrap"}}  primary="Participating Activities"/>
                 </ListItemButton>
               </Link>}
             </List>

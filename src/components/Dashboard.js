@@ -5,12 +5,14 @@ import "../style.css";
 import { getProfiles } from '../services/profilesServices';
 import { useGlobalState } from "../utils/stateContext";
 import { useEffect } from 'react';
+import MemberActivities from './MemberActivities';
+import OrganiserActivitiesList from './OrganiserActivityList';
 
 
 const Dashboard = () => {
 
     const {dispatch, store} = useGlobalState();
-    const {profiles} = store
+    const {profiles, loggedInUser} = store
 
     useEffect(() => {
         console.log("At UseEffect", profiles)
@@ -26,7 +28,17 @@ const Dashboard = () => {
     },
     // eslint-disable-next-line
     []);
-
+    
+        let newProfiles;
+    
+        if(typeof(profiles) === "string") {
+            newProfiles = JSON.parse(profiles)
+        } else {
+            newProfiles = profiles
+        }
+    const profile = newProfiles.find(profil => profil.fullname === loggedInUser)
+    console.log("profile:", profile)
+    
     return (
         <Box className="dashboard_container">
             <Box sx={{display: "flex", flexDirection: "raw"}} marginLeft={1}> 
@@ -38,9 +50,14 @@ const Dashboard = () => {
                         </Typography>
                     </Box>
                     {/* <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}> */}
-                    <Box>
-                        <FullActivityList /> 
-                    </Box>
+                    {profile&&<Box>
+                        {profile.account_id === "Member" &&
+                        <MemberActivities />}
+                        {profile.account_id === "Organiser" &&
+                        <OrganiserActivitiesList />}
+                        {profile.isAdmin &&
+                        <FullActivityList />}
+                    </Box>}
                 </Box>
             </Box>
         </Box>

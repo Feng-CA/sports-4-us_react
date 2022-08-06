@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState } from "react"; import { useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import { Container } from "@mui/system";
 import { Button, TextField, Typography } from "@mui/material";
@@ -8,28 +7,31 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+//import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+//import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+//import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { createActivity } from "../services/activitiesServices";
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 import PeopleIcon from '@mui/icons-material/People';
 import PersonIcon from '@mui/icons-material/Person';
 import { ExpandLess} from "@mui/icons-material";
 import { ExpandMore } from "@mui/icons-material";
+import { getActivities } from "../services/activitiesServices";
+import { useEffect } from "react";
+import { getOrganiserUsers } from "../services/usersServices";
 
 const ActivityForm = () => {
-     const {store} = useGlobalState()
+     const {store, dispatch} = useGlobalState()
      const {users} = store
-     const [open, setOpen] = useState(true)
-    // const navigate = useNavigate()
+     const [open, setOpen] = useState(false)
+     const navigate = useNavigate()
 
     
     const initialFormData = {
         title: "",
         category_id: "",
         location: "",
-        date_time: null,
+        date_time: "",
         //image: null,
         cost: 0,
         quantity: 0,
@@ -37,28 +39,43 @@ const ActivityForm = () => {
         user_id: 4
     }
     const [formData, setFormData] = useState(initialFormData)
+    const [organiserUsers, setOrganiserUsers] = useState([])
     // const [error, setError] = useState(null)
-    const [value, setValue] = useState(new Date());
+    //const [value, setValue] = useState(new Date());
     // const [selectedImage, setSelectedImage] = useState(null);
+    //let newProfiles = {}
     let newUsers = {}
     if(typeof(users) === "string") {
         newUsers = JSON.parse(users)
         } else {
           newUsers = users
         }
+   // if(typeof(profiles) === "string") {
+    //        newProfiles = JSON.parse(profiles)
+    //        } else {
+   //           newProfiles = profiles
+   // }
     
     useEffect(() => {
-        setFormData(() => ({
-            //date_time: value
-            //image: selectedImage
-        }))
-    }, [value])
+        getOrganiserUsers(2)
+            .then(response=>setOrganiserUsers(response.data))
+    }, 
+    [])  
+   
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(formData)
         createActivity(formData)
          .then(response=>console.log(response))
+
+         getActivities()
+            .then(response => {
+            sessionStorage.setItem("activities", JSON.stringify(response.data))
+            dispatch({
+                type: 'setActivities',
+                data: response.data
+            })
+            })
       
         // createActivity(formData)
         // .then((activities) => {
@@ -80,6 +97,7 @@ const ActivityForm = () => {
         //     }  
         // })
         // .catch(error=> {console.log(error)})
+        navigate("/activities") 
     }
 
     const handleFormData = (e) => {
@@ -90,16 +108,18 @@ const ActivityForm = () => {
         }))
     }
     const senderClick = (e) => {        
-          setOpen(!open);
-          console.log(e.target.outerText)
-          console.log((newUsers.find(({full_name})=>full_name===(e.target.outerText))).id)
+          setOpen(!open)
+         const organiserId = (newUsers.find(({full_name})=>full_name===(e.target.outerText))).id
+          const userFormData = {...formData, user_id: organiserId}
+        setFormData(userFormData)
       }
     
       const handleClick = () => {
         setOpen(!open);
-        console.log("You have clicked")
+        console.log("You have clicked", organiserUsers)
       }
 
+  
     
     return (
         <Container className="activityForm_container" sx={{width: 380}}>
@@ -158,25 +178,29 @@ const ActivityForm = () => {
     </Select> 
                         </FormControl>
                     </Box>
-                </Box>
+                {/*</Box>
                 <Box marginTop={3} sx={{width: 380}}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DateTimePicker
                             renderInput={(props) => <TextField {...props}  sx={{width: 320}}/>}
                             label="DateTimePicker"
-                            name="date_time"
-                            value={formData.date_time}
+                            name="time"
+                            value={5}
                             onChange={(newValue) => {
                             setValue(newValue)
                             }}
                         />
                     </LocalizationProvider>
                 </Box>
+                <Box>*/}
+                        <InputLabel>DateTime</InputLabel>
+                        <TextField required sx={{width: 320}} type="text" name="date_time" id="date_time" value={formData.date_time} onChange={handleFormData}/>
+                </Box>
                 <Box sx={{display: "flex"}} marginTop={2}> 
-                    <Box>
-                        <InputLabel>Quantity</InputLabel>
-                        <TextField sx={{width: 152}} type="number" name="quantity" id="quantity" InputProps={{inputProps: {max: 100, min: 0}}} value={Number(formData.quantity)} onChange={handleFormData}/>
-                    </Box>
+                <Box>
+                    <InputLabel>Quantity</InputLabel>
+                        <TextField required sx={{width: 152}} type="number" name="quantity" id="quantity" value={formData.quantity} onChange={handleFormData}/>   
+                </Box>
                     <Box marginLeft={2}>
                         <InputLabel>Cost</InputLabel>
                         <TextField sx={{width: 152}}type="number" name="cost" id="cost" InputProps={{inputProps: {max: 100, min: 0}}} value={Number(formData.cost)} onChange={handleFormData}/>
@@ -201,12 +225,13 @@ const ActivityForm = () => {
                     <ListItemIcon className="sidebarListItem">
                       <PeopleIcon className="sidebarIcon" />
                     </ListItemIcon>
-                    <ListItemText primary={"Select an Orgaiser"}/>
+                    <ListItemText primary={"Select an Organiser"}/>
                     {open? <ExpandLess/> : <ExpandMore/>}
                 </ListItemButton>
-
+                        {organiserUsers&&
                             <Collapse in={open} timeout="auto" unmountOnExit>
-                                    {newUsers.map(user =>(
+                               
+                                    {organiserUsers.map(user =>(
                                     <List component="div" disablePadding>
                                         <ListItemButton sx={{ pl: 4 }} onClick={(e)=>senderClick(e)}>
                                             <ListItemIcon>
@@ -217,7 +242,7 @@ const ActivityForm = () => {
                                         
                                     </List>
                                         ))}
-                                   </Collapse>
+                                   </Collapse>}
                 </Box>
          {/*</Select>
                     </FormControl>

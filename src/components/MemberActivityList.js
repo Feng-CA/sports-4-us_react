@@ -38,11 +38,14 @@ const MemberActivitiesList = () => {
                     pagination={{ clickable: true }}>
 
                 {newActivities.map((activity, index) => {
+                   {console.log("id",activity.id)}
                  
                     return (
+
                         <SwiperSlide className="categoried_activity" key={index}>
+                         
                             <Card>
-                                <Link to={`/activities/${activity.id}`}>
+                                <Link to={`/activities/${(newActivities.indexOf(newActivities.find(({ id }) => id === activity.id)))+1}`}>
                                 <CardMedia
                                     className="category_avatar"
                                     component="img"

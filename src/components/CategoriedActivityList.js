@@ -26,14 +26,14 @@ const CategoriedActivityList = () => {
     console.log(params.id)
 
     let newActivities;
-    console.log(activities)
+   
     
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
         newActivities = activities
     }
-
+   
 
     return (
         <Container className="categoriedActivityList_container">
@@ -52,7 +52,8 @@ const CategoriedActivityList = () => {
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
                             <Card>
-                                <Link to={`/activities/${activity.id}`}>
+                                
+                                <Link to={`/activities/${index+1}`}>
                                     <CardMedia
                                         className="category_avatar"
                                         component="img"

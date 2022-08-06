@@ -34,6 +34,20 @@ const OrganiserActivitiesList = () => {
     console.log(organiserActivities)
 
     return (
+        <>
+        {(organiserActivities.length===0)?
+        <div>
+            <br>
+            </br>
+            <Typography className="main_heading" variant="p">
+                            You Currently Have No Participating Activities.
+            </Typography>
+        </div>:
+         <div>
+         <Typography className="main_heading" variant="p">
+                         Your Organised Activities:
+         </Typography>
+     </div> }
         <Container className="organiserActivityList_container">
 
             <Swiper className="organiserActivityList_swiper"
@@ -45,10 +59,12 @@ const OrganiserActivitiesList = () => {
                     pagination={{ clickable: true }}>
 
                 {organiserActivities.map((activity, index) => {
-                 
+                //   {console.log("id",activity.id)}
+                //   {console.log("index", index)}
+                //   {console.log(newActivities.indexOf(newActivities.find(({ id }) => id === activity.id)))}
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
-                            <Link to={`/activities/${activity.id}`}>
+                            <Link to={`/activities/${(newActivities.indexOf(newActivities.find(({ id }) => id === activity.id)))+1}`}>
                                 <Card>
                                     <CardMedia
                                         className="category_avatar"
@@ -75,7 +91,7 @@ const OrganiserActivitiesList = () => {
             </Swiper>
         
         </Container>
-        
+        </>  
     )
 }
 

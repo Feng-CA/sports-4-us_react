@@ -15,13 +15,15 @@ import PhoneInput from 'react-phone-input-2';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import 'react-phone-input-2/lib/style.css'
+import { getProfiles, updateProfile } from "../services/profilesServices";
+import { useNavigate } from "react-router-dom";
 
 
 const AdminUpdateProfileForm = () => {
-    const {store} = useGlobalState()
-    const { loggedInUser, users, profiles } = store
+    const {store, dispatch} = useGlobalState()
+    const { users, profiles } = store
     const params = useParams()
-
+    const navigate = useNavigate()
     let newProfiles;
     
     if(typeof(profiles) === "string") {
@@ -34,21 +36,20 @@ const AdminUpdateProfileForm = () => {
         return newProfiles.find(p => p.id === parseInt(id))
     }
 
-    const profile = getProfile(params.profileId)
+    let profile = getProfile(Number(params.profileId))
 
-   
+    console.log("profile", profile)
 
-    // console.log("admin:", params)
-    // const navigate = useNavigate()
+
     const [interest, setInterest] = useState({
-        cycling: false,
-        golf: false,
-        tennis: false,
-        soccer: false,
-        hiking: false,
-        cricket: false,
-        running: false,
-        basketball: false
+        cycling: profile.cycling,
+        golf: profile.golf,
+        tennis: profile.tennis,
+        soccer: profile.soccer,
+        hiking: profile.hiking,
+        cricket: profile.cricket,
+        running: profile.running,
+        basketball: profile.basketball
     })
    
     let newUsers;
@@ -62,27 +63,35 @@ const AdminUpdateProfileForm = () => {
     const { cycling, golf, tennis, soccer, hiking, cricket, running, basketball } = interest;
     //const currentUser = (JSON.parse(users).find(user => user.full_name === loggedInUser))
     //const currentUser = (JSON.parse(newUsers).find(user => user.full_name === loggedInUser))
-    const currentUser = (newUsers.find(user => user.full_name === loggedInUser))
-    // console.log(currentUser)
+    const profileUser = (newUsers[Number(params.profileId)-1])
+    console.log("params",params)
+    console.log("profileUser",profileUser)
     //const currentUser = users.find(user => user.full_name === loggedInUser)
-    const [location, setLocation] = useState()
+    const [location, setLocation] = useState(profile.location)
 
     const initialFormData = {
-        fullname: profile.full_name,
-        email: profile.email,
         location: profile.location,
         contact_no: profile.contact_no,
         emergency_contact: profile.emergency_contact,
         emergency_contact_no: profile.emergency_contact_no,
-        account_type: "member",
+        account_type: profile.account_id,
+        cycling: profile.cycling,
+        golf: profile.golf,
+        tennis: profile.tennis,
+        soccer: profile.soccer,
+        hiking: profile.hiking,
+        cricket: profile.cricket,
+        running: profile.running,
+        basketball: profile.basketball,
         interests: profile.interests
     }
 
     const [formData, setFormData] = useState(initialFormData)
-    const [contactNo, setContactNo] = useState()
-    const [emergencyContactNo, setEmergencyContactNo] = useState()
-    const [emergencyContact, setEmergencyContact] = useState()
-    const [email, setEmail] = useState(currentUser.email)
+    const [contactNo, setContactNo] = useState(initialFormData.contact_no)
+    const [emergencyContactNo, setEmergencyContactNo] = useState(initialFormData.emergency_contact_no)
+    const [emergencyContact, setEmergencyContact] = useState(initialFormData.emergency_contact)
+    const [email, setEmail] = useState(profileUser.email)
+    const [account_id, setAccountId] = useState(profile.account_id)
 
     const handleChange = (event) => {
         setInterest({
@@ -91,27 +100,55 @@ const AdminUpdateProfileForm = () => {
         });
       };
 
+      const radioChange = (e) => {
+        // console.log(e.target.value)
+        setAccountId(e.target.value)
+        // console.log(account_id) 
+      };
+    //   console.log(account_id)
     // const [error, setError] = useState(null)
     
     
     useEffect(() => {
         setFormData(() => ({
-            fullname: profile.full_name,
-            email: profile.email,
+           
             interests: interest,
             contact_no: contactNo,
             emergency_contact_no: emergencyContactNo,
             emergency_contact: emergencyContact,
-            location: location
+            cycling: cycling,
+            golf: golf,
+            tennis: tennis,
+            soccer: soccer,
+            hiking: hiking,
+            cricket: cricket,
+            running: running,
+            basketball: basketball,
+            location: location,
+            account_id: account_id
         }))
-        
-    }, [interest, contactNo, emergencyContactNo, emergencyContact, location, email, profile])
+        // eslint-disable-next-line
+    }, [account_id, interest, contactNo, emergencyContactNo, emergencyContact, location, email, profile])
     
     console.log("before:", formData)
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         console.log("after:", formData)
+
+        updateProfile(profile.id,formData)
+        .then( response => profile = response) 
+        console.log("after-submit current Profile:", profile)
+            getProfiles()
+                .then( response => {
+                sessionStorage.setItem("profiles", JSON.stringify(response.data))
+                dispatch({
+                type: 'setProfiles',
+                data: response.data
+                })})
+             navigate(`../profiles/${Number(profile.id)}`)
+
+
         // updateProfile(formData)
         // .then((profile) => {
 
@@ -134,8 +171,9 @@ const AdminUpdateProfileForm = () => {
         // .catch(error=> {console.log(error)})
     }
 
-    
+    //<Container className="profileForm_container" sx={{width: 380}}></Container>
     return (
+       
         <Container className="profileForm_container" sx={{width: 380}}>
              <Box sx={{textAlign: "center"}} margin={3}>
                 <Typography variant="h6">Update Profile</Typography>
@@ -144,13 +182,13 @@ const AdminUpdateProfileForm = () => {
                 <Box>
                     <InputLabel>Your Full Name</InputLabel>
                     <Box marginTop={1}>
-                        <TextField required sx={{width: 320}} type="text" name="fullname" id="fullname" value={formData.fullname} disabled/>
+                        <TextField required sx={{width: 320}} type="text" name="fullname" id="fullname" value={profileUser.full_name} disabled/>
                     </Box>
                 </Box>
                 <Box marginTop={1}>
                     <InputLabel>Your Email</InputLabel>
                     <Box marginTop={1}>
-                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={formData.email} onChange={(e)=>setEmail(e.target.value)}/>
+                        <TextField required sx={{width: 320}} type="email" name="email" id="email" value={profileUser.email} onChange={(e)=>setEmail(e.target.value)} disabled/>
                     </Box>
                 </Box>
                 <Box sx={{display: "flex"}} marginTop={2}> 
@@ -202,11 +240,12 @@ const AdminUpdateProfileForm = () => {
                         <FormLabel id="demo-row-radio-buttons-group-label">Account Type</FormLabel>
                         <RadioGroup
                             row
-                            defaultValue="member"
-                            name="account_type"
+                            defaultValue={account_id === "Organiser"?2:1}
+                            name="account_id"
+                            onChange = {radioChange}
                             >
-                            <FormControlLabel value="member" control={<Radio />} label="Member"/>
-                            <FormControlLabel value="organiser" control={<Radio />} label="Organiser" disabled/>
+                            <FormControlLabel value= {1} control={<Radio />} label="Member"/>
+                            <FormControlLabel value= {2} control={<Radio />} label="Organiser"/>
                         </RadioGroup>
                     </FormControl>
                 </Box>

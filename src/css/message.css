@@ -2,7 +2,11 @@
     display: flex;
     flex-direction: raw;
     width: 100%;
-    height: 100vh;  
+    height: 100vh;
+    overflow: scroll;  
+}
+.sentMessage_container {
+    background-color: #cef5f7;
 }
 
 .sentMessages_wrap, .receivedMessages_wrap , .channelMessages_wrap {
@@ -25,7 +29,7 @@
 .messageForm_wrap, .channelMessageForm_wrap {
     display: flex;
     justify-content: center;
-    width: 65vw;
+    width: auto;
     margin: 0 auto;
     padding: 20px 0;  
 }
@@ -35,19 +39,31 @@
     padding: 1.5rem;
     border-radius: 0.5rem;
     background: transparent;
-    border: 2px solid #054ed7;
+    border: 2px solid #113d8d;
     resize: none;
+}
+
+.messageForm_heading {
+    color: rgb(73, 123, 239);
 }
 
 .channelMessageForm_container {
     display: flex;
     justify-content: center;
 }
+
+.receivedMessageDetail_container, .sentMessageDetail_container, .channelMessageDetail_container {
+    height: 100vh;
+}
+.receivedMessage_wrap, .sentMessage_wrap, .channelMessages_wrap {
+    display: flex;
+}
+
 @media (max-width: 900px) {
     .sentMessages_container, .receivedMessages_container, .messageForm_container, .channelMessages_container {
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
-        width: 80%;
+        width: 100%;
     }
 }

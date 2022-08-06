@@ -48,8 +48,6 @@ const Navigation = () => {
       
         navigate("/categories")
     }
-console.log("loggedinUser", loggedInUser)
-console.log("profiles", profiles)
 
     function stringToColor(string) {
         let hash = 0;
@@ -79,7 +77,25 @@ console.log("profiles", profiles)
         children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
     }
-let profile
+let profile = {
+  id: 12,
+  fullname: "",
+  location: null,
+  contact_no: null,
+  emergency_contact: null,
+  emergency_contact_no: null,
+  cycling: null,
+  golf: null,
+  tennis: null,
+  soccer: null,
+  hiking: null,
+  cricket: null,
+  running: null,
+  basketball: null,
+  account_id: "member",
+  isAdmin: null
+}
+
 let loggedInAdmin
 
 if(loggedInUser){
@@ -91,9 +107,8 @@ if(loggedInUser){
         newProfiles = profiles
     }
 
-    profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    profile = newProfiles.find(profil => profil.fullname === loggedInUser)
 
-    //console.log("navbar:", profile)
 
     // sets loggedInAdmin value
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
@@ -201,7 +216,8 @@ if(loggedInUser){
                 <MenuItem  onClick={handleCloseUserMenu} >
                   <Typography textAlign="center" onClick={() => navigate("/activities/member")}>My Activities</Typography>
                 </MenuItem>}
-                { (profile.account_id === "Organiser") &&
+            
+                { profile&&(profile.account_id === "Organiser") &&
                 <MenuItem  onClick={handleCloseUserMenu} >
                   <Typography textAlign="center" onClick={() => navigate("/activities/organiser")}>Organised Activities</Typography>
                 </MenuItem>}
