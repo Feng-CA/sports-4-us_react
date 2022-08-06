@@ -3,29 +3,37 @@ import { Container } from "@mui/system";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
+import { createBooking} from "../services/bookingServices";
+
 
 
 const ActivityDetail = () => {
-    const {store} = useGlobalState()
-    const { activities, loggedInUser, profiles } = store
+    const {store, dispatch} = useGlobalState()
+    const { activities, loggedInUser, profiles, bookingslist} = store
     const params = useParams()
     const navigate = useNavigate()
 
     
     let newProfiles;
     let newActivities;
+    //let newBookingslist;
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
         newActivities = activities
     }
+   // if(typeof(bookingslist) === "string") {
+   //     newBookingslist = JSON.parse(bookingslist)
+   // } else {
+   //     newBookingslist = bookingslist
+   // }
     
     if(typeof(profiles) === "string") {
         newProfiles = JSON.parse(profiles)
     } else {
         newProfiles = profiles
     }
-
+   
     // check whether loggedInUser is admin
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)
     
@@ -35,10 +43,21 @@ const ActivityDetail = () => {
     } else {
         loggedInAdmin = null
     }
+
+    //if(loggedInUser){
+    //    console.log(bookingslist)
+   // console.log(bookingslist.map((booking)=>(booking.member===loggedInUser)))
+   // }
     
     // get all organiser data
     const organiserProfiles = newProfiles.filter(profile => profile.account_id === "Organiser" )
     const organiserProfile = organiserProfiles.find(profile => profile.fullname === loggedInUser )
+
+   // const handleBook =() =>{
+
+    //    navigate("../../activities/member")
+
+    //}
   
 
     const handleUpdate = () => {
@@ -47,6 +66,26 @@ const ActivityDetail = () => {
     const handleDelete = () => {
 
     }
+
+    const handleBook = () => {
+       console.log(loggedInUser)
+       let newVar = bookingslist
+    if(loggedInUser!=null){  
+       
+       // console.log(newActivities[Number(params.id-1)].id)       
+        createBooking({activity_id: newActivities[Number(params.id-1)].id})
+        .then(response =>{newVar.unshift(response)
+            dispatch({
+                type: 'setBookingsList',
+                data: response
+            })      
+            })
+    
+            navigate("../../activities/member")
+      }else{navigate("../../login")}
+        }
+
+      
     
 
     return (
@@ -107,16 +146,24 @@ const ActivityDetail = () => {
                                 </Box>
                             }
                   
-                            {(!organiserProfile && !loggedInAdmin && loggedInUser) &&
+                            
                                 <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
+                                {(!organiserProfile && !loggedInAdmin && loggedInUser) &&
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
-                                    </Box>
+                                    </Box>}
+
+                                    {!loggedInUser&&
+                                    <Box marginLeft={3}> 
+                                        <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("../../contact")}>Enquiry</Button>
+                                    </Box>}
+                                    {(!organiserProfile && !loggedInAdmin) &&
                                     <Box marginLeft={2}>
-                                        <Button variant="contained" color="success" onClick={() => navigate("/payment")}>Register</Button>
-                                    </Box>
+                                        <Button variant="contained" color="success" onClick={handleBook}>Register</Button>
+                                    </Box>}
+                                    
                                 </Box>
-                            }
+                           
                         </CardContent>
                     </Box>
                 </Card>
@@ -129,7 +176,7 @@ const ActivityDetail = () => {
                         <Link to="/activities">Go back to the activities page</Link>
                     </Box>
                 </>
-            }
+}
         </Container>
     )
 }

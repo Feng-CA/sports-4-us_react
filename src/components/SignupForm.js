@@ -2,14 +2,14 @@ import { Container, Box, Button, InputLabel, TextField, Typography } from "@mui/
 import { useState } from "react"
 import { signUp } from "../services/authServices"
 import { useGlobalState } from "../utils/stateContext";
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { createProfile, getProfiles } from "../services/profilesServices";
 import { useEffect } from "react";
 
 const SignupForm = () => {
     const {dispatch, store} = useGlobalState();
     const {profiles} = store
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     
     const initialFormData = {
         full_name: "",
@@ -54,7 +54,7 @@ const SignupForm = () => {
                                 type: "setProfiles"
                             }) 
                    
-                    //navigate("/") 
+                            navigate("/")
                 }   
             })
             .catch(e => {setError(e)})    

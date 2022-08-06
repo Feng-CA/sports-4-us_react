@@ -104,6 +104,8 @@ const App = () => {
         data: response
     }) 
     })  
+
+    
     
     getSentMessages()
     .then(response =>{

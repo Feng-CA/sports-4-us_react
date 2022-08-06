@@ -56,7 +56,7 @@ const MessageForm = () => {
             type: "setSentMessagelist",
             data: message
             })
-        navigate("/messages")
+        navigate("../../messages/sentmessages")
     })}
 
    

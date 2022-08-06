@@ -77,7 +77,25 @@ const Navigation = () => {
         children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
     };
     }
-let profile
+let profile = {
+  id: 12,
+  fullname: "",
+  location: null,
+  contact_no: null,
+  emergency_contact: null,
+  emergency_contact_no: null,
+  cycling: null,
+  golf: null,
+  tennis: null,
+  soccer: null,
+  hiking: null,
+  cricket: null,
+  running: null,
+  basketball: null,
+  account_id: "member",
+  isAdmin: null
+}
+
 let loggedInAdmin
 
 if(loggedInUser){
@@ -89,7 +107,7 @@ if(loggedInUser){
         newProfiles = profiles
     }
 
-    profile = newProfiles.find(profile => profile.fullname === loggedInUser)
+    profile = newProfiles.find(profil => profil.fullname === loggedInUser)
 
 
     // sets loggedInAdmin value
@@ -198,7 +216,8 @@ if(loggedInUser){
                 <MenuItem  onClick={handleCloseUserMenu} >
                   <Typography textAlign="center" onClick={() => navigate("/activities/member")}>My Activities</Typography>
                 </MenuItem>}
-                { (profile.account_id === "Organiser") &&
+                {console.log(profile)}
+                { profile&&(profile.account_id === "Organiser") &&
                 <MenuItem  onClick={handleCloseUserMenu} >
                   <Typography textAlign="center" onClick={() => navigate("/activities/organiser")}>Organised Activities</Typography>
                 </MenuItem>}

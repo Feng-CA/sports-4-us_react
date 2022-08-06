@@ -13,10 +13,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import "swiper/css/navigation";
+import { getBookings } from "../services/bookingServices";
+import { useEffect } from "react";
+
 
 const MemberActivities = () => {
-    const {store} = useGlobalState()
-    const {bookingsList, loggedInUser } = store
+    const {store, dispatch} = useGlobalState()
+    const {bookingsList, loggedInUser, activities } = store
+
+    let newActivities;
+    
+    if(typeof(activities) === "string") {
+        newActivities = JSON.parse(activities)
+    } else {
+        newActivities = activities;
+    }
+
    
     let newBookingsList;
     
@@ -31,9 +43,35 @@ const MemberActivities = () => {
     console.log("loggedInUser:", loggedInUser)
     //console.log("organiser", activity)
     const memberActivities = newBookingsList.filter(booking => booking.member === loggedInUser)
-    console.log(memberActivities)
+    console.log("memberActivites", memberActivities)
+
+useEffect(() => {
+    getBookings()
+    .then(response =>{
+      sessionStorage.setItem("bookingsList", JSON.stringify(response))
+      dispatch({
+        type: 'setBookingsList',
+        data: response
+    }) 
+    }) 
+
+  },[bookingsList]);
 
     return (
+        <>
+        {(memberActivities.length===0)?
+        <div>
+            <br>
+            </br>
+            <Typography className="main_heading" variant="p">
+                            You Currently Have No Participating Activities.
+            </Typography>
+        </div>:
+         <div>
+         <Typography className="main_heading" variant="p">
+                         Your Participating Activities:
+         </Typography>
+     </div> }
         <Container className="organiserActivityList_container">
 
             <Swiper className="organiserActivityList_swiper"
@@ -45,10 +83,10 @@ const MemberActivities = () => {
                     pagination={{ clickable: true }}>
 
                 {memberActivities.map((activity, index) => {
-                 
                     return (
+                          
                         <SwiperSlide className="categoried_activity" key={index}>
-                            <Link to={`/activities/${activity.activity_id}`}>
+                            <Link to={`/activities/${(newActivities.indexOf(newActivities.find(({ id }) => id === activity.activity_id)))+1}`}>
                                 <Card>
                                     <CardMedia
                                         className="category_avatar"
@@ -75,8 +113,8 @@ const MemberActivities = () => {
             </Swiper>
         
         </Container>
-        
-    )
+</>  
+            )
 }
 
 export default MemberActivities

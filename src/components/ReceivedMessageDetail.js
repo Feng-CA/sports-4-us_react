@@ -36,7 +36,7 @@ const ReceivedMessageDetail = () => {
     }) 
     })
         
-        navigate("../receivedmessages")
+        navigate("../../../messages/receivedmessages")
     }
 
     const message = getMessage(params.messageId)//{text: "test message", user: "Test user"}
