@@ -146,8 +146,9 @@ const ActivityDetail = () => {
                                 </Box>
                             }
                   
-                            {(!organiserProfile && !loggedInAdmin && loggedInUser) &&
+                            
                                 <Box sx={{display: "flex", justifyContent: "space-evenly"}} marginTop={2}> 
+                                {(!organiserProfile && !loggedInAdmin && loggedInUser) &&
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
                                     </Box>}
@@ -156,12 +157,13 @@ const ActivityDetail = () => {
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("../../contact")}>Enquiry</Button>
                                     </Box>}
-
+                                    {(!organiserProfile && !loggedInAdmin) &&
                                     <Box marginLeft={2}>
                                         <Button variant="contained" color="success" onClick={handleBook}>Register</Button>
-                                    </Box>
+                                    </Box>}
+                                    
                                 </Box>
-                            }
+                           
                         </CardContent>
                     </Box>
                 </Card>
