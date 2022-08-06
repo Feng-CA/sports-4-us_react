@@ -3,7 +3,7 @@ import { Container } from "@mui/system";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGlobalState } from "../utils/stateContext";
 import group from "../assets/group-running.jpg";
-import { createBooking, getBookings } from "../services/bookingServices";
+import { createBooking} from "../services/bookingServices";
 
 
 

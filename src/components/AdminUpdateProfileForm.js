@@ -127,7 +127,7 @@ const AdminUpdateProfileForm = () => {
             location: location,
             account_id: account_id
         }))
-        
+        // eslint-disable-next-line
     }, [account_id, interest, contactNo, emergencyContactNo, emergencyContact, location, email, profile])
     
     console.log("before:", formData)
