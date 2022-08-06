@@ -216,7 +216,7 @@ if(loggedInUser){
                 <MenuItem  onClick={handleCloseUserMenu} >
                   <Typography textAlign="center" onClick={() => navigate("/activities/member")}>My Activities</Typography>
                 </MenuItem>}
-                {console.log(profile)}
+            
                 { profile&&(profile.account_id === "Organiser") &&
                 <MenuItem  onClick={handleCloseUserMenu} >
                   <Typography textAlign="center" onClick={() => navigate("/activities/organiser")}>Organised Activities</Typography>

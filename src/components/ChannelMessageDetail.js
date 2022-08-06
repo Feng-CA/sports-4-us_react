@@ -13,10 +13,6 @@ const ChannelMessageDetail = () => {
     const params = useParams()
     const navigate = useNavigate()
 
-    console.log("channelMessageList: ", channelMessageList)
-    console.log("params: ", params)
-    
-
 
     let newMessageList
      if(typeof(channelMessageList) === "string") {
@@ -24,15 +20,14 @@ const ChannelMessageDetail = () => {
       } else {
         newMessageList = channelMessageList
       }
-      console.log(newMessageList)
 
     const getChannelMessage = (id) => {
-        console.log(id)
         return newMessageList.find(m => parseInt(m.id) === parseInt(id))
     }
 
     const message = getChannelMessage(params.messageId)//{text: "test message", user: "Test user"}
-    console.log(message)
+   
+    
     return (
         <Container className="channelMessageDetail_container">
             <Box marginTop={3}>

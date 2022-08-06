@@ -52,10 +52,10 @@
     justify-content: center;
 }
 
-.receivedMessageDetail_container, .sentMessageDetail_container {
+.receivedMessageDetail_container, .sentMessageDetail_container, .channelMessageDetail_container {
     height: 100vh;
 }
-.receivedMessage_wrap, .sentMessage_wrap {
+.receivedMessage_wrap, .sentMessage_wrap, .channelMessages_wrap {
     display: flex;
 }
 

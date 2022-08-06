@@ -71,7 +71,7 @@ export const reducer = (state, action) => {
 
         case "setChannelMessageList": {
             //updates the messages array
-            console.log("it was in setChannelMessageList")
+        
             return {
                 ...state,
                 channelMessageList: action.data
