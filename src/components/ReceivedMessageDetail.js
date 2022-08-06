@@ -6,6 +6,7 @@ import { deleteReceivedMessage } from "../services/messagesServices"
 import {useNavigate} from "react-router-dom";
 import { getReceivedMessages } from "../services/messagesServices";
 import { ArrowBack} from "@mui/icons-material";
+import "../css/message.css"
 
 const ReceivedMessageDetail = () => {
      const {store,dispatch} = useGlobalState()
@@ -44,26 +45,24 @@ const ReceivedMessageDetail = () => {
             <Box marginTop={3}>
               <ArrowBack onClick={() => navigate("/messages/receivedmessages")}/>
             </Box>
-            <Box marginTop={3}>
-                <Card style={{width: 380, margin: "0 auto"}}>
+            <Box className="receivedMessage_wrap" marginTop={6}>
                     { message ?
-                        <Card>
+                        <Card style={{width: "380", margin: "0 auto", backgroundColor: "#cef5f7"}}>
                             <CardContent>
                                 <Typography variant='p'>{message.sender}</Typography>
                                 <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
                                 <Typography variant='h5' marginTop={2}>{message.message}</Typography>
-                                <Box sx={{display: "flex", alignItems: "center"}} marginTop={1}>
+                                <Box sx={{display: "flex", justifyContent: "flex-end", alignItems: "center"}} marginTop={1}>
                                     <Button size="small" variant="contained" color="secondary" onClick={({e})=>handleClick(e)} >Delete Message</Button>
                                 </Box>
                             </CardContent>    
                         </Card>
                         :
                         <>
-                            <p>Message not found</p>
+                            <Typography variant="h5">Message not found</Typography>
                             <Link to="/messages">Go back to the main page</Link>
                         </>
                     }
-                </Card>
             </Box>
             
         </Container>

@@ -7,7 +7,7 @@ const ChannelMessage = ({message, displayName}) => {
 
     return (
         <Box className="channelMessage_container" marginTop={2}>
-            <Card style={{width: "auto", margin: "0 auto"}}>
+            <Card style={{width: "auto", margin: "0 auto", backgroundColor: "#cef5f7"}}>
                 <CardContent>
                     <Box className="channelMessagesCard">
                         <Box>

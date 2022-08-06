@@ -71,8 +71,8 @@ const MessageForm = () => {
             </Box>
             <Box className="messageForm_wrap">
                 <form onSubmit={handleSubmit}>
-                    <Box sx={{display: "flex", flexDirection: "column"}}  marginTop={2}>
-                        <InputLabel className="messageForm_heading">{`Hi ${loggedInUser},`}</InputLabel>
+                    <Box sx={{display: "flex", flexDirection: "column"}}  marginTop={3}>
+                        <InputLabel className="messageForm_heading" sx={{fontSize: "30px", color: "#113d8d"}}>{`Hi ${loggedInUser},`}</InputLabel>
                         <SendersList/>
                         <Box marginTop={2}>
                             <TextField className="messageForm_textField" required sx={{width: 320}} type="textarea" name="message" id="message" placeholder={"what would you like to say?"} value={formData.message} onChange={handleFormData}/>

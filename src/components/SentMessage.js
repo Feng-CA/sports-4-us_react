@@ -7,11 +7,11 @@ const SentMessage = ({message, displayName}) => {
 
     return (
         <Box className="sentMessage_container" marginTop={2}>         
-            <Card style={{width: "auto", margin: "0 auto"}}>
+            <Card className="sentMessage_wrap" style={{width: "auto", margin: "0 auto", backgroundColor: "#cef5f7"}}>
                 <CardContent>
                     <Box className="sentMessagesCard">
                         <Box>
-                            <Link to={`/messages/user/${displayName}`}>
+                            <Link to={`/messages/new`}>
                                 <Typography variant='p'>{displayName}</Typography>
                             </Link>
                         </Box>

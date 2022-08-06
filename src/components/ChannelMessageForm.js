@@ -61,7 +61,7 @@ const ChannelMessageForm = () => {
             <Box className="channelMessageForm_wrap">
                 <form onSubmit={handleSubmit}>
                     <Box sx={{display: "flex", flexDirection: "column"}}  marginTop={2}>
-                        <InputLabel sx={{fontSize: "30px", color: "blue"}}>{`Hi ${loggedInUser},`}</InputLabel>
+                        <InputLabel sx={{fontSize: "30px", color: "#113d8d"}}>{`Hi ${loggedInUser},`}</InputLabel>
                         <ChannelsList/>
                         <Box marginTop={2}>
                             <TextField className="channelMessageForm_textField" required sx={{width: 320}} type="textarea" name="message" id="message" placeholder={"what would you like to say?"} value={formData.message} onChange={handleFormData}/>

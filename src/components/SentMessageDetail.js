@@ -5,6 +5,7 @@ import { Button, Container, Box, Card, CardContent, Typography } from "@mui/mate
 import { deleteSentMessage, getSentMessages } from "../services/sentMessagesServices"
 import {useNavigate} from "react-router-dom";
 import { ArrowBack} from "@mui/icons-material";
+import "../css/message.css"
 
 
 const SentMessageDetail = () => {
@@ -46,10 +47,10 @@ const SentMessageDetail = () => {
             <Box marginTop={3}>
               <ArrowBack onClick={() => navigate("/messages/sentmessages")}/>
             </Box>
-            <Box marginTop={3}>
-                <Card style={{width: 380, margin: "0 auto"}}>
+            <Box className="sentMessage_wrap" marginTop={6}>
+        
                     { message ?
-                        <Card>
+                        <Card style={{width: 380, margin: "0 auto", backgroundColor: "#cef5f7"}}>
                             <CardContent>
                                 <Typography variant='p'>{message.receiver}</Typography>
                                 <Typography variant='p' margin={2}>{message.date} {message.time}</Typography>
@@ -65,7 +66,7 @@ const SentMessageDetail = () => {
                             <Link to="/messages">Go back to the main page</Link>
                         </>
                     }
-                </Card>
+          
             </Box>
             
         </Container>
