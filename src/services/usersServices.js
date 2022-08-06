@@ -11,6 +11,7 @@ export async function getOrganiserUsers(id){
 } 
 
 export async function deleteUser(id){
+    console.log(id)
     const response = await sports4usAPI.delete(`users/${id}`)
     return response
 } 

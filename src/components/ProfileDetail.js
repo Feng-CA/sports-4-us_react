@@ -4,8 +4,8 @@ import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
 import Sidebar from "./SideBar";
 import { useEffect } from "react";
-import { deleteProfile, getProfiles } from "../services/profilesServices";
-import { deleteUser } from "../services/usersServices";
+import { getProfiles } from "../services/profilesServices";
+//import { deleteUser } from "../services/usersServices";
 import { getUsers } from "../services/usersServices";
 
 
@@ -25,6 +25,14 @@ const ProfileDetail = () => {
                 type: 'setProfiles',
                data: response.data
             })})
+            getUsers()
+            .then(response => {
+            sessionStorage.setItem("users", JSON.stringify(response.data))
+            dispatch({
+                type: 'setUsers',
+                data: response.data
+            })
+            })
        // eslint-disable-next-line
     },[]);
    
@@ -50,8 +58,8 @@ const ProfileDetail = () => {
     }
 
     const profile = getProfile(params.profileId)
-    const profileUser = newUsers.find(u => u.full_name === profile.fullname)
-
+    //const profileUser = newUsers.find(u => u.full_name === profile.fullname)
+    console.log(newUsers)
 
     // const golf = () => {
     //     if (profile.golf === true) return golf
@@ -69,9 +77,10 @@ const ProfileDetail = () => {
         loggedInAdmin = null
     }
    
-    const handleClick = () => {
+    /*const handleClick = () => {
         console.log(profile.id, profileUser.id)
         deleteUser(profileUser.id)
+            .then(response=>console.log(response))
         deleteProfile(profile.id)
 
         //Get all the users from the back end
@@ -98,7 +107,7 @@ const ProfileDetail = () => {
         navigate( "../../../member/profiles" )
 
 
-    }
+    }*/
 
   
 
@@ -169,11 +178,11 @@ const ProfileDetail = () => {
                                         <Button variant="contained" color="success" onClick={() => navigate(`/member/profiles/${profile.id}/update`)}>Update</Button>
                                     </Box>
                                 }
-                                { loggedInAdmin &&(!profile.isAdmin)&&
+                                {/* loggedInAdmin &&(!profile.isAdmin)&&
                                     <Box marginLeft={3}> 
                                         <Button variant="contained" color="error" onClick={handleClick}>Delete</Button>
                                     </Box>
-                                }
+                            */}
                                 </Box>
                             </CardContent>
                         </Box>

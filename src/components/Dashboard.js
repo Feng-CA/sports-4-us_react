@@ -50,14 +50,14 @@ const Dashboard = () => {
                         </Typography>
                     </Box>
                     {/* <Box sx={{display: "flex", felxDirection: "column", textAlign: "left", justifyItems: "flex-start",   flexWrap: "wrap"}} marginTop={3}> */}
-                    <Box>
+                    {profile&&<Box>
                         {profile.account_id === "Member" &&
                         <MemberActivities />}
                         {profile.account_id === "Organiser" &&
                         <OrganiserActivitiesList />}
                         {profile.isAdmin &&
                         <FullActivityList />}
-                    </Box>
+                    </Box>}
                 </Box>
             </Box>
         </Box>

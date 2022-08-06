@@ -7,9 +7,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+//import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+//import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+//import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { createActivity } from "../services/activitiesServices";
 import { Collapse, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
 import PeopleIcon from '@mui/icons-material/People';
@@ -22,7 +22,7 @@ import { getOrganiserUsers } from "../services/usersServices";
 
 const ActivityForm = () => {
      const {store, dispatch} = useGlobalState()
-     const {users, profiles} = store
+     const {users} = store
      const [open, setOpen] = useState(false)
      const navigate = useNavigate()
 
@@ -41,20 +41,20 @@ const ActivityForm = () => {
     const [formData, setFormData] = useState(initialFormData)
     const [organiserUsers, setOrganiserUsers] = useState([])
     // const [error, setError] = useState(null)
-    const [value, setValue] = useState(new Date());
+    //const [value, setValue] = useState(new Date());
     // const [selectedImage, setSelectedImage] = useState(null);
-    let newProfiles = {}
+    //let newProfiles = {}
     let newUsers = {}
     if(typeof(users) === "string") {
         newUsers = JSON.parse(users)
         } else {
           newUsers = users
         }
-    if(typeof(profiles) === "string") {
-            newProfiles = JSON.parse(profiles)
-            } else {
-              newProfiles = profiles
-    }
+   // if(typeof(profiles) === "string") {
+    //        newProfiles = JSON.parse(profiles)
+    //        } else {
+   //           newProfiles = profiles
+   // }
     
     useEffect(() => {
         getOrganiserUsers(2)
@@ -117,7 +117,7 @@ const ActivityForm = () => {
     
       const handleClick = () => {
         setOpen(!open);
-        console.log("You have clicked")
+        console.log("You have clicked", organiserUsers)
       }
 
   
@@ -179,7 +179,7 @@ const ActivityForm = () => {
     </Select> 
                         </FormControl>
                     </Box>
-                </Box>
+                {/*</Box>
                 <Box marginTop={3} sx={{width: 380}}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DateTimePicker
@@ -193,7 +193,7 @@ const ActivityForm = () => {
                         />
                     </LocalizationProvider>
                 </Box>
-                <Box>
+                <Box>*/}
                         <InputLabel>DateTime</InputLabel>
                         <TextField required sx={{width: 320}} type="text" name="date_time" id="date_time" value={formData.date_time} onChange={handleFormData}/>
                 </Box>
@@ -226,7 +226,7 @@ const ActivityForm = () => {
                     <ListItemIcon className="sidebarListItem">
                       <PeopleIcon className="sidebarIcon" />
                     </ListItemIcon>
-                    <ListItemText primary={"Select an Orgaiser"}/>
+                    <ListItemText primary={"Select an Organiser"}/>
                     {open? <ExpandLess/> : <ExpandMore/>}
                 </ListItemButton>
                         {organiserUsers&&
