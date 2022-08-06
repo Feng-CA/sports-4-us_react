@@ -48,8 +48,6 @@ const Navigation = () => {
       
         navigate("/categories")
     }
-console.log("loggedinUser", loggedInUser)
-console.log("profiles", profiles)
 
     function stringToColor(string) {
         let hash = 0;
