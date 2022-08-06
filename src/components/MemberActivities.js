@@ -54,7 +54,7 @@ useEffect(() => {
         data: response
     }) 
     }) 
-
+    // eslint-disable-next-line
   },[bookingsList]);
 
     return (

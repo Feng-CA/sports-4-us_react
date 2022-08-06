@@ -101,11 +101,11 @@ const AdminUpdateProfileForm = () => {
       };
 
       const radioChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         setAccountId(e.target.value)
-        console.log(account_id) 
+        // console.log(account_id) 
       };
-      console.log(account_id)
+    //   console.log(account_id)
     // const [error, setError] = useState(null)
     
     

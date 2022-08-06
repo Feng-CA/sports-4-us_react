@@ -26,14 +26,14 @@ const CategoriedActivityList = () => {
     console.log(params.id)
 
     let newActivities;
-    console.log(activities)
+   
     
     if(typeof(activities) === "string") {
         newActivities = JSON.parse(activities)
     } else {
         newActivities = activities
     }
-    //array.indexOf(2)
+   
 
     return (
         <Container className="categoriedActivityList_container">

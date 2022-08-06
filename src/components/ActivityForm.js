@@ -65,7 +65,6 @@ const ActivityForm = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        console.log(formData)
         createActivity(formData)
          .then(response=>console.log(response))
 

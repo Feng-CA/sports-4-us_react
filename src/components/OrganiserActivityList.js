@@ -59,9 +59,9 @@ const OrganiserActivitiesList = () => {
                     pagination={{ clickable: true }}>
 
                 {organiserActivities.map((activity, index) => {
-                  {console.log("id",activity.id)}
-                  {console.log("index", index)}
-                  {console.log(newActivities.indexOf(newActivities.find(({ id }) => id === activity.id)))}
+                //   {console.log("id",activity.id)}
+                //   {console.log("index", index)}
+                //   {console.log(newActivities.indexOf(newActivities.find(({ id }) => id === activity.id)))}
                     return (
                         <SwiperSlide className="categoried_activity" key={index}>
                             <Link to={`/activities/${(newActivities.indexOf(newActivities.find(({ id }) => id === activity.id)))+1}`}>

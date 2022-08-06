@@ -11,7 +11,7 @@ const ChannelMessage = ({message, displayName}) => {
                 <CardContent>
                     <Box className="channelMessagesCard">
                         <Box>
-                            <Link to={`/messages/user/${displayName}`}>
+                            <Link to="/messages/new">
                                 <Typography variant='p'>{displayName}</Typography>
                             </Link>
                         </Box>
@@ -20,7 +20,7 @@ const ChannelMessage = ({message, displayName}) => {
                         </Box>
                     </Box>
                     <Box marginTop={2}>
-                        <Link to={`/channelmessages/${message.id}`} style={{textDecoration: 'none'}}>
+                        <Link to={`/channelmessages/messages/${message.id}`} style={{textDecoration: 'none'}}>
                             <Typography variant='h5'>{message.message}</Typography>
                         </Link>
                     </Box>

@@ -68,7 +68,7 @@ const ActivityDetail = () => {
     }
 
     const handleBook = () => {
-       console.log(loggedInUser)
+  
        let newVar = bookingslist
     if(loggedInUser!=null){  
        

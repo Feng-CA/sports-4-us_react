@@ -9,8 +9,8 @@ import { ArrowBack} from "@mui/icons-material";
 import "../css/message.css"
 
 const ReceivedMessageDetail = () => {
-     const {store,dispatch} = useGlobalState()
-     const {receivedMessageList} = store
+    const {store,dispatch} = useGlobalState()
+    const {receivedMessageList} = store
     const params = useParams()
     const navigate = useNavigate()
     

@@ -32,6 +32,7 @@ import SentMessages from './SentMessages';
 import { getSentMessages } from '../services/sentMessagesServices';
 import SentMessageDetail from './SentMessageDetail';
 import ChannelMessages from './ChannelMessages';
+import ChannelMessageDetail from './ChannelMessageDetail'
 import OrganiserActivitiesList from './OrganiserActivityList';
 import MemberActivities from './MemberActivities';
 import { getBookings } from '../services/bookingServices';
@@ -201,6 +202,7 @@ const App = () => {
                       <Route path="sentmessages" element={<SentMessages />} />
                       <Route path="sentmessages/:messageId" element={<SentMessageDetail />} />
                       <Route path="channelmessages" element={<ChannelMessages />} />
+                      <Route path="channelmessages/messages/:messageId" element={<ChannelMessageDetail />} />
                   </Route>
                   }
                   

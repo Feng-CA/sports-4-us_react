@@ -39,6 +39,7 @@ const ActivitiesList = () => {
             data: response.data
           })
         })
+        // eslint-disable-next-line
     },[]);
 
     return (
