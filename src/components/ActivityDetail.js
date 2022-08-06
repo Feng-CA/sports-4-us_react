@@ -12,7 +12,6 @@ const ActivityDetail = () => {
     const { activities, loggedInUser, profiles, bookingslist} = store
     const params = useParams()
     const navigate = useNavigate()
-    console.log(activities)
 
     
     let newProfiles;
@@ -88,7 +87,6 @@ const ActivityDetail = () => {
 
       
     
-    // console.log(newActivities[Number(params.id-1)])
 
     return (
         <Container className="activitydetail_container">
@@ -153,6 +151,7 @@ const ActivityDetail = () => {
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
                                     </Box>}
+                                    
                                     {!loggedInUser&&
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("../../contact")}>Enquiry</Button>

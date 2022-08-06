@@ -111,7 +111,6 @@ if(loggedInUser){
 
     profile = newProfiles.find(profil => profil.fullname === loggedInUser)
 
-    console.log("profile:", profile)
 
     // sets loggedInAdmin value
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)

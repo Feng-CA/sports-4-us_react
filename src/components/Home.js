@@ -1,7 +1,6 @@
 import { Box, Button, Card, CardMedia, Typography } from "@mui/material"
 import { useNavigate } from "react-router-dom";
 import home from "../assets/home.jpg";
-// import "../style.css"
 import { useGlobalState } from "../utils/stateContext";
 
 const Home = () => {
@@ -9,8 +8,6 @@ const Home = () => {
     const {loggedInUser} = store
 
     const navigate = useNavigate()
-
-
 
     return (
         <div className="home"> 
