@@ -43,7 +43,7 @@ const MemberActivities = () => {
     console.log("loggedInUser:", loggedInUser)
     //console.log("organiser", activity)
     const memberActivities = newBookingsList.filter(booking => booking.member === loggedInUser)
-    console.log(memberActivities)
+    console.log("memberActivites", memberActivities)
 
 useEffect(() => {
     getBookings()
@@ -58,6 +58,20 @@ useEffect(() => {
   },[bookingsList]);
 
     return (
+        <>
+        {(memberActivities.length===0)?
+        <div>
+            <br>
+            </br>
+            <Typography className="main_heading" variant="p">
+                            You Currently Have No Participating Activities.
+            </Typography>
+        </div>:
+         <div>
+         <Typography className="main_heading" variant="p">
+                         Your Participating Activities:
+         </Typography>
+     </div> }
         <Container className="organiserActivityList_container">
 
             <Swiper className="organiserActivityList_swiper"
@@ -99,8 +113,8 @@ useEffect(() => {
             </Swiper>
         
         </Container>
-        
-    )
+</>  
+            )
 }
 
 export default MemberActivities

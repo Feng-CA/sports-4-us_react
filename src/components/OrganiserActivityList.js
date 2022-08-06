@@ -34,6 +34,20 @@ const OrganiserActivitiesList = () => {
     console.log(organiserActivities)
 
     return (
+        <>
+        {(organiserActivities.length===0)?
+        <div>
+            <br>
+            </br>
+            <Typography className="main_heading" variant="p">
+                            You Currently Have No Participating Activities.
+            </Typography>
+        </div>:
+         <div>
+         <Typography className="main_heading" variant="p">
+                         Your Organised Activities:
+         </Typography>
+     </div> }
         <Container className="organiserActivityList_container">
 
             <Swiper className="organiserActivityList_swiper"
@@ -77,7 +91,7 @@ const OrganiserActivitiesList = () => {
             </Swiper>
         
         </Container>
-        
+        </>  
     )
 }
 

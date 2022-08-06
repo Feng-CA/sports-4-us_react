@@ -17,6 +17,7 @@ export async function createProfile(data){
 return response.data
 }
 
+
 //view your specific profile - have to be logged in 
 export async function getProfile(id){
     const response = await sports4usAPI.get(`/profiles/${id}`)

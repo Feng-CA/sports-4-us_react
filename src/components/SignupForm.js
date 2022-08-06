@@ -54,7 +54,7 @@ const SignupForm = () => {
                                 type: "setProfiles"
                             }) 
                    
-                            navigate("/member")
+                            navigate("/")
                 }   
             })
             .catch(e => {setError(e)})    

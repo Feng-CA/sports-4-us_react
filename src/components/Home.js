@@ -43,7 +43,7 @@ const Home = () => {
                     </Box>
                 }
                     <Box className="home_explorer" sx={{display: "flex"}} marginLeft={8} marginTop={2}>
-                        <Button className="home_button" size="medium" variant="contained" color="secondary" onClick={() => navigate("/activities")}>Explorer all activities</Button>
+                        <Button className="home_button" size="medium" variant="contained" color="secondary" onClick={() => navigate("/categories")}>Explorer all activities</Button>
                     </Box>
                 </Box>
             </Card>

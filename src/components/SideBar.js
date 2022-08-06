@@ -144,13 +144,13 @@ const Sidebar = () => {
                   <ListItemText primary="Organised Activities"/>
                 </ListItemButton>
               </Link>}
-              { (profile.account_id !== "Admin") &&
+              { (profile.account_id === "Member") &&
               <Link to="/activities/member" className="dashboard_link">
                 <ListItemButton>
                   <ListItemIcon className="sidebarListItem">
                     <TimelineIcon className="sidebarIcon" />
                   </ListItemIcon>
-                  <ListItemText sx={{display: "flex", flexDirection: "column", flexWrap: "wrap"}}  primary="Paticipating Activities"/>
+                  <ListItemText sx={{display: "flex", flexDirection: "column", flexWrap: "wrap"}}  primary="Participating Activities"/>
                 </ListItemButton>
               </Link>}
             </List>

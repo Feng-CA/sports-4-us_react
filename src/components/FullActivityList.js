@@ -42,7 +42,12 @@ const ActivitiesList = () => {
     },[]);
 
     return (
-        <Container className="fullActivityList_container">
+        <>
+        <Typography className="main_heading" variant="p">
+                        All Activities
+        </Typography>
+       
+        <Container className="fullActivityList_container">         
 
             <Swiper className="fullActivityList_swiper"
                     // install Swiper modules
@@ -55,7 +60,9 @@ const ActivitiesList = () => {
                 {newActivities.map((activity, index) => {
                  
                     return (
+                    
                         <SwiperSlide className="categoried_activity" key={index}>
+                  
                             <Card>
                                 <Link to={`/activities/${activity.id}`}>
                                 <CardMedia
@@ -83,7 +90,7 @@ const ActivitiesList = () => {
             </Swiper>
         
         </Container>
-        
+     </>   
     )
 }
 

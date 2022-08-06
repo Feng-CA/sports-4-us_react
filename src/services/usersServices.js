@@ -9,3 +9,8 @@ export async function getOrganiserUsers(id){
     const response = await sports4usAPI.get(`users/account/${id}`)
     return response
 } 
+
+export async function deleteUser(id){
+    const response = await sports4usAPI.delete(`users/${id}`)
+    return response
+} 

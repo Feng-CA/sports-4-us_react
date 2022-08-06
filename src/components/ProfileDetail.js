@@ -4,13 +4,16 @@ import { useGlobalState } from "../utils/stateContext";
 import running from "../assets/running.jpg";
 import Sidebar from "./SideBar";
 import { useEffect } from "react";
-import { getProfiles } from "../services/profilesServices";
+import { deleteProfile, getProfiles } from "../services/profilesServices";
+import { deleteUser } from "../services/usersServices";
+import { getUsers } from "../services/usersServices";
+
 
 
 
 const ProfileDetail = () => {
     const {store, dispatch} = useGlobalState()
-    const { loggedInUser, profiles } = store
+    const { loggedInUser, profiles, users } = store
     const navigate = useNavigate()
 
     const params = useParams()
@@ -28,6 +31,7 @@ const ProfileDetail = () => {
 
 
     let newProfiles;
+    let newUsers;
     
     if(typeof(profiles) === "string") {
         newProfiles = JSON.parse(profiles)
@@ -35,11 +39,19 @@ const ProfileDetail = () => {
         newProfiles = profiles
     }
 
+    if(typeof(users) === "string") {
+        newUsers = JSON.parse(users)
+    } else {
+        newUsers = users
+    }
+
     const getProfile = (id) => {
         return newProfiles.find(p => p.id === parseInt(id))
     }
 
     const profile = getProfile(params.profileId)
+    const profileUser = newUsers.find(u => u.full_name === profile.fullname)
+
 
     // const golf = () => {
     //     if (profile.golf === true) return golf
@@ -58,6 +70,33 @@ const ProfileDetail = () => {
     }
    
     const handleClick = () => {
+        console.log(profile.id, profileUser.id)
+        deleteUser(profileUser.id)
+        deleteProfile(profile.id)
+
+        //Get all the users from the back end
+            getUsers()
+            .then(response => {
+            sessionStorage.setItem("users", JSON.stringify(response.data))
+            dispatch({
+                type: 'setUsers',
+                data: response.data
+            })
+            })
+
+                        //Get all the profiles from the back end
+            getProfiles()
+            .then( response => {
+            sessionStorage.setItem("profiles", JSON.stringify(response.data))
+            
+            dispatch({
+                type: 'setProfiles',
+            data: response.data
+            })
+            }) 
+
+        navigate( "../../../member/profiles" )
+
 
     }
 
@@ -130,7 +169,7 @@ const ProfileDetail = () => {
                                         <Button variant="contained" color="success" onClick={() => navigate(`/member/profiles/${profile.id}/update`)}>Update</Button>
                                     </Box>
                                 }
-                                { loggedInAdmin &&
+                                { loggedInAdmin &&(!profile.isAdmin)&&
                                     <Box marginLeft={3}> 
                                         <Button variant="contained" color="error" onClick={handleClick}>Delete</Button>
                                     </Box>
