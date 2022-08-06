@@ -48,7 +48,6 @@ const App = () => {
     receivedMessageList: sessionStorage.getItem("receivedMessagesList")||[],
     sentMessageList: sessionStorage.getItem("sentMessagesList")||[],
     channelMessageList: sessionStorage.getItem("channelMessageList")||[],
-    //messageList: [],
     receiverId: "",
     messagingChannelId: sessionStorage.getItem("messagingChannelId")||1,
     bookingsList: sessionStorage.getItem("bookingsList")||[]
@@ -153,14 +152,14 @@ const App = () => {
   
   // get loggedInAdmin value
   let loggedInAdmin;
- //Introduced check for adminProfile in case it is an empty array
- if(adminProfile){
-  if (adminProfile.fullname === loggedInUser) {
-    loggedInAdmin = adminProfile.fullname
-} 
-}else {
-    loggedInAdmin = null
-}
+  //Introduced check for adminProfile in case it is an empty array
+  if(adminProfile) {
+    if (adminProfile.fullname === loggedInUser) {
+      loggedInAdmin = adminProfile.fullname
+    } 
+  }else {
+      loggedInAdmin = null
+  }
 
  
   return (

@@ -10,7 +10,6 @@ const ActivityDetail = () => {
     const { activities, loggedInUser, profiles } = store
     const params = useParams()
     const navigate = useNavigate()
-    console.log(typeof(activities))
 
     
     let newProfiles;
@@ -49,7 +48,6 @@ const ActivityDetail = () => {
 
     }
     
-    console.log(newActivities[Number(params.id-1)])
 
     return (
         <Container className="activitydetail_container">

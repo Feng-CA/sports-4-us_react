@@ -93,7 +93,6 @@ if(loggedInUser){
 
     profile = newProfiles.find(profile => profile.fullname === loggedInUser)
 
-    //console.log("navbar:", profile)
 
     // sets loggedInAdmin value
     const adminProfile = newProfiles.find(profile => profile.isAdmin === true)

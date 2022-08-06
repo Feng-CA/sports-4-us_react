@@ -14,7 +14,7 @@ export async function createMessage(data){
     return response.data
 }   
 
-export async function deleteMessage(id){
+export async function deleteReceivedMessage(id){
     const response = await sports4usAPI.delete(`/messages/${id}`)
     return response.data
 }  

@@ -36,10 +36,7 @@ const AdminUpdateProfileForm = () => {
 
     const profile = getProfile(params.profileId)
 
-   
 
-    // console.log("admin:", params)
-    // const navigate = useNavigate()
     const [interest, setInterest] = useState({
         cycling: false,
         golf: false,
