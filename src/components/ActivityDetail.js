@@ -151,7 +151,7 @@ const ActivityDetail = () => {
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("/messages/channelmessages")}>Enquiry</Button>
                                     </Box>}
-                                    
+
                                     {!loggedInUser&&
                                     <Box marginLeft={3}> 
                                         <Button variant="outlined" style={{color: "primary"}} onClick={() => navigate("../../contact")}>Enquiry</Button>
@@ -174,7 +174,7 @@ const ActivityDetail = () => {
                         <Link to="/activities">Go back to the activities page</Link>
                     </Box>
                 </>
-            }
+}
         </Container>
     )
 }
