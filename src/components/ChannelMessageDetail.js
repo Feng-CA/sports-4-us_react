@@ -24,16 +24,19 @@ const ChannelMessageDetail = () => {
       } else {
         newMessageList = channelMessageList
       }
+      console.log(newMessageList)
 
     const getChannelMessage = (id) => {
-        return newMessageList.find(m => m.message_id === parseInt(id))
+        console.log(id)
+        return newMessageList.find(m => parseInt(m.id) === parseInt(id))
     }
 
     const message = getChannelMessage(params.messageId)//{text: "test message", user: "Test user"}
+    console.log(message)
     return (
         <Container className="channelMessageDetail_container">
             <Box marginTop={3}>
-              <ArrowBack onClick={() => navigate("/channelmessages")}/>
+              <ArrowBack onClick={() => navigate("../../../../messages/channelmessages")}/>
             </Box>
             <Box className="channelMessage_wrap" marginTop={6}>
                     { message ?
