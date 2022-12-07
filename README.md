@@ -1,5 +1,13 @@
 # **Full Stack App (Part A)**
 
+## **Demo Screenshoots**
+
+### Home Page
+![HomePage](docs/Demo/home.png)
+
+### Categories Page
+![ActivitiesPage](docs/Demo/activities.png)
+
 ## **Website Links**
 **Website URL:** https://sports4us.netlify.app/
 
